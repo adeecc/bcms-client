@@ -1,3 +1,4 @@
-# ReactJS + TypeScript Starter Template
+# BCMS-Client
 
-A carefully designed starter template for use in personal projects.
+## BCMS - The Better CMS
+
