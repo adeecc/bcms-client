@@ -17,16 +17,16 @@ const CourseCreateForm: React.FC<Props> = (props: Props) => {
   return (
     <>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-4xl">
-        <h1 className="mb-8 text-center text-primary-100 font-black">
+        <h3 className="mb-8 text-center text-primary-100">
           Create Course
-        </h1>
+        </h3>
         <div className="bg-primary-800 py-8 px-6 shadow rounded-lg sm:px-10">
           <form
-            className="mb-0 md:flex md:flex-wrap md:justify-between"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4"
             onSubmit={handleSubmit}
             method="POST"
           >
-            <div className="field-group mb-4 md:w-full">
+            <div className="field-group md:col-span-3">
               <label htmlFor="name" className=" font-medium text-primary-100">
                 Course Name
               </label>
@@ -41,7 +41,7 @@ const CourseCreateForm: React.FC<Props> = (props: Props) => {
               />
             </div>
 
-            <div className="field-group mb-4 md:w-1/3">
+            <div className="field-group ">
               <label htmlFor="code" className="font-medium text-primary-100">
                 Code
               </label>
@@ -51,11 +51,11 @@ const CourseCreateForm: React.FC<Props> = (props: Props) => {
                 type="text"
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+                className="w-full  border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
 
-            <div className="field-group mb-4 md:w-1/3">
+            <div className="field-group ">
               <label htmlFor="year" className="font-medium text-primary-100">
                 Year
               </label>
@@ -65,12 +65,12 @@ const CourseCreateForm: React.FC<Props> = (props: Props) => {
                 type="text"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+                className="w-full  border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
 
             {/* Convert Semester to Drop Down Menu */}
-            <div className="field-group mb-4 md:w-1/3">
+            <div className="field-group ">
               <label htmlFor="sem" className=" font-medium text-primary-100">
                 Semester
               </label>
@@ -84,7 +84,7 @@ const CourseCreateForm: React.FC<Props> = (props: Props) => {
               />
             </div>
 
-            <div className="field-group md:w-full">
+            <div className="field-group col-span-1 md:col-span-3">
               <input
                 type="submit"
                 value="Create"
