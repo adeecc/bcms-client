@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import SignUp from "./pages/User/SignUp";
 import SignIn from "./pages/User/SignIn";
 import CourseCreate from "./pages/Course/CourseCreate";
+import PostCreate from "./pages/Post/PostCreate";
 
 interface AppProps {}
 
@@ -17,6 +18,7 @@ export const App: React.FC<AppProps> = (props: AppProps) => {
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/course/create" component={CourseCreate} />
+          <Route exact path="/post/create" component={PostCreate} />
         </Switch>
       </BrowserRouter>
     </>
