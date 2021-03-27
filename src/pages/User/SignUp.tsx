@@ -1,6 +1,6 @@
 import React from "react";
 
-import SignUpForm from "../components/user/SignUpForm";
+import SignUpForm from "../../components/User/SignUpForm";
 
 interface Props {}
 
