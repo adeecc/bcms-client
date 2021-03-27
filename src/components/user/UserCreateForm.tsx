@@ -20,8 +20,10 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
   return (
     <>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <h1 className="mb-8 text-3xl text-center font-black">{props.title}</h1>
-        <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
+        <h1 className="mb-8 text-center text-primary-100 font-black">
+          {props.title}
+        </h1>
+        <div className="bg-primary-800 py-8 px-6 shadow rounded-lg sm:px-10">
           <form
             className="mb-0 space-y-6"
             onSubmit={handleSubmit}
@@ -30,7 +32,7 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
             <div className="">
               <label
                 htmlFor="username"
-                className="block text-sm font-medium text-gray-700"
+                className="block font-medium text-primary-100"
               >
                 Username
               </label>
@@ -40,14 +42,16 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
+
+
 
             <div className="">
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
+                className="block  font-medium text-primary-100"
               >
                 Name
               </label>
@@ -58,14 +62,14 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
 
             <div className="">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className="block  font-medium text-primary-100"
               >
                 Email Address
               </label>
@@ -77,14 +81,14 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
 
             <div className="">
               <label
                 htmlFor="mobile"
-                className="block text-sm font-medium text-gray-700"
+                className="block  font-medium text-primary-100"
               >
                 Mobile Number
               </label>
@@ -95,14 +99,14 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
 
             <div className="">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className="block  font-medium text-primary-100"
               >
                 Password
               </label>
@@ -113,7 +117,7 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
 
@@ -121,13 +125,13 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
               <input
                 type="submit"
                 value="Sign Up"
-                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full my-3 py-2 px-4 border border-transparent rounded-md shadow-sm  font-medium text-button bg-accent hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-hover"
               />
             </div>
           </form>
-          <div className="mt-3">
+          <div className="text-primary-100">
             Already Registered?{" "}
-            <Link to="" className="text-indigo-600 font-medium">
+            <Link to="" className="text-accent font-medium">
               Sign In.
             </Link>
           </div>
