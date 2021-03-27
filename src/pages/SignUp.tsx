@@ -1,13 +1,13 @@
 import React from "react";
 
-import UserCreateForm from "../components/user/UserCreateForm";
+import SignUpForm from "../components/user/SignUpForm";
 
 interface Props {}
 
 const SignUp: React.FC<Props> = (props: Props) => {
   return (
     <div className="min-h-screen">
-      <UserCreateForm title="Create Your Account"/>
+      <SignUpForm/>
     </div>
   );
 };
