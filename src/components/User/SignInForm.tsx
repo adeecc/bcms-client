@@ -17,9 +17,9 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
   return (
     <>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <h1 className="mb-8 text-center text-primary-100 font-black">
+        <h3 className="mb-8 text-center text-primary-100 font-black">
           Sign In!
-        </h1>
+        </h3>
         <div className="bg-primary-800 py-8 px-6 shadow rounded-lg sm:px-10">
           <form
             className="mb-0 space-y-6"
