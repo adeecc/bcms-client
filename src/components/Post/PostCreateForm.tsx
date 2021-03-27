@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.bubble.css";
+import "react-quill/dist/quill.snow.css";
 
 interface Props {
   courseId: number;
@@ -8,7 +11,7 @@ export const PostCreateForm = (props: Props) => {
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
   const [courseID, setCourseID] = useState<number>(() => props.courseId); // Might not be required Use Prop Directly
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string>("");
 
   const [courseCode, setCourseCode] = useState<string>("");
   const [courseName, setCourseName] = useState<string>("");
@@ -49,24 +52,22 @@ export const PostCreateForm = (props: Props) => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full  border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+              className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
             />
           </div>
           <div className="field-group">
-            <label htmlFor="title" className=" font-medium text-primary-100">
+            <label htmlFor="title" className="font-medium text-primary-100">
               Body
             </label>
-            <textarea
-              id="body"
-              name="body"
+            <ReactQuill
+              theme="bubble"
               value={body}
-              onChange={(e) => setBody(e.target.value)}
-              required
-              className="w-full  border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+              onChange={setBody}
+              className="bg-button border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
             />
           </div>
           <div className="field-group">
-            <label htmlFor="title" className=" font-medium text-primary-100">
+            <label htmlFor="title" className="font-medium text-primary-100">
               Tags
             </label>
             <input
@@ -74,7 +75,7 @@ export const PostCreateForm = (props: Props) => {
               name="tags"
               type="tags"
               value={tags}
-              onChange={(e) => setTags([e.target.value])}
+              onChange={(e) => setTags(e.target.value)}
               required
               className="w-full  border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
             />
