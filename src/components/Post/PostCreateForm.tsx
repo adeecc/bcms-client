@@ -16,7 +16,7 @@ export const PostCreateForm = (props: Props) => {
   const [body, setBody] = useState<string>("");
   const [courseID, setCourseID] = useState<number>(() => props.courseId); // Might not be required Use Prop Directly
   const [tags, setTags] = useState<string>("");
-  
+
   const [courseCode, setCourseCode] = useState<string>("");
   const [courseName, setCourseName] = useState<string>("");
 
@@ -73,7 +73,7 @@ export const PostCreateForm = (props: Props) => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+              className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
             />
           </div>
           <div className="field-group">
@@ -81,14 +81,14 @@ export const PostCreateForm = (props: Props) => {
               Body
             </label>
             <ReactQuill
-              theme="snow"
+              theme="bubble"
               value={body}
-              placeholder="Highlight text for rich editor"
+              placeholder=""
               onChange={setBody}
               modules={modules}
               // formats={formats}
               bounds="form"
-              className="bg-button border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+              className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
             />
           </div>
           <div className="field-group">
@@ -102,7 +102,7 @@ export const PostCreateForm = (props: Props) => {
               value={tags}
               onChange={(e) => setTags(e.target.value)}
               required
-              className="w-full  border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+              className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
             />
           </div>
           <div className="field-group col-span-1">

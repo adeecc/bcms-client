@@ -41,7 +41,7 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+                className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
 
@@ -59,14 +59,14 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+                className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
 
             <div className="">
               <label
                 htmlFor="email"
-                className="block  font-medium text-primary-100"
+                className="block font-medium text-primary-100"
               >
                 Email Address
               </label>
@@ -78,7 +78,7 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+                className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
 
@@ -96,14 +96,14 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+                className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
 
             <div className="">
               <label
                 htmlFor="password"
-                className="block  font-medium text-primary-100"
+                className="block font-medium text-primary-100"
               >
                 Password
               </label>
@@ -114,7 +114,7 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+                className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               />
             </div>
 
