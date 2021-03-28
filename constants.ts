@@ -1,3 +1,5 @@
-const API_BASE_URL = process.env.API_BASE_URL || "localhost:5000";
+const __apiBaseUrl__ = process.env.API_BASE_URL || "localhost:5000";
+const __accessTokenKey__ = "access-token";
+const __refreshTokenKey__ = "refresh-token";
 
-export { API_BASE_URL };
+export { __apiBaseUrl__, __accessTokenKey__, __refreshTokenKey__ };
