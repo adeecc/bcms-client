@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
+
 import "react-quill/dist/quill.bubble.css";
 import "react-quill/dist/quill.snow.css";
 
@@ -7,14 +8,34 @@ interface Props {
   courseId: number;
 }
 
+// @todo: Clean Up Code and UI
+// @todo: Implement deletion of tags
+
 export const PostCreateForm = (props: Props) => {
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
   const [courseID, setCourseID] = useState<number>(() => props.courseId); // Might not be required Use Prop Directly
   const [tags, setTags] = useState<string>("");
-
+  
   const [courseCode, setCourseCode] = useState<string>("");
   const [courseName, setCourseName] = useState<string>("");
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      [{ script: "sub" }, { script: "super" }],
+      ["formula", "code-block"],
+      ["link"],
+      ["clean"],
+    ],
+  };
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -56,18 +77,22 @@ export const PostCreateForm = (props: Props) => {
             />
           </div>
           <div className="field-group">
-            <label htmlFor="title" className="font-medium text-primary-100">
+            <label htmlFor="body" className="font-medium text-primary-100">
               Body
             </label>
             <ReactQuill
-              theme="bubble"
+              theme="snow"
               value={body}
+              placeholder="Highlight text for rich editor"
               onChange={setBody}
-              className="bg-button border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+              modules={modules}
+              // formats={formats}
+              bounds="form"
+              className="bg-button border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
             />
           </div>
           <div className="field-group">
-            <label htmlFor="title" className="font-medium text-primary-100">
+            <label htmlFor="tags" className="font-medium text-primary-100">
               Tags
             </label>
             <input
