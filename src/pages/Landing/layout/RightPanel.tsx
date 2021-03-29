@@ -7,7 +7,7 @@ interface Props {
 const RightPanel = (props: Props) => {
     return (
         <div className={props.gridStyle}>
-            {/* <h1 className="text-button">Fuck</h1> */}
+            {/* Add Gallery of Courses: Card Style flex-row for small screens, flex col for larger */}
         </div>
     )
 }

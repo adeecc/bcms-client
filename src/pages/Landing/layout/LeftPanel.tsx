@@ -5,20 +5,14 @@ interface Props {
   gridStyle: string;
 }
 
-const LeftPanel = (props: Props) => {
+const LeftPanel: React.FC<Props> = (props: Props) => {
   return (
     <div className={props.gridStyle}>
-      <div className="flex flex-col sticky top-0 w-full pt-5">
-        {/* Logo and Icon */}
-        <div className="w-full flex justify-center ">
-          <Link to="/dashboard">
-            <img
-              className="flex-shrink"
-                style={{
-                  height: "2rem",
-                }}
-              src="logo512.png"
-            />
+      <div className="pt-5 sticky top-0 lg:h-screen flex flex-col">
+        {/* Logo */}
+        <div className="w-full flex justify-center text-primary-100">
+          <Link to="/">
+            <h1><span className="text-accent">B</span>CMS</h1>
           </Link>
         </div>
       </div>

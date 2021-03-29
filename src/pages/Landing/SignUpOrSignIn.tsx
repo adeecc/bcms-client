@@ -1,9 +1,9 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 interface Props {}
 
-const SignUpOrSignIn = (props: Props) => {
+const SignUpOrSignIn:React.FC<Props> = (props: Props) => {
   return (
     <div className="container flex flex-col min-h-screen justify-center sm:mx-auto sm:w-full sm:max-w-xl">
       <div className="bg-primary-800 py-8 px-6 shadow rounded-lg sm:px-10">
