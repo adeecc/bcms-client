@@ -1,6 +1,6 @@
 import React from "react";
 import Feed from "../../../components/Post/Feed";
-import SvgSearch from "../../../icons/Search";
+import SvgSearch from "../../../icons/SolidSearch";
 
 interface Props {
   gridStyle: string;

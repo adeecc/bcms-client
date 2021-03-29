@@ -3,7 +3,7 @@ import { LeftPanel, MiddlePanel, RightPanel } from "./layout";
 
 interface Props {}
 
-const Dashboard = (props: Props) => {
+const Dashboard: React.FC = (props: Props) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12">
       <LeftPanel gridStyle="lg:col-span-3 h-full" />
