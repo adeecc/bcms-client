@@ -30,7 +30,7 @@ const Post: React.FC<Props> = ({
     if (updated_at.getTime() - created_at.getTime() > 5000) {
       setIsModified(true);
     }
-  }, [updatedAtString]);
+  }, [updated_at, created_at]);
 
   return (
     <div

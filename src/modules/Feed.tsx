@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PostCard from "./PostCard";
+import PostCard from "../ui/PostCard";
 
 import postData from "./sample";
 
@@ -18,7 +18,7 @@ const Feed: React.FC<Props> = (props: Props) => {
   const [posts, setPosts] = useState<Post[]>(() =>
     JSON.parse(postData, (key, value) => {
       console.log(key);
-      if (key == "created_at" || key == "updated_at") return new Date(value);
+      if (key === "created_at" || key === "updated_at") return new Date(value);
       else return value;
     })
   );

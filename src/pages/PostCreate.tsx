@@ -1,5 +1,5 @@
 import React from "react";
-import { PostCreateForm } from "../../components/Post/PostCreateForm";
+import { PostCreateForm } from "../modules/forms/PostCreateForm";
 
 interface Props {}
 

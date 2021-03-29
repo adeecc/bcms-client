@@ -1,6 +1,6 @@
 import React from "react";
 
-import UserSignInForm from "../../components/User/SignInForm";
+import UserSignInForm from "../../modules/forms/SignInForm";
 
 interface Props {}
 

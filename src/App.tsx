@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Home from "./pages/Landing/Home";
+import Home from "./pages/Home";
 import SignUp from "./pages/User/SignUp";
 import SignIn from "./pages/User/SignIn";
-import CourseCreate from "./pages/Course/CourseCreate";
-import PostCreate from "./pages/Post/PostCreate";
+import CourseCreate from "./pages/CourseCreate";
+import PostCreate from "./pages/PostCreate";
 
 interface AppProps {}
 
