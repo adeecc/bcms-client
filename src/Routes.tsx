@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 
-import CourseCreate from "./pages/CourseCreate";
 import Home from "./pages/Home";
-import PostCreate from "./pages/PostCreate";
-import SignUpOrSignIn from "./pages/SignUpOrSignIn";
 import SignIn from "./pages/User/SignIn";
 import SignUp from "./pages/User/SignUp";
+import SignUpOrSignIn from "./pages/SignUpOrSignIn";
+import CourseCreate from "./pages/CourseCreate";
+import PostCreate from "./pages/PostCreate";
 
 import { __accessTokenKey__, __refreshTokenKey__ } from "./constants";
 
