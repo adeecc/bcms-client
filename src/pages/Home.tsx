@@ -4,16 +4,8 @@ import SignUpOrSignIn from "./SignUpOrSignIn";
 
 interface Props {}
 
-const verifyLoggedIn = () => {
-  const hasTokens =
-    localStorage.getItem("access-token") &&
-    localStorage.getItem("refresh-token");
-  // return hasTokens;
-  return true;
-};
-
 const Home: React.FC = (props: Props) => {
-  return verifyLoggedIn() ? <Dashboard /> : <SignUpOrSignIn />;
+  return <Dashboard />;
 };
 
 export default Home;
