@@ -14,8 +14,8 @@ interface Props {}
 
 const Routes: React.FC<Props> = (props: Props) => {
   const hasTokens =
-    sessionStorage.getItem(__accessTokenKey__) &&
-    sessionStorage.getItem(__refreshTokenKey__);
+    localStorage.getItem(__accessTokenKey__) &&
+    localStorage.getItem(__refreshTokenKey__);
 
   return (
     <Switch>
