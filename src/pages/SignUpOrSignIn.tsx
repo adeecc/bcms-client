@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import logo from "../img/logo2.png";
+
 interface Props {}
 
 const SignUpOrSignIn:React.FC<Props> = (props: Props) => {
@@ -13,11 +15,9 @@ const SignUpOrSignIn:React.FC<Props> = (props: Props) => {
             className="inline-block"
             style={{
               height: "1em",
-              width: "1em",
             }}
-            src="logo512.png"
+            src={logo}
           />
-          CMS
         </h2>
         <div className="flex justify-evenly">
           <Link
