@@ -2,10 +2,14 @@ import React from "react";
 import { Route, Switch } from "react-router";
 
 import Home from "./pages/Home";
+
 import SignIn from "./pages/User/SignIn";
 import SignUp from "./pages/User/SignUp";
 import SignUpOrSignIn from "./pages/SignUpOrSignIn";
+
+import Courses from "./modules/Courses";
 import CourseCreate from "./pages/CourseCreate";
+
 import PostCreate from "./pages/PostCreate";
 
 import { __accessTokenKey__, __refreshTokenKey__ } from "./constants";
@@ -27,6 +31,7 @@ const Routes: React.FC<Props> = (props: Props) => {
         ) : (
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/course" component={Courses} />
             <Route exact path="/course/create" component={CourseCreate} />
             <Route exact path="/post/create" component={PostCreate} />
           </Switch>
