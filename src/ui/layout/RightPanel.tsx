@@ -17,7 +17,7 @@ const RightPanel: React.FC<Props> = ({ gridStyle }) => {
   return (
     <div className={gridStyle}>
       <div className="pt-5 sticky top-0 lg:h-screen flex flex-col">
-        <div className="mb-7 h-6 pt-5">
+        <div className="mb-7 pt-5">
           <div className="flex justify-center">
             <div
               className="my-auto mx-4"
