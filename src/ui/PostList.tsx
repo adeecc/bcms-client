@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 
-import postData from "../modules/sample";
+import postData from "../modules/samplePosts";
 
 interface Props {
   courseId?: number;
