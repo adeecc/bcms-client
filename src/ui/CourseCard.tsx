@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  id: string;
+  id: any;
   code: string;
   name: string;
   year: string;
@@ -19,7 +19,7 @@ const CourseCard: React.FC<Props> = ({
 }) => {
   return (
     <div
-      id={id}
+      key={id}
       className="w-full bg-primary-800 p-6 rounded-lg flex flex-col my-7"
     >
       <div className="w-full flex justify-between">
