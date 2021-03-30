@@ -1,11 +1,7 @@
 import React from "react";
-import { useHistory } from "react-router";
 
-import SvgLogout from "../../icons/SolidLogout";
-import SvgBook from "../../icons/SolidBook";
-
-import { __accessTokenKey__, __refreshTokenKey__} from "../../constants";
-
+import { __accessTokenKey__, __refreshTokenKey__ } from "../../constants";
+import { Link, useHistory } from "react-router-dom";
 
 interface Props {
   gridStyle: string;
@@ -13,6 +9,13 @@ interface Props {
 
 const RightPanel: React.FC<Props> = ({ gridStyle }) => {
   const history = useHistory();
+
+  const logoutHandler = (e: React.SyntheticEvent) => {
+    console.log(e);
+    localStorage.removeItem(__accessTokenKey__);
+    localStorage.removeItem(__refreshTokenKey__);
+    history.push("/signin");
+  };
 
   return (
     <div className={gridStyle}>
@@ -33,23 +36,23 @@ const RightPanel: React.FC<Props> = ({ gridStyle }) => {
               />
             </div>
             <div className="my-auto mx-4">
-              <button className="focus:outline-none" onClick={() => {history.push('/courses');}}>
-                <SvgBook
-                  style={{
-                    height: 32,
-                    width: 32,
-                  }}
-                />
-              </button>
+              <Link to="/course">
+                <h4 className="text-primary-100 hover:text-primary-200 font-bold">
+                  Courses
+                </h4>
+              </Link>
             </div>
             <div className="my-auto mx-4">
-              <button className="focus:outline-none">
-                <SvgLogout
-                  style={{
-                    height: 32,
-                    width: 32,
-                  }}
-                />
+              {/* <Link to="/logout">
+                <h4 className="text-primary-100 hover:text-primary-200 font-bold">
+                  Logout
+                </h4>
+              </Link> */}
+
+              <button className="focus:outline-none" onClick={logoutHandler}>
+                <h4 className="text-primary-100 hover:text-primary-200 font-bold">
+                  Logout
+                </h4>
               </button>
             </div>
           </div>
