@@ -23,9 +23,12 @@ const Routes: React.FC<Props> = (props: Props) => {
 
   return (
     <Switch>
+      {/* Public Routes */}
+      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/signin" component={SignIn} />
+
+      {/* Private Routes: Require Login */}
       <Route path="/">
-        <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/signin" component={SignIn} />
         {!hasTokens ? (
           <SignUpOrSignIn />
         ) : (
