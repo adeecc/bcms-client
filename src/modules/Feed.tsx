@@ -3,7 +3,7 @@ import PostList from "../ui/PostList";
 
 interface Props {}
 
-const Feed: React.FC = ({}) => {
+const Feed: React.FC<Props> = (props: Props) => {
   return <PostList maxPosts={5}/>;
 };
 

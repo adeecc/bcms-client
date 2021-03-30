@@ -13,6 +13,7 @@ const SignUpOrSignIn:React.FC<Props> = (props: Props) => {
           Welcome to{" "}
           <img
             className="inline-block"
+            alt="logo"
             style={{
               height: "1em",
             }}

@@ -17,6 +17,7 @@ const LeftPanel: React.FC<Props> = (props: Props) => {
             <Link to="/">
               <img
                 className="inline-block"
+                alt="logo"
                 style={{
                   height: "40px",
                   // width: "40px",
