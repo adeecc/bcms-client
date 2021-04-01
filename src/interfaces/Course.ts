@@ -7,5 +7,4 @@ export interface Course {
   instructor: string;
   year: string;
   sem: string;
-  posts?: Post[];
 }
