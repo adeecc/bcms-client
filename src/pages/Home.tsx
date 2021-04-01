@@ -1,6 +1,5 @@
 import React from "react";
-import Dashboard from "./Dashboard";
-import SignUpOrSignIn from "./SignUpOrSignIn";
+import Dashboard from "../modules/Dashboard";
 
 interface Props {}
 
