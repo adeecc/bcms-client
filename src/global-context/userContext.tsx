@@ -2,13 +2,6 @@ import React, { useReducer } from "react";
 
 import { userReducer, UserActions } from "./userReducer";
 
-type UserType = {
-  isLoggedIn: boolean;
-  id?: number;
-  username?: string;
-  fullName?: string;
-};
-
 type userContextType = {
   state: UserType;
   dispatch: React.Dispatch<UserActions>;

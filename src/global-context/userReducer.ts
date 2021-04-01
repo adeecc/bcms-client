@@ -1,12 +1,3 @@
-import React, { useReducer, useContext } from "react";
-
-type UserType = {
-  isLoggedIn: boolean;
-  id?: number;
-  username?: string;
-  fullName?: string;
-};
-
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined
     ? {
@@ -40,11 +31,20 @@ type UserPayload = {
 export type UserActions = ActionMap<UserPayload>[keyof ActionMap<UserPayload>];
 
 export const userReducer = (state: UserType, action: UserActions) => {
-  switch (action?.type) {
+  switch (action.type) {
     case ActionTypes.LogIn:
-      return {
-        isLoggedIn: true,
-      };
+      state.id = action.payload.id;
+      state.fullName = action.payload.fullName;
+      state.username = action.payload.username;
+      state.isLoggedIn = true;
+      console.log("Logged IN!");
+
+      return state;
+
+    case ActionTypes.LogOut:
+      state.isLoggedIn = false;
+      return state;
+
     default:
       return state;
   }
