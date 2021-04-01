@@ -40,7 +40,7 @@ const PostList: React.FC<Props> = ({ courseId, maxPosts }) => {
     <div>
       {posts?.map((value, index) => (
         <PostCard
-          id="{index}"
+          id={value.id}
           title={value.title}
           courseName={value.courseName}
           created_at={value.created_at}

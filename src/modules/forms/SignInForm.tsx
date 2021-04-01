@@ -64,7 +64,7 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
             <div className="">
               <input
                 type="submit"
-                value="Sign Up"
+                value="Sign In"
                 className="w-full my-3 py-2 px-4 border border-transparent rounded-md shadow-sm  font-medium text-button bg-accent hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-hover"
               />
             </div>

@@ -12,8 +12,7 @@ const RightPanel: React.FC<Props> = ({ gridStyle }) => {
 
   const logoutHandler = (e: React.SyntheticEvent) => {
     console.log(e);
-    localStorage.removeItem(__accessTokenKey__);
-    localStorage.removeItem(__refreshTokenKey__);
+    localStorage.clear()
     history.push("/signin");
   };
 

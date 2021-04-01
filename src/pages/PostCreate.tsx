@@ -3,7 +3,7 @@ import { PostCreateForm } from "../modules/forms/PostCreateForm";
 
 interface Props {}
 
-const PostCreate = (props: Props) => {
+const PostCreate: React.FC<Props> = (props: Props) => {
   return (
     <div>
       <PostCreateForm courseId={2}/>

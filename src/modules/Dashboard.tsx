@@ -3,8 +3,8 @@ import PostList from "../ui/PostList";
 
 interface Props {}
 
-const Feed: React.FC = ({}) => {
+const Dashboard: React.FC = (props: Props) => {
   return <PostList maxPosts={5}/>;
 };
 
-export default Feed;
+export default Dashboard;
