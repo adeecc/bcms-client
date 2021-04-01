@@ -15,6 +15,7 @@ import CourseCreate from "../pages/CourseCreate";
 import PostCreate from "../pages/PostCreate";
 
 import { __accessTokenKey__, __refreshTokenKey__ } from "../constants";
+import CourseDetail from "../ui/CourseDetail";
 
 interface Props {}
 
@@ -39,6 +40,7 @@ const Routes: React.FC<Props> = (props: Props) => {
               <Route exact path="/" component={Home} />
               <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/course" component={Courses} />
+              <Route exact path="/course/:id" component={CourseDetail} />
               <Route exact path="/course/create" component={CourseCreate} />
               <Route exact path="/post/create" component={PostCreate} />
             </Switch>
