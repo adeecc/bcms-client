@@ -4,7 +4,7 @@ import PostCard from "./PostCard";
 import postData from "../modules/samplePosts";
 
 interface Props {
-  courseId?: number;
+  courseId?: string;
   maxPosts?: number;
 }
 
