@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 
+import Grid from "../ui/layout/Grid";
+import Dashboard from "../modules/Dashboard";
 import Home from "../pages/Home";
 
 import SignIn from "../pages/User/SignIn";
@@ -13,7 +15,6 @@ import CourseCreate from "../pages/CourseCreate";
 import PostCreate from "../pages/PostCreate";
 
 import { __accessTokenKey__, __refreshTokenKey__ } from "../constants";
-import Grid from "../ui/layout/Grid";
 
 interface Props {}
 
@@ -36,6 +37,7 @@ const Routes: React.FC<Props> = (props: Props) => {
           <Grid>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/course" component={Courses} />
               <Route exact path="/course/create" component={CourseCreate} />
               <Route exact path="/post/create" component={PostCreate} />
