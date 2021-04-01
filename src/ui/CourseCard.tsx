@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
   id: any;
@@ -18,7 +19,7 @@ const CourseCard: React.FC<Props> = ({
   instructor,
 }) => {
   return (
-    <div
+    <Link to={`/course/${id}`}
       key={id}
       className="w-full bg-primary-800 p-6 rounded-lg flex flex-col my-7"
     >
@@ -33,7 +34,7 @@ const CourseCard: React.FC<Props> = ({
         </span>
       </div>
       <div className="w-full text-accent pt-2">{instructor}</div>
-    </div>
+    </Link>
   );
 };
 
