@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 
-import { userReducer } from './userReducer';
+import { userReducer, UserActions } from "./userReducer";
 
 type UserType = {
   isLoggedIn: boolean;
@@ -11,7 +11,7 @@ type UserType = {
 
 type userContextType = {
   state: UserType;
-  dispatch: React.Dispatch<any>;
+  dispatch: React.Dispatch<UserActions>;
 };
 
 const initialState = {
@@ -24,7 +24,6 @@ const defaultUserContext = {
 };
 
 const UserContext = React.createContext<userContextType>(defaultUserContext);
-
 
 const UserProvider: React.FC = ({ children }) => {
   const [userState, dispatch] = useReducer(userReducer, initialState);
@@ -46,6 +45,7 @@ export { UserContext, UserProvider };
 //   dispatch({
 //     type: ActionTypes.LogIn,
 //     payload: {
+//       isLoggedIn: true,
 //       id: 1234,
 //       username: "adichopra11",
 //       fullName: "Aditya Chopra",
@@ -56,6 +56,8 @@ export { UserContext, UserProvider };
 // const logOut = () => {
 //   dispatch({
 //     type: ActionTypes.LogOut,
-//     payload: {},
+//     payload: {
+//       isLoggedIn: false,
+//     },
 //   });
 // };
