@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
   id: string;
@@ -33,7 +34,8 @@ const Post: React.FC<Props> = ({
   }, [updated_at, created_at]);
 
   return (
-    <div
+    <Link
+      to={`/post/${id}`}
       key={id}
       className="w-full bg-primary-800 p-6 rounded-lg flex flex-col my-7"
     >
@@ -54,7 +56,7 @@ const Post: React.FC<Props> = ({
         )}
       </div>
       <div className="w-full text-accent pt-2">{courseName}</div>
-    </div>
+    </Link>
   );
 };
 
