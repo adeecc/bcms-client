@@ -1,3 +1,5 @@
+import jwt_decode from "jwt-decode";
+
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined
     ? {
@@ -18,9 +20,8 @@ type UserPayload = {
   [ActionTypes.LogIn]: {
     // User User details
     // Set is Logged in to true
-    id: number;
-    username: string;
-    fullName: string;
+    accessToken: string;
+    refreshToken: string;
   };
 
   [ActionTypes.LogOut]: {
@@ -28,23 +29,33 @@ type UserPayload = {
   };
 };
 
+const decodeToken = (token:string): UserInfo => {
+    const decoded: UserInfo = jwt_decode(token);
+    console.log(decoded);
+    return decoded;
+};
+
 export type UserActions = ActionMap<UserPayload>[keyof ActionMap<UserPayload>];
 
-export const userReducer = (state: UserType, action: UserActions) => {
+export const userReducer = (state: UserType, action: UserActions): UserType => {
+
+  console.log(state, action);
+
   switch (action.type) {
     case ActionTypes.LogIn:
-      state.id = action.payload.id;
-      state.fullName = action.payload.fullName;
-      state.username = action.payload.username;
-      state.isLoggedIn = true;
-      console.log("Logged IN!");
+      return {
+        isLoggedIn: true,
 
-      return state;
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+
+        userInfo: decodeToken(action.payload.accessToken)
+      };
 
     case ActionTypes.LogOut:
-      state.isLoggedIn = false;
-      return state;
-
+      return {
+        isLoggedIn: false
+      }
     default:
       return state;
   }
