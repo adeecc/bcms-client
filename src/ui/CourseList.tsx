@@ -10,7 +10,7 @@ interface Props {
 
 interface Course {
   code: string;
-  name: string;
+  courseName: string;
   year: string;
   sem: string;
   instructor: string;
@@ -38,7 +38,7 @@ const CourseList: React.FC<Props> = ({ userId, maxCourses }) => {
         <CourseCard
           id={index}
           code={value.code}
-          name={value.name}
+          name={value.courseName}
           year={value.year}
           sem={value.sem}
           instructor={value.instructor}
