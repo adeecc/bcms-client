@@ -45,6 +45,7 @@ const PostList: React.FC<Props> = ({ courseId, maxPosts }) => {
           courseName={value.courseName}
           created_at={value.created_at}
           updated_at={value.updated_at}
+          tags={value.tags}
         />
       ))}
     </div>

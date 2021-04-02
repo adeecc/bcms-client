@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Tag from "./Tag";
 
 interface Props {
   id: string;
@@ -55,7 +56,19 @@ const Post: React.FC<Props> = ({
           <span className="text-primary-100">{createdAtString}</span>
         )}
       </div>
-      <div className="w-full text-accent pt-2">{courseName}</div>
+
+      <div className="w-full flex justify-between">
+        <div className="text-accent pt-2">{courseName}</div>
+        <div className="flex text-primary-300 pt-2">
+          {tags?.map((value, index) => {
+            if (index === 3) return "..."
+            if (index > 3) return;
+            return (
+              <Tag label={value} />
+            );
+          })}
+        </div>
+      </div>
     </Link>
   );
 };
