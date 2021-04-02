@@ -8,12 +8,10 @@ interface AppProps {}
 
 export const App: React.FC<AppProps> = (props: AppProps) => {
   return (
-    <>
     <UserProvider>
         <BrowserRouter>
           <Routes />
         </BrowserRouter>
     </UserProvider>
-    </>
   );
 };
