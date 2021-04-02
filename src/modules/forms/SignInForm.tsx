@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { UserContext } from "../../global-context/userContext";
+import { ActionTypes } from "../../global-context/userReducer";
+import authClient from "../../api/authClient";
 
 interface Props {
   
@@ -9,9 +12,20 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const {dispatch} = React.useContext(UserContext);
+
+  const history = useHistory();
+
+  const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log(username, password);
+
+    const payload = await authClient.login(username, password);
+
+    dispatch({
+      type: ActionTypes.LogIn,
+      payload: payload
+    });
+    history.push("/dashboard");
   };
 
   return (

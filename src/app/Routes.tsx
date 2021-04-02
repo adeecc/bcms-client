@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 
+import GuardedRoute from "./GuardRoutes";
+
 import Grid from "../ui/layout/Grid";
 import Dashboard from "../modules/Dashboard";
 import Home from "../pages/Home";
@@ -32,22 +34,19 @@ const Routes: React.FC<Props> = (props: Props) => {
       <Route exact path="/signin" component={SignIn} />
 
       {/* Private Routes: Require Login */}
-      <Route path="/">
-        {!hasTokens ? (
-          <SignUpOrSignIn />
-        ) : (
+      <Route path="/">(
           <Grid>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/course" component={Courses} />
-              <Route exact path="/course/:id" component={CourseDetail} />
-              <Route exact path="/course/create" component={CourseCreate} />
-              <Route exact path="/post/:id" component={PostDetail} />
-              <Route exact path="/post/create" component={PostCreate} />
+              <GuardedRoute exact path="/dashboard" component={Dashboard} />
+              <GuardedRoute exact path="/course" component={Courses} />
+              <GuardedRoute exact path="/course/:id" component={CourseDetail} />
+              <GuardedRoute exact path="/course/create" component={CourseCreate} />
+              <GuardedRoute exact path="/post/:id" component={PostDetail} />
+              <GuardedRoute exact path="/post/create" component={PostCreate} />
             </Switch>
           </Grid>
-        )}
+        )
       </Route>
     </Switch>
   );
