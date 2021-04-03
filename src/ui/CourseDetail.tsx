@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import SvgPlus from "../icons/SolidPlus";
 
 import { Course } from "../interfaces/Course";
+import PostCreateModal from "../modules/PostCreateModal";
 import PostList from "./PostList";
 
 interface Props {}
@@ -14,7 +15,7 @@ const CourseDetail: React.FC<Props> = ({}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isInstructor, setIsInstructor] = useState<boolean>(() => {
     // check if instructor id = current user id
-    return false;
+    return true;
   });
 
   const [isEnrolled, setIsEnrolled] = useState<boolean>(() => {
@@ -35,6 +36,20 @@ const CourseDetail: React.FC<Props> = ({}) => {
       sem: "1",
     };
   });
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const onClickCreatePost = (e: React.SyntheticEvent) => {
+    console.log("Creating a post!");
+
+    setModalIsOpen(true);
+  };
+
+  const onClickEnroll = (e: React.SyntheticEvent) => {};
 
   useEffect(() => {
     // Data Required
@@ -61,11 +76,37 @@ const CourseDetail: React.FC<Props> = ({}) => {
           <h3 className="text-primary-100 my-auto">{course.name}</h3>
         </div>
 
-        {(!isEnrolled || isInstructor) && (
-          <button className="py-2 px-6 my-auto rounded-lg text-button bg-accent">
-            {isInstructor ? <SvgPlus /> : "Enroll"}
+        {isInstructor && (
+          <div className="my-auto">
+            <button
+              className="py-2 px-6 my-auto rounded-lg text-button bg-accent focus:outline-none"
+              onClick={onClickCreatePost}
+            >
+              <SvgPlus />
+            </button>
+            <PostCreateModal
+              courseId={id}
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+            />
+          </div>
+        )}
+
+        {!isEnrolled && !isInstructor && (
+          <button
+            className="py-2 px-6 my-auto rounded-lg text-button bg-accent focus:outline-none"
+            onClick={onClickEnroll}
+          >
+            Enroll
           </button>
         )}
+
+        {/* {(!isEnrolled || isInstructor) && (
+          {isInstructor ? () : ()}
+          // <button className="py-2 px-6 my-auto rounded-lg text-button bg-accent">
+          //   <SvgPlus />
+          // </button>
+        )} */}
       </div>
       <div className="flex mb-5">
         <h4 className="text-primary-300 mr-3">
