@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import MDEditor from '@uiw/react-md-editor';
 
-import ReactQuill from "react-quill";
-
 import "react-quill/dist/quill.bubble.css";
 import "react-quill/dist/quill.snow.css";
 
