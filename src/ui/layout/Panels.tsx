@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import { GridPanel, SideHeaderWrapper, MiddleHeaderWrapper } from "./Wrappers";
+import { GridPanel, HeaderWrapper } from "./Wrappers";
 
 import logo from "../../img/logo2.png";
+import ProfileCard from "../ProfileCard";
+import GlobalSearch from "../GlobalSearch";
+import { UserContext } from "../../global-context/userContext";
 
 interface PanelProps {
   gridStyle: string;
@@ -13,7 +16,8 @@ const LeftPanel: React.FC<PanelProps> = ({ gridStyle }) => {
   return (
     <GridPanel gridStyle={gridStyle} sticky>
       {/* Logo */}
-      <SideHeaderWrapper>
+      <HeaderWrapper>
+        <div className="w-full flex justify-center">
         <Link to="/">
           <img
             alt="logo"
@@ -23,7 +27,8 @@ const LeftPanel: React.FC<PanelProps> = ({ gridStyle }) => {
             src={logo}
           />
         </Link>
-      </SideHeaderWrapper>
+        </div>
+      </HeaderWrapper>
     </GridPanel>
   );
 };
@@ -34,7 +39,7 @@ const MiddlePanel: React.FC<
   return (
     <GridPanel gridStyle={gridStyle}>
       <div className="sticky top-0 w-full z-10 bg-primary-900">
-        <MiddleHeaderWrapper>{stickyChildren}</MiddleHeaderWrapper>
+        <HeaderWrapper><GlobalSearch /></HeaderWrapper>
       </div>
       <div className="w-full">{children}</div>
     </GridPanel>
@@ -44,6 +49,8 @@ const MiddlePanel: React.FC<
 const RightPanel: React.FC<PanelProps> = ({ gridStyle }) => {
   const history = useHistory();
 
+  const { state, dispatch } = useContext(UserContext);
+
   const logoutHandler = (e: React.SyntheticEvent) => {
     console.log(e);
     localStorage.clear();
@@ -52,7 +59,8 @@ const RightPanel: React.FC<PanelProps> = ({ gridStyle }) => {
 
   return (
     <GridPanel gridStyle={gridStyle} sticky>
-      <SideHeaderWrapper>
+      <HeaderWrapper>
+        <div className="flex">
         <div
           className="my-auto mx-4"
           style={{
@@ -62,7 +70,7 @@ const RightPanel: React.FC<PanelProps> = ({ gridStyle }) => {
         >
           <Link to="/">
             <img
-              src="https://cdn.statically.io/avatar/shape=circle/gh"
+              src={`https://ui-avatars.com/api/?background=fd6868&color=fff&name=${state.userInfo?.fullName?.split(" ").join("+")}`}
               alt="avatar"
               className="rounded-full h-full object-cover"
             />
@@ -82,7 +90,10 @@ const RightPanel: React.FC<PanelProps> = ({ gridStyle }) => {
             </h4>
           </button>
         </div>
-      </SideHeaderWrapper>
+        </div>
+      </HeaderWrapper>
+
+      <ProfileCard />
     </GridPanel>
   );
 };
