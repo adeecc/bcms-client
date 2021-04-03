@@ -21,20 +21,31 @@ const AdminToolCard: React.FC<Props> = ({}) => {
     setModalIsOpen(true);
   };
 
-
   console.log(state);
 
   return IsAdmin || IsFaculty ? (
-    <div className="max-w-sm rounded-lg flex flex-col">
-      <div className="px-4 py-2 bg-primary-800 border-b border-primary-600">
-        <h4 className="text-primary-100 font-bold">Admin Tools</h4>
+    <div className="max-w-sm rounded-lg overflow-hidden flex flex-col">
+      <div className="px-8 py-6 bg-primary-800 border-b border-primary-600">
+        <h4 className="text-primary-100 font-bold">Privilege Tools</h4>
       </div>
-      <div className="px-4 py-2 bg-primary-700 w-full flex justify-between my-auto">
-        <h5 className="text-primary-200 font-bold my-auto">Create Course</h5>
-        <button className="bg-primary-600 p-2 rounded ouline-none focus:ouline-none my-auto" onClick={onClickCreateCourse}>
-          <SvgPlus />
-        </button>
-        <CourseCreateModal isOpen={modalIsOpen} onRequestClose={closeModal} />
+      <div className="px-8 py-6 bg-primary-700 w-full flex flex-col my-auto">
+        <div className="w-full flex justify-between my-auto">
+          <h5 className="text-primary-200 font-bold my-auto">Create Course</h5>
+          <button
+            className="bg-primary-600 p-2 rounded ouline-none focus:ouline-none my-auto"
+            onClick={onClickCreateCourse}
+          >
+            <SvgPlus />
+          </button>
+          <CourseCreateModal isOpen={modalIsOpen} onRequestClose={closeModal} />
+        </div>
+        {IsAdmin && (
+          <div className="w-full flex justify-between my-auto">
+            <h5 className="text-primary-200 font-bold my-auto">
+              Generate Reports
+            </h5>
+          </div>
+        )}
       </div>
     </div>
   ) : null;
