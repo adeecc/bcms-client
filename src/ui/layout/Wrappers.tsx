@@ -26,23 +26,12 @@ const GridPanel: React.FC<GridPanelProps> = ({
 
 interface PanelHeaderProps {}
 
-const SideHeaderWrapper: React.FC<PanelHeaderProps> = ({ children }) => {
+const HeaderWrapper: React.FC<PanelHeaderProps> = ({ children }) => {
   return (
-    <div className="mb-7 lg:h-6 pt-7">
-      <div className="w-full flex justify-center text-primary-100">
-        {children}
-      </div>
-    </div>
-  );
-};
-
-const MiddleHeaderWrapper: React.FC<PanelHeaderProps> = ({ children }) => {
-  return (
-    <div className="w-full mb-7 pt-7 ">
-      <GlobalSearch />
+    <div className="w-full mb-10 pt-7">
       {children}
     </div>
   );
 };
 
-export { GridPanel, SideHeaderWrapper, MiddleHeaderWrapper };
+export { GridPanel, HeaderWrapper };
