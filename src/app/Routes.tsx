@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router";
+import { Redirect, Route, Switch } from "react-router";
 
 import GuardedRoute from "./GuardRoutes";
 
@@ -22,27 +22,29 @@ interface Props {}
 const Routes: React.FC<Props> = (props: Props) => {
   return (
     <Switch>
+      <Route exact path="/">
+        <Redirect to="/dashboard"></Redirect>
+      </Route>
+
       {/* Public Routes */}
-      <Route exact path="/signup" component={SignUp} />
-      <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/signin" component={SignIn} />
 
       {/* Private Routes: Require Login */}
-      <Route path="/">
+
         <Grid>
           <Switch>
-            <GuardedRoute exact path="/" component={Home} />
-            <GuardedRoute exact path="/dashboard" component={Dashboard} />
-            <GuardedRoute exact path="/course" component={Courses} />
-            <GuardedRoute exact path="/course/:id" component={CourseDetail} />
+            <GuardedRoute exact path="/dashboard" Component={Dashboard} />
+            <GuardedRoute exact path="/course" Component={Courses} />
+            <GuardedRoute exact path="/course/:id" Component={CourseDetail} />
             <GuardedRoute
               exact
               path="/course/create"
-              component={CourseCreate}
+              Component={CourseCreate}
             />
-            <GuardedRoute exact path="/post/:id" component={PostDetail} />
+            <GuardedRoute exact path="/post/:id" Component={PostDetail} />
           </Switch>
         </Grid>
-      </Route>
     </Switch>
   );
 };
