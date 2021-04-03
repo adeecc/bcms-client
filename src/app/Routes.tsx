@@ -14,8 +14,6 @@ import SignUpOrSignIn from "../pages/SignUpOrSignIn";
 import Courses from "../modules/Courses";
 import CourseCreate from "../pages/CourseCreate";
 
-import PostCreate from "../pages/PostCreate";
-
 import CourseDetail from "../ui/CourseDetail";
 import PostDetail from "../ui/PostDetail";
 
@@ -42,7 +40,6 @@ const Routes: React.FC<Props> = (props: Props) => {
               component={CourseCreate}
             />
             <GuardedRoute exact path="/post/:id" component={PostDetail} />
-            <GuardedRoute exact path="/post/create" component={PostCreate} />
           </Switch>
         </Grid>
       </Route>
