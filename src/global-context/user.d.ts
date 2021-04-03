@@ -10,7 +10,7 @@ type UserInfo = {
   username: string;
   fullName?: string;
   email?: string;
-  role: UserRoles;
+  role: UserRoles[];
 };
 
 type UserType = {
