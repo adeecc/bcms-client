@@ -7,6 +7,7 @@ import logo from "../../img/logo2.png";
 import ProfileCard from "../ProfileCard";
 import GlobalSearch from "../GlobalSearch";
 import { UserContext } from "../../global-context/userContext";
+import AdminToolCard from "../AdminTool";
 
 interface PanelProps {
   gridStyle: string;
@@ -18,15 +19,15 @@ const LeftPanel: React.FC<PanelProps> = ({ gridStyle }) => {
       {/* Logo */}
       <HeaderWrapper>
         <div className="w-full flex justify-center">
-        <Link to="/">
-          <img
-            alt="logo"
-            style={{
-              height: "40px",
-            }}
-            src={logo}
-          />
-        </Link>
+          <Link to="/">
+            <img
+              alt="logo"
+              style={{
+                height: "40px",
+              }}
+              src={logo}
+            />
+          </Link>
         </div>
       </HeaderWrapper>
     </GridPanel>
@@ -39,7 +40,9 @@ const MiddlePanel: React.FC<
   return (
     <GridPanel gridStyle={gridStyle}>
       <div className="sticky top-0 w-full z-10 bg-primary-900">
-        <HeaderWrapper><GlobalSearch /></HeaderWrapper>
+        <HeaderWrapper>
+          <GlobalSearch />
+        </HeaderWrapper>
       </div>
       <div className="w-full">{children}</div>
     </GridPanel>
@@ -61,39 +64,42 @@ const RightPanel: React.FC<PanelProps> = ({ gridStyle }) => {
     <GridPanel gridStyle={gridStyle} sticky>
       <HeaderWrapper>
         <div className="flex">
-        <div
-          className="my-auto mx-4"
-          style={{
-            height: 40,
-            width: 40,
-          }}
-        >
-          <Link to="/">
-            <img
-              src={`https://ui-avatars.com/api/?background=fd6868&color=fff&name=${state.userInfo?.fullName?.split(" ").join("+")}`}
-              alt="avatar"
-              className="rounded-full h-full object-cover"
-            />
-          </Link>
-        </div>
-        <div className="my-auto mx-4">
-          <Link to="/course">
-            <h4 className="text-primary-100 hover:text-primary-200 font-bold">
-              Courses
-            </h4>
-          </Link>
-        </div>
-        <div className="my-auto mx-4">
-          <button className="focus:outline-none" onClick={logoutHandler}>
-            <h4 className="text-primary-100 hover:text-primary-200 font-bold">
-              Logout
-            </h4>
-          </button>
-        </div>
+          <div
+            className="my-auto mx-4"
+            style={{
+              height: 40,
+              width: 40,
+            }}
+          >
+            <Link to="/">
+              <img
+                src={`https://ui-avatars.com/api/?background=fd6868&color=fff&name=${state.userInfo?.fullName
+                  ?.split(" ")
+                  .join("+")}`}
+                alt="avatar"
+                className="rounded-full h-full object-cover"
+              />
+            </Link>
+          </div>
+          <div className="my-auto mx-4">
+            <Link to="/course">
+              <h4 className="text-primary-100 hover:text-primary-200 font-bold">
+                Courses
+              </h4>
+            </Link>
+          </div>
+          <div className="my-auto mx-4">
+            <button className="focus:outline-none" onClick={logoutHandler}>
+              <h4 className="text-primary-100 hover:text-primary-200 font-bold">
+                Logout
+              </h4>
+            </button>
+          </div>
         </div>
       </HeaderWrapper>
 
       <ProfileCard />
+      <AdminToolCard />
     </GridPanel>
   );
 };
