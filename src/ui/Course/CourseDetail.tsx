@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import SvgPlus from "../icons/SolidPlus";
+import SvgPlus from "../../icons/SolidPlus";
 
-import { Course } from "../interfaces/Course";
-import PostCreateModal from "../modules/PostCreateModal";
-import PostList from "./PostList";
+import { Course } from "../../interfaces/Course";
+import PostCreateModal from "../../modules/PostCreateModal";
+import PostList from "../Post/PostList";
 
 interface Props {}
 

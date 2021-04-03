@@ -6,9 +6,9 @@ interface Props {}
 
 const Grid: React.FC<Props> = ({ children }) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-10 scrollbar-thin scrollbar-thumb-primary-700">
+    <div className="grid gap-4 grid-cols-1 lg:grid-cols-8 scrollbar-thin scrollbar-thumb-primary-700">
       <LeftPanel gridStyle="lg:col-span-2 w-full h-full" />
-      <MiddlePanel gridStyle="lg:col-span-6 h-full w-full max-w-4xl mx-auto">
+      <MiddlePanel gridStyle="lg:col-span-4 h-full w-full max-w-3xl mx-auto">
         {children}
       </MiddlePanel>
       <RightPanel gridStyle="lg:col-span-2 w-full h-full" />

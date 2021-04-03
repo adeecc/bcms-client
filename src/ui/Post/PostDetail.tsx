@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import MDEditor from '@uiw/react-md-editor';
 
-import { Post } from "../interfaces/Post";
-import Tag from "./Tag";
+import { Post } from "../../interfaces/Post";
+import Tag from "../Tag";
 
 interface Props {}
 
@@ -14,7 +14,7 @@ const PostDetail: React.FC<Props> = ({}) => {
     return {
       id,
       title: "Que Sara Sara",
-      body:`# Headering 1\n> Okauy this is very gg as well ngl\nhello | darkness\n--- ---\nmy old | friend`,
+      body:`# Headering 1\n> Okauy this is very gg as well ngl\n - Hello \n - darkness\n - my\n - old\n - friend`,
       courseName: "Lorem ipsum dolor sit",
       created_at: new Date(
         "Thu Apr 01 2021 17:56:34 GMT+0530 (India Standard Time)"

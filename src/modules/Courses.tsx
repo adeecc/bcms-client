@@ -1,6 +1,6 @@
 import React from "react";
 
-import CourseList from "../ui/CourseList";
+import CourseList from "../ui/Course/CourseList";
 
 interface Props {}
 

@@ -14,8 +14,8 @@ import SignUpOrSignIn from "../pages/SignUpOrSignIn";
 import Courses from "../modules/Courses";
 import CourseCreate from "../pages/CourseCreate";
 
-import CourseDetail from "../ui/CourseDetail";
-import PostDetail from "../ui/PostDetail";
+import CourseDetail from "../ui/Course/CourseDetail";
+import PostDetail from "../ui/Post/PostDetail";
 
 interface Props {}
 

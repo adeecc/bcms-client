@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
 
-import courseData from "../modules/sampleCourses";
+import courseData from "../../modules/sampleCourses";
 
 interface Props {
   userId?: number;
