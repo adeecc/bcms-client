@@ -4,6 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import { GridPanel, SideHeaderWrapper, MiddleHeaderWrapper } from "./Wrappers";
 
 import logo from "../../img/logo2.png";
+import { UserContext } from "../../global-context/userContext";
+import { ActionTypes } from "../../global-context/userReducer";
 
 interface PanelProps {
   gridStyle: string;
@@ -44,10 +46,15 @@ const MiddlePanel: React.FC<
 const RightPanel: React.FC<PanelProps> = ({ gridStyle }) => {
   const history = useHistory();
 
+  const {dispatch} = React.useContext(UserContext);
+
   const logoutHandler = (e: React.SyntheticEvent) => {
-    console.log(e);
-    localStorage.clear();
-    history.push("/signin");
+      dispatch({
+        type: ActionTypes.LogOut,
+        payload: {}
+      });
+
+      history.replace("/signin");
   };
 
   return (
