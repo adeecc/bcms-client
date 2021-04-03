@@ -14,7 +14,7 @@ const GridPanel: React.FC<GridPanelProps> = ({
   return (
     <div className={gridStyle}>
       <div
-        className={`w-full ${
+        className={`w-full space-y-8 ${
           sticky ? "sticky top-0 lg:h-screen" : ""
         } flex flex-col mx-auto`}
       >
