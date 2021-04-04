@@ -2,19 +2,11 @@ import React, { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 
 import postData from "../../modules/samplePosts";
+import { Post } from "../../interfaces/Post";
 
 interface Props {
   courseId?: string;
   maxPosts?: number;
-}
-
-interface Post {
-  id: string;
-  title: string;
-  courseName: string;
-  created_at: Date;
-  updated_at: Date;
-  tags?: string[];
 }
 
 const PostList: React.FC<Props> = ({ courseId, maxPosts }) => {
