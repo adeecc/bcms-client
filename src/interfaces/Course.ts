@@ -1,8 +1,6 @@
-import { Post } from "./Post";
-
 export interface Course {
   id: string;
-  name: string;
+  courseName: string;
   code: string;
   instructor: string;
   year: string;
