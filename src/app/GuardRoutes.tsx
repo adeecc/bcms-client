@@ -12,6 +12,7 @@ const checkPrevious = (dispatch: any): Boolean => {
 }
 
 const isAuthorized = (user: UserType, allowedRoles: Array<UserRoles>): Boolean => {
+    console.log(user, allowedRoles);
     const roles: UserRoles[] = (user?.userInfo?.role || []);
     return user.isLoggedIn && (allowedRoles === undefined || allowedRoles.filter(allowedRole => roles.includes(allowedRole)).length != 0 || allowedRoles.length === 0);
 };
