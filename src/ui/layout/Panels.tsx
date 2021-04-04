@@ -8,6 +8,7 @@ import ProfileCard from "../ProfileCard";
 import GlobalSearch from "../GlobalSearch";
 import { UserContext } from "../../global-context/userContext";
 import AdminToolCard from "../AdminTool";
+import CourseFeed from "../Course/CourseFeed";
 
 interface PanelProps {
   gridStyle: string;
@@ -30,6 +31,7 @@ const LeftPanel: React.FC<PanelProps> = ({ gridStyle }) => {
           </Link>
         </div>
       </HeaderWrapper>
+      <CourseFeed />
     </GridPanel>
   );
 };
@@ -66,16 +68,20 @@ const RightPanel: React.FC<PanelProps> = ({ gridStyle }) => {
         <div className="flex">
           <div
             className="my-auto mx-4"
-            style={{
-              height: 40,
-              width: 40,
-            }}
+            // style={{
+            //   height: 40,
+            //   width: 40,
+            // }}
           >
             <Link to="/">
               <img
                 src={`https://ui-avatars.com/api/?background=fd6868&color=fff&name=${state.userInfo?.fullName
                   ?.split(" ")
                   .join("+")}`}
+                style={{
+                  height: 40,
+                  width: 40,
+                }}
                 alt="avatar"
                 className="rounded-full h-full object-cover"
               />
