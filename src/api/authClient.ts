@@ -1,19 +1,35 @@
 import axiosClient from './axiosClient';
 
 const login = async (username: string, password: string) => {
-    //Do this actually
-    // await axiosClient.baseClient.post("auth/login", {
-    //     username,
-    //     password
-    // });
+    try {
+        const response = await axiosClient.baseClient.post("auth/login", {
+            username,
+            password
+        });
 
-    //For now just return random shit
-    return {
-        accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZnVsbE5hbWUiOiJKb2huIERvZSIsImlhdCI6MTUxNjIzOTAyMiwiaWQiOjEsInVzZXJuYW1lIjoiYXNkYXNkIiwicm9sZSI6InN0dWRlbnQifQ.LbSkYPrr0AlPuuKig2nMA7faPZaoTbgmuBODFwkCK4c",
-        refreshToken: "asd"
+        return response.data;
+    } catch(e) {
+        console.log(e);
     }
-}
+};
+
+const register = async (username: string, name: string, email: string, phone_no: string, password: string) => {
+    try {
+        const response = await axiosClient.baseClient.post("auth/register", {
+            username,
+            password,
+            name, 
+            email,
+            phone_no
+        });
+
+        return response.data;
+    } catch(e) {
+        console.log(e);
+    }
+};
 
 export default {
-    login
+    login,
+    register
 }
