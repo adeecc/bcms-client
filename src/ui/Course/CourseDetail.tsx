@@ -29,7 +29,7 @@ const CourseDetail: React.FC<Props> = ({}) => {
   const [course, setCourse] = useState<Course>(() => {
     return {
       id,
-      name: "Logic in Computer Science",
+      courseName: "Logic in Computer Science",
       code: "CS F214",
       instructor: "DR. V Ramaswamy", // Get instructor id and convert it to name
       year: "2020",
@@ -73,7 +73,7 @@ const CourseDetail: React.FC<Props> = ({}) => {
       <div className="flex justify-between mb-2">
         <div className="truncate flex flex-row">
           <h3 className="text-primary-300 my-auto mr-2">{course.code}</h3>
-          <h3 className="text-primary-100 my-auto">{course.name}</h3>
+          <h3 className="text-primary-100 my-auto">{course.courseName}</h3>
         </div>
 
         {isInstructor && (
