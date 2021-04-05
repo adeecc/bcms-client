@@ -1,5 +1,5 @@
 import React from "react";
-import SvgSearch from "../icons/SolidSearch";
+import { SearchIcon } from "@heroicons/react/solid";
 
 interface Props {}
 
@@ -7,7 +7,7 @@ const GlobalSearch: React.FC<Props> = (props: Props) => {
   return (
     <div className="w-full flex items-center bg-primary-700 hover:bg-primary-600 text-primary-300 focus-within:text-primary-100 rounded-lg">
       <div className="h-full px-4">
-        <SvgSearch />
+        <SearchIcon className="w-6 h-6" />
       </div>
       <input
         type="text"

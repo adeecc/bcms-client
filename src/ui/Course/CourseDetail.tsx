@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import SvgPlus from "../../icons/SolidPlus";
+import { PlusIcon } from "@heroicons/react/solid";
+
 
 import { Course } from "../../interfaces/Course";
 import PostCreateModal from "../../modules/PostCreateModal";
@@ -79,10 +80,10 @@ const CourseDetail: React.FC<Props> = ({}) => {
         {isInstructor && (
           <div className="my-auto">
             <button
-              className="py-2 px-6 my-auto rounded-lg text-button bg-accent focus:outline-none"
+              className="px-4 my-auto rounded-lg text-button bg-accent focus:outline-none"
               onClick={onClickCreatePost}
             >
-              <SvgPlus />
+              <PlusIcon className="w-8 h-8 text-primary-100" />
             </button>
             <PostCreateModal
               courseId={id}

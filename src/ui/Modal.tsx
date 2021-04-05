@@ -1,6 +1,7 @@
 import React from "react";
 import ReactModal from "react-modal";
-import SvgPlus from "../icons/SolidPlus";
+// import SvgPlus from "../icons/SolidPlus";
+import { XIcon } from "@heroicons/react/solid";
 
 const customStyles = {
   content: {
@@ -49,10 +50,10 @@ export const Modal: React.FC<ReactModal["props"]> = ({
       <div className="flex flex-col w-full">
         <div className="justofy-end absolute right-3 top-3">
           <button
-            className="p-1 text-primary-100"
+            className="text-primary-100"
             onClick={(e) => props?.onRequestClose?.(e)}
           >
-            <SvgPlus className="transform rotate-45" />
+            <XIcon className="h-8 w-8" />
           </button>
         </div>
         <div tabIndex={-1} className="focus:outline-none" onKeyDown={onKeyDown}>
