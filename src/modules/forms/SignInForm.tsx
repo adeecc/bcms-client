@@ -21,11 +21,14 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
 
     const payload = await authClient.login(username, password);
 
-    dispatch({
-      type: ActionTypes.LogIn,
-      payload: payload
-    });
-    history.push("/dashboard");
+    if(payload) {
+      dispatch({
+        type: ActionTypes.LogIn,
+        payload: payload
+      });
+      history.replace("/dashboard");
+    }
+
   };
 
   return (

@@ -1,4 +1,4 @@
-const __apiBaseUrl__ = process.env.API_BASE_URL || "localhost:5000";
+const __apiBaseUrl__ = process.env.API_BASE_URL || "http://localhost:5000";
 const __accessTokenKey__ = "access-token";
 const __refreshTokenKey__ = "refresh-token";
 

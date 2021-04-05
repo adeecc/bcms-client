@@ -1,5 +1,6 @@
 import jwt_decode from "jwt-decode";
 
+import {__accessTokenKey__, __refreshTokenKey__} from "../constants"
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined
     ? {
@@ -35,6 +36,14 @@ const decodeToken = (token:string): UserInfo => {
     return decoded;
 };
 
+const saveToken = (key:string, token?: string) => {
+    if (token) {
+      localStorage.setItem(key, token);
+    } else {
+      localStorage.removeItem(key);
+    }
+} ;
+
 export type UserActions = ActionMap<UserPayload>[keyof ActionMap<UserPayload>];
 
 export const userReducer = (state: UserType, action: UserActions): UserType => {
@@ -43,6 +52,9 @@ export const userReducer = (state: UserType, action: UserActions): UserType => {
 
   switch (action.type) {
     case ActionTypes.LogIn:
+      saveToken(__accessTokenKey__, action.payload.accessToken);
+      saveToken(__refreshTokenKey__, action.payload.refreshToken);
+
       return {
         isLoggedIn: true,
 
@@ -53,6 +65,9 @@ export const userReducer = (state: UserType, action: UserActions): UserType => {
       };
 
     case ActionTypes.LogOut:
+      saveToken(__accessTokenKey__);
+      saveToken(__refreshTokenKey__);
+
       return {
         isLoggedIn: false
       }

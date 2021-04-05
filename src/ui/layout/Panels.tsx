@@ -9,6 +9,7 @@ import GlobalSearch from "../GlobalSearch";
 import { UserContext } from "../../global-context/userContext";
 import AdminToolCard from "../AdminTool";
 import CourseFeed from "../Course/CourseFeed";
+import { ActionTypes } from "../../global-context/userReducer";
 
 interface PanelProps {
   gridStyle: string;
@@ -57,9 +58,12 @@ const RightPanel: React.FC<PanelProps> = ({ gridStyle }) => {
   const { state, dispatch } = useContext(UserContext);
 
   const logoutHandler = (e: React.SyntheticEvent) => {
-    console.log(e);
-    localStorage.clear();
-    history.push("/signin");
+      dispatch({
+        type: ActionTypes.LogOut,
+        payload: {}
+      });
+
+      history.replace("/signin");
   };
 
   return (

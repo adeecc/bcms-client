@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 
-import { userReducer, UserActions } from "./userReducer";
+import { userReducer, UserActions, ActionTypes } from "./userReducer";
+import {__accessTokenKey__, __refreshTokenKey__} from "../constants";
 
 type userContextType = {
   state: UserType;
@@ -20,6 +21,24 @@ const UserContext = React.createContext<userContextType>(defaultUserContext);
 
 const UserProvider: React.FC = ({ children }) => {
   const [userState, dispatch] = useReducer(userReducer, initialState);
+
+  React.useEffect(() => {
+    const accessToken = localStorage.getItem(__accessTokenKey__);
+    const refreshToken = localStorage.getItem(__refreshTokenKey__);
+
+    console.log(accessToken, refreshToken);
+
+    if(accessToken && refreshToken) {
+      dispatch({
+        type: ActionTypes.LogIn,
+        payload: {
+          accessToken: accessToken,
+          refreshToken: refreshToken
+        }
+      });
+    }
+
+  }, []);
 
   return (
     <UserContext.Provider value={{ state: userState, dispatch }}>

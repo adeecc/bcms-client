@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../global-context/userContext";
+import authClient from "../../api/authClient";
 
 interface Props {}
 
@@ -10,9 +12,13 @@ const UserCreateForm: React.FC<Props> = (props: Props) => {
   const [mobile, setMobile] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
-    event.preventDefault();
+  const {dispatch} = React.useContext(UserContext);
 
+  const handleSubmit = async (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    
+    const response = await authClient.register(username, name, email, mobile, password);
+    console.log(response);
     console.log(username, name, email, mobile, password);
   };
 
