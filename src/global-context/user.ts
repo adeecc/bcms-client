@@ -2,10 +2,10 @@ enum UserRoles {
   Student = "student",
   Faculty = "faculty",
   Admin = "admin",
-  None
+  None = "none"
 };
 
-type UserInfo = {
+export type UserInfo = {
   id: number;
   username: string;
   fullName?: string;
@@ -13,7 +13,7 @@ type UserInfo = {
   role: UserRoles[];
 };
 
-type UserType = {
+export type UserType = {
     isLoggedIn: boolean;
 
     accessToken?: string;
@@ -21,3 +21,7 @@ type UserType = {
 
     userInfo?: UserInfo;
 };
+
+export {
+  UserRoles
+}

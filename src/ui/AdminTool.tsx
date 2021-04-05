@@ -1,7 +1,11 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../global-context/userContext";
-import SvgPlus from "../icons/SolidPlus";
 import CourseCreateModal from "../modules/CourseCreateModal";
+
+import { UserRoles } from "../global-context/user";
+
+
+import { PlusIcon, ArrowNarrowRightIcon } from "@heroicons/react/solid";
 
 interface Props {}
 
@@ -28,22 +32,49 @@ const AdminToolCard: React.FC<Props> = ({}) => {
       <div className="px-8 py-6 bg-primary-800 border-b border-primary-600">
         <h4 className="text-primary-100 font-bold">Privilege Tools</h4>
       </div>
-      <div className="px-8 py-6 bg-primary-700 w-full flex flex-col my-auto">
+      <div className="px-8 py-6 bg-primary-700 w-full flex flex-col my-auto space-y-3">
         <div className="w-full flex justify-between my-auto">
           <h5 className="text-primary-200 font-bold my-auto">Create Course</h5>
           <button
-            className="bg-primary-600 p-2 rounded ouline-none focus:ouline-none my-auto"
+            className="bg-primary-600 rounded ouline-none focus:ouline-none my-auto"
             onClick={onClickCreateCourse}
           >
-            <SvgPlus />
+            <PlusIcon className="w-8 h-8 text-primary-100" />
           </button>
           <CourseCreateModal isOpen={modalIsOpen} onRequestClose={closeModal} />
         </div>
         {IsAdmin && (
           <div className="w-full flex justify-between my-auto">
             <h5 className="text-primary-200 font-bold my-auto">
+              Manage Roles
+            </h5>
+            <button
+              className="bg-primary-600 rounded ouline-none focus:ouline-none my-auto"
+              onClick={onClickCreateCourse}
+            >
+              <ArrowNarrowRightIcon className="p-1 w-8 text-primary-100" />
+            </button>
+            <CourseCreateModal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+            />
+          </div>
+        )}
+        {IsAdmin && (
+          <div className="w-full flex justify-between my-auto">
+            <h5 className="text-primary-200 font-bold my-auto">
               Generate Reports
             </h5>
+            <button
+              className="bg-primary-600 rounded ouline-none focus:ouline-none my-auto"
+              onClick={onClickCreateCourse}
+            >
+              <ArrowNarrowRightIcon className="p-1 w-8 text-primary-100" />
+            </button>
+            <CourseCreateModal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+            />
           </div>
         )}
       </div>

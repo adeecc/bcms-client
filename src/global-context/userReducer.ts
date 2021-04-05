@@ -1,4 +1,5 @@
 import jwt_decode from "jwt-decode";
+import { UserType, UserInfo } from "../global-context/user";
 
 import {__accessTokenKey__, __refreshTokenKey__} from "../constants"
 type ActionMap<M extends { [index: string]: any }> = {
