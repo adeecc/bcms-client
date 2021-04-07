@@ -5,7 +5,7 @@ import { __apiBaseUrl__, __accessTokenKey__, __refreshTokenKey__  } from "../con
 const baseClient = axios.create({
   baseURL: __apiBaseUrl__,
   headers: {
-    "Access-Control-Expose-Headers": "x-access-token",
+    "Access-Control-Expose-Headers": "authorization",
     "Content-Type": "application/json",
   },
 });
@@ -19,7 +19,7 @@ const renewAccessToken = async (): Promise<boolean> => {
 
   try {
     const res = await baseClient.post("auth/refresh", { token: refreshToken });
-    baseClient.defaults.headers.common["x-access-token"] = res.data.data.token;
+    baseClient.defaults.headers.common["authorization"] = `$Bearer ${res.data.data.token}`;
     localStorage.setItem(__refreshTokenKey__, res.data.data.token);
     return true;
   } catch (error) {
@@ -28,7 +28,7 @@ const renewAccessToken = async (): Promise<boolean> => {
   }
 };
 
-export default {
+export {
   baseClient,
   renewAccessToken,
 };
