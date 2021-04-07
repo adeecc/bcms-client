@@ -1,11 +1,16 @@
-import axiosClient from './axiosClient';
+import { baseClient } from './axiosClient';
 
 const login = async (username: string, password: string) => {
     try {
-        const response = await axiosClient.baseClient.post("auth/login", {
+        const response = await baseClient.post("auth/login", {
             username,
             password
         });
+
+        baseClient.defaults.headers.common["authorization"] = `$Bearer ${response.data.accessToken}`;
+
+        console.log("From login function:")
+        console.log(response)
 
         return response.data;
     } catch(e) {
@@ -15,7 +20,7 @@ const login = async (username: string, password: string) => {
 
 const register = async (username: string, name: string, email: string, phone_no: string, password: string) => {
     try {
-        const response = await axiosClient.baseClient.post("auth/register", {
+        const response = await baseClient.post("auth/register", {
             username,
             password,
             name, 
