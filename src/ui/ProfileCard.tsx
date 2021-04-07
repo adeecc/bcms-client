@@ -6,13 +6,13 @@ interface Props {}
 const ProfileCard: React.FC<Props> = ({}) => {
   const { state, dispatch } = useContext(UserContext);
 
-  console.log(state);
+  // console.log(state);
 
   return (
     <div className="max-w-sm bg-primary-800 rounded-lg shadow flex flex-col px-8 py-6 space-y-5">
       <div className="flex space-x-8">
         <img
-          src={`https://ui-avatars.com/api/?background=fd6868&color=fff&name=${state.userInfo?.fullName
+          src={`https://ui-avatars.com/api/?background=fd6868&color=fff&name=${state.userInfo?.name
             ?.split(" ")
             .join("+")}`}
           alt="avatar"
@@ -20,7 +20,7 @@ const ProfileCard: React.FC<Props> = ({}) => {
         />
         <div className="flex flex-col">
           <span className="text-primary-100 font-bold">
-            {state.userInfo?.fullName}
+            {state.userInfo?.name}
           </span>
           <span className="text-primary-300">@{state.userInfo?.username}</span>
         </div>

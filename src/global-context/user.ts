@@ -8,7 +8,7 @@ enum UserRoles {
 export type UserInfo = {
   id: number;
   username: string;
-  fullName?: string;
+  name?: string;
   email?: string;
   role: UserRoles[];
 };

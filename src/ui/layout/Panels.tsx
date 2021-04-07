@@ -79,7 +79,7 @@ const RightPanel: React.FC<PanelProps> = ({ gridStyle }) => {
           >
             <Link to="/">
               <img
-                src={`https://ui-avatars.com/api/?background=fd6868&color=fff&name=${state.userInfo?.fullName
+                src={`https://ui-avatars.com/api/?background=fd6868&color=fff&name=${state.userInfo?.name
                   ?.split(" ")
                   .join("+")}`}
                 style={{
