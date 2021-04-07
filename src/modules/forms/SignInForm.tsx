@@ -4,31 +4,36 @@ import { UserContext } from "../../global-context/userContext";
 import { ActionTypes } from "../../global-context/userReducer";
 import authClient from "../../api/authClient";
 
-interface Props {
-  
-}
+interface Props {}
 
 const SignUpForm: React.FC<Props> = (props: Props) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loginError, setLoginError] = useState<boolean>(false)
 
-  const {dispatch} = React.useContext(UserContext);
+  const { dispatch } = React.useContext(UserContext);
 
   const history = useHistory();
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
+    setLoginError(false);
+
     const payload = await authClient.login(username, password);
 
-    if(payload) {
+    console.table({ payload });
+
+    if (payload) {
       dispatch({
         type: ActionTypes.LogIn,
-        payload: payload
+        payload: payload,
       });
-      history.replace("/dashboard");
-    }
 
+      history.replace("/dashboard");
+    } else {
+      setLoginError(true)
+    }
   };
 
   return (
@@ -37,6 +42,7 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
         <h3 className="mb-8 text-center text-primary-100 font-black">
           Sign In!
         </h3>
+        {loginError && <h4 className="text-accent-hover my-3">Invalid Username or Password. Try again</h4>}
         <div className="bg-primary-800 py-8 px-6 shadow rounded-lg sm:px-10">
           <form
             className="mb-0 space-y-6"
