@@ -20,7 +20,7 @@ const renewAccessToken = async (): Promise<boolean> => {
   try {
     const res = await baseClient.post("auth/refresh", { token: refreshToken });
     baseClient.defaults.headers.common["authorization"] = `$Bearer ${res.data.data.token}`;
-    localStorage.setItem(__refreshTokenKey__, res.data.data.token);
+    localStorage.setItem(__accessTokenKey__, res.data.data.token);
     return true;
   } catch (error) {
     console.error(error.response.data);
