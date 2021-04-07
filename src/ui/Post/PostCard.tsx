@@ -64,7 +64,7 @@ const Post: React.FC<Props> = ({
             if (index === 3) return "..."
             if (index > 3) return "";
             return (
-              <Tag label={value} />
+              <Tag key={index} label={value} />
             );
           })}
         </div>
