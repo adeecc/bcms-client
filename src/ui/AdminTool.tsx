@@ -6,11 +6,13 @@ import { UserRoles } from "../global-context/user";
 
 
 import { PlusIcon, ArrowNarrowRightIcon } from "@heroicons/react/solid";
+import { useHistory } from "react-router";
 
 interface Props {}
 
 const AdminToolCard: React.FC<Props> = ({}) => {
   const { state, dispatch } = useContext(UserContext);
+  const history = useHistory()
 
   const IsAdmin = !state.userInfo?.role.includes(UserRoles.Admin);
   const IsFaculty = state.userInfo?.role.includes(UserRoles.Faculty);
@@ -25,7 +27,11 @@ const AdminToolCard: React.FC<Props> = ({}) => {
     setModalIsOpen(true);
   };
 
-  console.log(state);
+  const onClickRoleManagement = (e: React.SyntheticEvent) => {
+    history.push("/roles")
+  }
+
+  // console.log(state);
 
   return IsAdmin || IsFaculty ? (
     <div className="max-w-sm rounded-lg overflow-hidden flex flex-col">
@@ -50,14 +56,10 @@ const AdminToolCard: React.FC<Props> = ({}) => {
             </h5>
             <button
               className="bg-primary-600 rounded ouline-none focus:ouline-none my-auto"
-              onClick={onClickCreateCourse}
+              onClick={onClickRoleManagement}
             >
               <ArrowNarrowRightIcon className="p-1 w-8 text-primary-100" />
             </button>
-            <CourseCreateModal
-              isOpen={modalIsOpen}
-              onRequestClose={closeModal}
-            />
           </div>
         )}
         {IsAdmin && (
