@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { UserContext } from "../global-context/userContext";
+import React from "react";
 import { Modal } from "../ui/Modal";
 import PostCreateForm from "./forms/PostCreateForm";
 
@@ -13,7 +12,6 @@ const PostCreateModal: React.FC<PostCreateModalProps> = ({
   isOpen,
   onRequestClose,
 }) => {
-  const { state, dispatch } = useContext(UserContext);
 
   //   if (!state.isLoggedIn) {
   //     return null;

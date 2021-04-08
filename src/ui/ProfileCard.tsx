@@ -3,8 +3,8 @@ import { UserContext } from "../global-context/userContext";
 
 interface Props {}
 
-const ProfileCard: React.FC<Props> = ({}) => {
-  const { state, dispatch } = useContext(UserContext);
+const ProfileCard: React.FC<Props> = () => {
+  const { state } = useContext(UserContext);
 
   // console.log(state);
 

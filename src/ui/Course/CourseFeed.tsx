@@ -6,7 +6,7 @@ import courseData from "../../modules/sampleCourses";
 
 interface Props {}
 
-const CourseFeed: React.FC<Props> = ({}) => {
+const CourseFeed: React.FC<Props> = () => {
   const [courses, setCourses] = useState<Course[] | null>(null);
   const { state } = useContext(UserContext);
 

@@ -10,8 +10,8 @@ import { useHistory } from "react-router";
 
 interface Props {}
 
-const AdminToolCard: React.FC<Props> = ({}) => {
-  const { state, dispatch } = useContext(UserContext);
+const AdminToolCard: React.FC<Props> = () => {
+  const { state } = useContext(UserContext);
   const history = useHistory()
 
   const IsAdmin = !state.userInfo?.role.includes(UserRoles.Admin);

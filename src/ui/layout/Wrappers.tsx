@@ -1,6 +1,4 @@
 import React from "react";
-import GlobalSearch from "../GlobalSearch";
-
 interface GridPanelProps {
   gridStyle: string;
   sticky?: boolean;
@@ -27,11 +25,7 @@ const GridPanel: React.FC<GridPanelProps> = ({
 interface PanelHeaderProps {}
 
 const HeaderWrapper: React.FC<PanelHeaderProps> = ({ children }) => {
-  return (
-    <div className="w-full mb-10 pt-7">
-      {children}
-    </div>
-  );
+  return <div className="w-full mb-10 pt-7">{children}</div>;
 };
 
 export { GridPanel, HeaderWrapper };

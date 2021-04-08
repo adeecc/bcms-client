@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../../global-context/userContext";
 import { ActionTypes } from "../../global-context/userReducer";
-import authClient from "../../api/authClient";
+import { login } from "../../api/authClient";
 
 interface Props {}
 
@@ -20,7 +20,7 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
 
     setLoginError(false);
 
-    const payload = await authClient.login(username, password);
+    const payload = await login(username, password);
 
     console.table({ payload });
 

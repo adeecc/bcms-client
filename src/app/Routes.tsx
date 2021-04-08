@@ -5,17 +5,16 @@ import GuardedRoute from "./GuardRoutes";
 
 import Grid from "../ui/layout/Grid";
 import Dashboard from "../modules/Dashboard";
-import Home from "../pages/Home";
 
 import SignIn from "../pages/User/SignIn";
 import SignUp from "../pages/User/SignUp";
-import SignUpOrSignIn from "../pages/SignUpOrSignIn";
 
 import Courses from "../modules/Courses";
 import CourseCreate from "../pages/CourseCreate";
 
 import CourseDetail from "../ui/Course/CourseDetail";
 import PostDetail from "../ui/Post/PostDetail";
+import RoleManagement from "../ui/User/RoleManagement";
 
 interface Props {}
 
@@ -43,6 +42,7 @@ const Routes: React.FC<Props> = (props: Props) => {
               Component={CourseCreate}
             />
             <GuardedRoute exact path="/post/:id" Component={PostDetail} />
+            <GuardedRoute exact path="/roles" component={RoleManagement} />
           </Switch>
         </Grid>
     </Switch>

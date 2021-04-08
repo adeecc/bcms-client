@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { PlusIcon } from "@heroicons/react/solid";
 
-
 import { Course } from "../../interfaces/Course";
 import PostCreateModal from "../../modules/PostCreateModal";
 import PostList from "../Post/PostList";
@@ -11,7 +10,7 @@ interface Props {}
 
 // Todo: Add handler for button
 
-const CourseDetail: React.FC<Props> = ({}) => {
+const CourseDetail: React.FC<Props> = ({ children}) => {
   const { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(true);
   const [isInstructor, setIsInstructor] = useState<boolean>(() => {

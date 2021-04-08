@@ -22,7 +22,7 @@ const isAuthorized = (
       user.isLoggedIn &&
       (allowedRoles === undefined ||
         allowedRoles.filter((allowedRole) => roles.includes(allowedRole))
-          .length != 0 ||
+          .length !== 0 ||
         allowedRoles.length === 0)
     );
 
@@ -42,7 +42,7 @@ const GuardedRoute: React.FC<any> = ({ Component, roles, ...rest }) => {
         },
       });
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <Route

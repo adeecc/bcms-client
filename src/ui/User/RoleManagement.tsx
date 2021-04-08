@@ -47,7 +47,7 @@ const UserRow: React.FC<UserRowProps> = ({ id, username, name, roles }) => {
 
 interface RoleManagementProps {}
 
-const RoleManagement: React.FC<RoleManagementProps> = ({}) => {
+const RoleManagement: React.FC<RoleManagementProps> = () => {
   const [users, setUsers] = useState<UserInfo[] | null>(null);
 
   useEffect(() => {
