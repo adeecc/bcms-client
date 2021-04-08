@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Tag from "../Tag";
+import Tag from "../ui/Tag";
 
 interface Props {
   id: string;

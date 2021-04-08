@@ -1,5 +1,5 @@
 import React from "react";
-import Dashboard from "../modules/Dashboard";
+import Dashboard from "../components/Dashboard";
 
 interface Props {}
 

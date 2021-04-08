@@ -1,5 +1,5 @@
 import React from "react";
-import PostList from "../ui/Post/PostList";
+import PostList from "./Post/PostList";
 
 interface Props {}
 

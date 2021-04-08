@@ -1,5 +1,5 @@
 import React from "react";
-import CourseCreateForm from "../modules/forms/CourseCreateForm";
+import CourseCreateForm from "../components/forms/CourseCreateForm";
 
 interface Props {}
 

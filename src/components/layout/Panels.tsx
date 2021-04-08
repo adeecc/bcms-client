@@ -4,10 +4,10 @@ import { Link, useHistory } from "react-router-dom";
 import { GridPanel, HeaderWrapper } from "./Wrappers";
 
 import logo from "../../img/logo2.png";
-import ProfileCard from "../ProfileCard";
-import GlobalSearch from "../GlobalSearch";
+import ProfileCard from "../User/ProfileCard";
+import GlobalSearch from "../ui/GlobalSearch";
 import { UserContext } from "../../global-context/userContext";
-import AdminToolCard from "../AdminTool";
+import AdminToolCard from "../User/AdminTool";
 import CourseFeed from "../Course/CourseFeed";
 import { ActionTypes } from "../../global-context/userReducer";
 

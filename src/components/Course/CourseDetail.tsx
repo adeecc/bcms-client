@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { PlusIcon } from "@heroicons/react/solid";
 
 import { Course } from "../../interfaces/Course";
-import PostCreateModal from "../../modules/PostCreateModal";
+import PostCreateModal from "../modals/PostCreateModal";
 import PostList from "../Post/PostList";
 
 interface Props {}

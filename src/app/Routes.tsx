@@ -3,18 +3,18 @@ import { Redirect, Route, Switch } from "react-router";
 
 import GuardedRoute from "./GuardRoutes";
 
-import Grid from "../ui/layout/Grid";
-import Dashboard from "../modules/Dashboard";
+import Grid from "../components/layout/Grid";
+import Dashboard from "../components/Dashboard";
 
-import SignIn from "../pages/User/SignIn";
-import SignUp from "../pages/User/SignUp";
+import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
 
-import Courses from "../modules/Courses";
+import Courses from "../components/Courses";
 import CourseCreate from "../pages/CourseCreate";
 
-import CourseDetail from "../ui/Course/CourseDetail";
-import PostDetail from "../ui/Post/PostDetail";
-import RoleManagement from "../ui/User/RoleManagement";
+import CourseDetail from "../components/Course/CourseDetail";
+import PostDetail from "../components/Post/PostDetail";
+import RoleManagement from "../components/User/RoleManagement";
 
 interface Props {}
 

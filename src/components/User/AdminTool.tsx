@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../global-context/userContext";
-import CourseCreateModal from "../modules/CourseCreateModal";
+import { UserContext } from "../../global-context/userContext";
+import CourseCreateModal from "../modals/CourseCreateModal";
 
-import { UserRoles } from "../global-context/user";
+import { UserRoles } from "../../global-context/user";
 
 
 import { PlusIcon, ArrowNarrowRightIcon } from "@heroicons/react/solid";

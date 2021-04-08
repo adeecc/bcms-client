@@ -1,25 +1,27 @@
 import React from "react";
-import { Modal } from "../ui/Modal";
-import CourseCreateForm from "./forms/CourseCreateForm";
+import { Modal } from "./Modal";
+import PostCreateForm from "../forms/PostCreateForm";
 
-interface CourseCreateModalProps {
+interface PostCreateModalProps {
+    courseId: string;
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
-const CourseCreateModal: React.FC<CourseCreateModalProps> = ({
+const PostCreateModal: React.FC<PostCreateModalProps> = ({
   isOpen,
   onRequestClose,
 }) => {
+
   //   if (!state.isLoggedIn) {
   //     return null;
   //   }
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
-      <CourseCreateForm />
+      <PostCreateForm courseId={0}/>
     </Modal>
   );
 };
 
-export default CourseCreateModal;
+export default PostCreateModal;
