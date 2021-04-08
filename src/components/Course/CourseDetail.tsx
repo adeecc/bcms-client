@@ -10,23 +10,14 @@ interface Props {}
 
 // Todo: Add handler for button
 
-const CourseDetail: React.FC<Props> = ({ children}) => {
+const CourseDetail: React.FC<Props> = ({ children }) => {
   const { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(true);
-  const [isInstructor, setIsInstructor] = useState<boolean>(() => {
-    // check if instructor id = current user id
-    return true;
-  });
 
-  const [isEnrolled, setIsEnrolled] = useState<boolean>(() => {
-    //   fetch(baseApiUr/courses)
-    //  Check if this course is in the courses of the student;
-    // If yes, then true
-    // else false
-    return false;
-  });
+  const [isInstructor, setIsInstructor] = useState<boolean>(() => true);
+  const [isEnrolled, setIsEnrolled] = useState<boolean>(() => false);
 
-  const [course, setCourse] = useState<Course>(() => {
+  const [course, setCourse] = useState<Course | null>(() => {
     return {
       cid: id,
       code: "CS F214",
@@ -45,12 +36,24 @@ const CourseDetail: React.FC<Props> = ({ children}) => {
   };
 
   const onClickCreatePost = (e: React.SyntheticEvent) => {
-    console.log("Creating a post!");
-
     setModalIsOpen(true);
   };
 
   const onClickEnroll = (e: React.SyntheticEvent) => {};
+
+  const loadCourseDetails = async () => {
+    setCourse({
+      cid: id,
+      code: "CS F212",
+      name: "Database Systems",
+      sem: "1",
+      year: "2020",
+      instructorId: 1,
+      instructorName: "DR. R Gururaj",
+    });
+
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     // Data Required
@@ -64,10 +67,10 @@ const CourseDetail: React.FC<Props> = ({ children}) => {
     //     userIsInstructor: boolean; // derived from courseInstructorId & userId
     // }
 
-    setIsLoading(false);
+    loadCourseDetails();
   }, []);
 
-  return isLoading ? (
+  return isLoading || !course ? (
     <h3 className="text-primary-200 text-center">Loading...</h3>
   ) : (
     <div className="">

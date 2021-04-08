@@ -18,8 +18,8 @@ const UserCourse: React.FC<Props> = () => {
   };
 
   useEffect(() => {
-      loadCourses();
-  })
+    loadCourses();
+  }, [state]);
 
   return (
     <div>

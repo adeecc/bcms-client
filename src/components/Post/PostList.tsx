@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+
 import PostCard from "./PostCard";
 
 import postData from "../../modules/samplePosts";
@@ -11,14 +13,20 @@ interface Props {
   maxPosts?: number;
 }
 
-const PostList: React.FC<Props> = ({ courseId, maxPosts }) => {
+const PostList: React.FC<Props> = () => {
+  const { id } = useParams<{ id: string }>();
   const [posts, setPosts] = useState<Post[] | null>(null);
 
   const loadPosts = async () => {
-    if (courseId) {
-      const loadedPosts = await getCoursePosts(courseId);
-      // setPosts(loadedPosts)
-      console.log(loadedPosts);
+    let loadedPosts;
+    if (id) {
+      const loadedPosts = await getCoursePosts(id);
+      setPosts(loadedPosts);
+      console.table(loadedPosts);
+    } else {
+      const loadedPosts = JSON.parse(postData);
+      setPosts(loadedPosts);
+      console.table(loadedPosts);
     }
   };
 
@@ -27,32 +35,25 @@ const PostList: React.FC<Props> = ({ courseId, maxPosts }) => {
     // const loadedPosts = axiosClient.get(`{apiBaseUrl}/posts/courseId`);
 
     loadPosts();
-
-    const loadedPosts = JSON.parse(postData, (key, value) => {
-      if (key === "created_at" || key === "updated_at") return new Date(value);
-      else return value;
-    });
-
-    if (maxPosts) {
-      setPosts(loadedPosts.slice(0, maxPosts));
-    } else {
-      setPosts(loadedPosts);
-    }
-  }, [maxPosts]);
+  }, [id]);
 
   return (
     <div>
-      {posts?.map((value, index) => (
-        <PostCard
-          key={value.id}
-          id={value.id}
-          title={value.title}
-          courseName={value.courseName}
-          created_at={value.created_at}
-          updated_at={value.updated_at}
-          tags={value.tags}
-        />
-      ))}
+      {posts?.length ? (
+        posts.map((value, index) => (
+          <PostCard
+            key={index}
+            id={value.id}
+            title={value.title}
+            courseName={value.courseName}
+            created_at={value.created_at}
+            updated_at={value.updated_at}
+            tags={value.tags}
+          />
+        ))
+      ) : (
+        <h3 className="text-primary-300 font-bold my-3">No Posts Yet</h3>
+      )}
     </div>
   );
 };
