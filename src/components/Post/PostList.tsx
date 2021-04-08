@@ -21,8 +21,14 @@ const PostList: React.FC<Props> = () => {
     let loadedPosts;
     if (id) {
       const loadedPosts = await getCoursePosts(id);
+
+      // relabel the .post_id field to .id 
+      loadedPosts.forEach((el: any) => {
+        el.id = el.post_id;
+        delete el.post_id;
+      });
+
       setPosts(loadedPosts);
-      console.table(loadedPosts);
     } else {
       const loadedPosts = JSON.parse(postData);
       setPosts(loadedPosts);

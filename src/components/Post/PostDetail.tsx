@@ -71,9 +71,7 @@ const PostDetail: React.FC<Props> = () => {
         </h4>
         <div className="flex text-primary-300 pt-2 my-auto">
           {post.tags?.map((value, index) => {
-            if (index === 3) return "...";
-            if (index > 3) return "";
-            return <Tag label={value} />;
+            return <Tag key={index} label={value} />;
           })}
         </div>
       </div>
