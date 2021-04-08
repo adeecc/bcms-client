@@ -1,9 +1,9 @@
 import React, { useReducer } from "react";
 
 import { userReducer, UserActions, ActionTypes } from "./userReducer";
-import { UserType } from "../global-context/user";
+import { UserType } from "./user";
 
-import {__accessTokenKey__, __refreshTokenKey__} from "../constants";
+import {__accessTokenKey__, __refreshTokenKey__} from "../../constants";
 
 type userContextType = {
   state: UserType;

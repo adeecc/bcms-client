@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { UserContext } from "../../global-context/userContext";
-import { ActionTypes } from "../../global-context/userReducer";
+import { UserContext } from "../../global/context/userContext";
+import { ActionTypes } from "../../global/context/userReducer";
 import { login } from "../../api/authClient";
 
 interface Props {}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 
 import postData from "../../modules/samplePosts";
-import { Post } from "../../interfaces/Post";
+import { Post } from "../../global/interfaces/Post";
 
 import { getCoursePosts } from "../../api/courseClient";
 

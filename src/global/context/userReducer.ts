@@ -1,7 +1,7 @@
 import jwt_decode from "jwt-decode";
-import { UserType, UserInfo } from "../global-context/user";
+import { UserType, UserInfo } from "./user";
 
-import { __accessTokenKey__, __refreshTokenKey__ } from "../constants";
+import { __accessTokenKey__, __refreshTokenKey__ } from "../../constants";
 
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined

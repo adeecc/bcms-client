@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../global-context/userContext";
+import { UserContext } from "../../global/context/userContext";
 
 interface Props {}
 

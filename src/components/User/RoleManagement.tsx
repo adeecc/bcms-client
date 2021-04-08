@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { UserRoles, UserInfo } from "../../global-context/user";
+import { UserRoles, UserInfo } from "../../global/context/user";
 import { PlusCircleIcon } from "@heroicons/react/outline";
 
 interface UserRowProps {

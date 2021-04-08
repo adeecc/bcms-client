@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../global-context/userContext";
-import { Course } from "../../interfaces/Course";
+import { UserContext } from "../../global/context/userContext";
+import { Course } from "../../global/interfaces/Course";
 import courseData from "../../modules/sampleCourses";
 
 interface Props {}

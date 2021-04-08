@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { UserContext } from "../global-context/userContext";
-import { ActionTypes } from "../global-context/userReducer";
-import { UserRoles, UserType } from "../global-context/user";
+import { UserContext } from "../global/context/userContext";
+import { ActionTypes } from "../global/context/userReducer";
+import { UserRoles, UserType } from "../global/context/user";
 import { __accessTokenKey__, __refreshTokenKey__ } from "../constants";
 
 const checkPrevious = (): Boolean => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { PlusIcon } from "@heroicons/react/solid";
 
-import { Course } from "../../interfaces/Course";
+import { Course } from "../../global/interfaces/Course";
 import PostCreateModal from "../modals/PostCreateModal";
 import PostList from "../Post/PostList";
 

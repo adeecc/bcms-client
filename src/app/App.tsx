@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { UserProvider } from "../global-context/userContext";
+import { UserProvider } from "../global/context/userContext";
 
 import Routes from "./Routes";
 

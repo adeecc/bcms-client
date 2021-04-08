@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import MDEditor from "@uiw/react-md-editor";
 
-import { Post } from "../../interfaces/Post";
+import { Post } from "../../global/interfaces/Post";
 import Tag from "../ui/Tag";
 
 interface Props {}
