@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 interface Props {
-  id: any;
+  cid: any;
   code: string;
   name: string;
   year: string;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const CourseCard: React.FC<Props> = ({
-  id,
+  cid,
   code,
   name,
   year,
@@ -19,8 +19,8 @@ const CourseCard: React.FC<Props> = ({
   instructor,
 }) => {
   return (
-    <Link to={`/course/${id}`}
-      key={id}
+    <Link to={`/course/${cid}`}
+      key={cid}
       className="w-full bg-primary-800 p-6 rounded-lg flex flex-col my-7"
     >
       <div className="w-full flex justify-between">

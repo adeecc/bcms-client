@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
 
-import courseData from "../../modules/sampleCourses";
+import { getAllCourses } from "../../api/courseClient";
 
 interface Props {
   userId?: number;
@@ -9,36 +9,38 @@ interface Props {
 }
 
 interface Course {
+  cid: any;
   code: string;
-  courseName: string;
-  year: string;
+  instructor_id: number;
+  name: string;
   sem: string;
+  year: string;
   instructor: string;
 }
 
 const CourseList: React.FC<Props> = ({ userId, maxCourses }) => {
   const [courses, setCourses] = useState<Course[] | null>(null);
 
+  const loadCourses = async () => {
+    const res = await getAllCourses();
+    console.log(res[0])
+    setCourses(res);
+  }
+
   useEffect(() => {
     // Get Courses from the API
-    // const loadedPosts = axiosClient.get(`{apiBaseUrl}/courses/userId`);
 
-    const loadedPosts = JSON.parse(courseData);
-
-    if (maxCourses) {
-        setCourses(loadedPosts.slice(0, maxCourses));
-    } else {
-        setCourses(loadedPosts);
-    }
-  }, [maxCourses, userId]);
+    loadCourses()
+  }, []);
 
   return (
     <div>
       {courses?.map((value, index) => (
         <CourseCard
-          id={index}
+          key={value.cid}
+          cid={value.cid}
           code={value.code}
-          name={value.courseName}
+          name={value.name}
           year={value.year}
           sem={value.sem}
           instructor={value.instructor}

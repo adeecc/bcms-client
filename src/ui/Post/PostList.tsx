@@ -4,6 +4,8 @@ import PostCard from "./PostCard";
 import postData from "../../modules/samplePosts";
 import { Post } from "../../interfaces/Post";
 
+import { getCoursePosts } from "../../api/courseClient";
+
 interface Props {
   courseId?: string;
   maxPosts?: number;
@@ -12,9 +14,19 @@ interface Props {
 const PostList: React.FC<Props> = ({ courseId, maxPosts }) => {
   const [posts, setPosts] = useState<Post[] | null>(null);
 
+  const loadPosts = async () => {
+    if (courseId) {
+      const loadedPosts = await getCoursePosts(courseId);
+      // setPosts(loadedPosts)
+      console.log(loadedPosts);
+    }
+  };
+
   useEffect(() => {
     // Get Posts from the API
     // const loadedPosts = axiosClient.get(`{apiBaseUrl}/posts/courseId`);
+
+    loadPosts();
 
     const loadedPosts = JSON.parse(postData, (key, value) => {
       if (key === "created_at" || key === "updated_at") return new Date(value);
@@ -26,7 +38,7 @@ const PostList: React.FC<Props> = ({ courseId, maxPosts }) => {
     } else {
       setPosts(loadedPosts);
     }
-  }, [maxPosts, courseId]);
+  }, [maxPosts]);
 
   return (
     <div>
