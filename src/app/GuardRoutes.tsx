@@ -16,7 +16,7 @@ const isAuthorized = (
   user: UserType,
   allowedRoles: Array<UserRoles>
 ): Boolean => {
-  console.log(user, allowedRoles);
+  // console.log(user, allowedRoles);
   const roles: UserRoles[] = user?.userInfo?.role || [];
     return (
       user.isLoggedIn &&
