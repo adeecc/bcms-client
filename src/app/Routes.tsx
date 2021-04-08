@@ -15,6 +15,7 @@ import CourseCreate from "../pages/CourseCreate";
 import CourseDetail from "../components/Course/CourseDetail";
 import PostDetail from "../components/Post/PostDetail";
 import RoleManagement from "../components/User/RoleManagement";
+import UserCourse from "../components/Course/UserCourse";
 
 interface Props {}
 
@@ -34,6 +35,7 @@ const Routes: React.FC<Props> = (props: Props) => {
         <Grid>
           <Switch>
             <GuardedRoute exact path="/dashboard" Component={Dashboard} />
+            <GuardedRoute exact path="/user/course" Component={UserCourse} />
             <GuardedRoute exact path="/course" Component={Courses} />
             <GuardedRoute exact path="/course/:id" Component={CourseDetail} />
             <GuardedRoute

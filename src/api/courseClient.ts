@@ -15,6 +15,20 @@ const getAllCourses = async () => {
   }
 };
 
+const getUserCourses = async (id: string | number) => {
+  try {
+    baseClient.defaults.headers.common[
+      "authorization"
+    ] = `$Bearer ${localStorage.getItem("access-token")}`;
+    const response = await baseClient.get(`/users/${id}/courses`);
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return {};
+  }
+};
+
 const getCoursePosts = async (cid: string | number) => {
   try {
     baseClient.defaults.headers.common[
@@ -29,4 +43,4 @@ const getCoursePosts = async (cid: string | number) => {
   }
 };
 
-export { getAllCourses, getCoursePosts};
+export { getAllCourses, getUserCourses, getCoursePosts };

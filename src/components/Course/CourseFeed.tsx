@@ -31,7 +31,7 @@ const CourseFeed: React.FC<Props> = () => {
             </Link>
           ))}
 
-          <Link to="/course" className="flex space-x-1">
+          <Link to="/user/course" className="flex space-x-1">
             <div className="text-primary-100 font-bold">All Courses...</div>
           </Link>
         </div>
