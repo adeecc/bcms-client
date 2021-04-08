@@ -3,34 +3,24 @@ import CourseCard from "./CourseCard";
 
 import { getAllCourses } from "../../api/courseClient";
 
+import { Course } from "../../global/interfaces/Course";
+
 interface Props {
   userId?: number;
   maxCourses?: number;
 }
 
-interface Course {
-  cid: any;
-  code: string;
-  instructor_id: number;
-  name: string;
-  sem: string;
-  year: string;
-  instructor: string;
-}
-
-const CourseList: React.FC<Props> = ({ userId, maxCourses }) => {
+const CourseList: React.FC<Props> = ({ maxCourses }) => {
   const [courses, setCourses] = useState<Course[] | null>(null);
 
   const loadCourses = async () => {
     const res = await getAllCourses();
-    console.log(res[0])
-    setCourses(res);
-  }
+    console.log(res[0]);
+    setCourses(res.slice(maxCourses));
+  };
 
   useEffect(() => {
-    // Get Courses from the API
-
-    loadCourses()
+    loadCourses();
   }, []);
 
   return (
@@ -43,7 +33,7 @@ const CourseList: React.FC<Props> = ({ userId, maxCourses }) => {
           name={value.name}
           year={value.year}
           sem={value.sem}
-          instructor={value.instructor}
+          instructor={value.instructorName}
         />
       ))}
     </div>

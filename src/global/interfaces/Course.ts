@@ -1,8 +1,9 @@
 export interface Course {
-  id: string;
-  courseName: string;
+  cid: string;
   code: string;
-  instructor: string;
-  year: string;
+  name: string;
   sem: string;
+  year: string;
+  instructorId: number | string;
+  instructorName: string;
 }

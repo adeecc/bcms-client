@@ -23,10 +23,10 @@ const CourseFeed: React.FC<Props> = () => {
 
         <div className="flex flex-col space-y-7">
           {courses?.map((value, index) => (
-            <Link key={value.id} to={`/course/${value.id}`} className="flex space-x-1">
+            <Link key={value.cid} to={`/course/${value.cid}`} className="flex space-x-1">
               <div className="text-primary-300">{value.code}</div>
               <div className="text-primary-100 font-bold">
-                {value.courseName}
+                {value.name}
               </div>
             </Link>
           ))}

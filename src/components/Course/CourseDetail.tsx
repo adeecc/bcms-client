@@ -28,12 +28,13 @@ const CourseDetail: React.FC<Props> = ({ children}) => {
 
   const [course, setCourse] = useState<Course>(() => {
     return {
-      id,
-      courseName: "Logic in Computer Science",
+      cid: id,
       code: "CS F214",
-      instructor: "DR. V Ramaswamy", // Get instructor id and convert it to name
-      year: "2020",
+      name: "Logic in Computer Science",
       sem: "1",
+      year: "2020",
+      instructorId: 1,
+      instructorName: "DR. V Ramaswamy",
     };
   });
 
@@ -73,7 +74,7 @@ const CourseDetail: React.FC<Props> = ({ children}) => {
       <div className="flex justify-between mb-2">
         <div className="truncate flex flex-row">
           <h3 className="text-primary-300 my-auto mr-2">{course.code}</h3>
-          <h3 className="text-primary-100 my-auto">{course.courseName}</h3>
+          <h3 className="text-primary-100 my-auto">{course.name}</h3>
         </div>
 
         {isInstructor && (
@@ -112,9 +113,9 @@ const CourseDetail: React.FC<Props> = ({ children}) => {
         <h4 className="text-primary-300 mr-3">
           Sem {course.sem} | {course.year}
         </h4>
-        <h4 className="text-accent mr-4">{course.instructor}</h4>
+        <h4 className="text-accent mr-4">{course.instructorName}</h4>
       </div>
-      <PostList courseId={course.id} />
+      <PostList courseId={course.cid} />
     </div>
   );
 };
