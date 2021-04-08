@@ -3,7 +3,7 @@ export interface Post {
   title: string;
   body: string;
   courseName: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
   tags?: string[];
 }

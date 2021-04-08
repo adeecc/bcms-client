@@ -6,8 +6,8 @@ interface Props {
   id: string;
   title: string;
   courseName: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
   tags?: string[];
 }
 
@@ -20,16 +20,16 @@ const Post: React.FC<Props> = ({
   tags,
 }) => {
   const [createdAtString, setCreatedAtString] = useState(
-    created_at.toDateString()
+    new Date(created_at).toDateString()
   );
   const [updatedAtString, setUpdatedAtString] = useState(
-    updated_at.toDateString()
+    new Date(updated_at).toDateString()
   );
 
   const [isModified, setIsModified] = useState<boolean>(false);
 
   useEffect(() => {
-    if (updated_at.getTime() - created_at.getTime() > 5000) {
+    if (new Date(updated_at).getTime() - new Date(created_at).getTime() > 5000) {
       setIsModified(true);
     }
   }, [updated_at, created_at]);

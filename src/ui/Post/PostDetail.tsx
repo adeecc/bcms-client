@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import MDEditor from '@uiw/react-md-editor';
+import MDEditor from "@uiw/react-md-editor";
 
 import { Post } from "../../interfaces/Post";
 import Tag from "../Tag";
 
 interface Props {}
 
-const PostDetail: React.FC<Props> = ({}) => {
+const PostDetail: React.FC<Props> = () => {
   const { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState<Post>(() => {
     return {
       id,
       title: "Que Sara Sara",
-      body:`# Headering 1\n> Okauy this is very gg as well ngl\n - Hello \n - darkness\n - my\n - old\n - friend`,
+      body: `# Headering 1\n> Okauy this is very gg as well ngl\n - Hello \n - darkness\n - my\n - old\n - friend`,
       courseName: "Lorem ipsum dolor sit",
-      created_at: new Date(
-        "Thu Apr 01 2021 17:56:34 GMT+0530 (India Standard Time)"
-      ),
-      updated_at: new Date(),
+      created_at: "Thu Apr 01 2021 17:56:34 GMT+0530 (India Standard Time)",
+      updated_at: new Date().toISOString(),
       tags: ["Evaluation", "Mid Semester"],
     };
   });
@@ -34,13 +32,20 @@ const PostDetail: React.FC<Props> = ({}) => {
     //   courseId: string; // -> courseName: string;
     //   created_at: Date;
     //   updated_at: Date;
+    //   Tags
+    //   instructorId
+    //   instructorName
     // }
 
     setIsLoading(false);
   }, []);
 
   useEffect(() => {
-    if (post.updated_at.getTime() - post.created_at.getTime() > 5000) {
+    if (
+      new Date(post.updated_at).getTime() -
+        new Date(post.created_at).getTime() >
+      5000
+    ) {
       setIsModified(true);
     }
   }, [post.updated_at, post.created_at]);
@@ -58,12 +63,12 @@ const PostDetail: React.FC<Props> = ({}) => {
             </div>
           )}
         </div>
-        <h4 className="text-primary-200 my-auto">
-          ({post.courseName})
-        </h4>
+        <h4 className="text-primary-200 my-auto">({post.courseName})</h4>
       </div>
       <div className="flex justify-between mb-16">
-        <h4 className="text-accent mr-4 my-auto">{post.updated_at.toDateString()}</h4>
+        <h4 className="text-accent mr-4 my-auto">
+          {new Date(post.updated_at).toDateString()}
+        </h4>
         <div className="flex text-primary-300 pt-2 my-auto">
           {post.tags?.map((value, index) => {
             if (index === 3) return "...";
@@ -72,7 +77,10 @@ const PostDetail: React.FC<Props> = ({}) => {
           })}
         </div>
       </div>
-      <MDEditor.Markdown source={post.body} className="w-full bg-primary-900 text-primary-100 mt-5 focus:outline-none"/>
+      <MDEditor.Markdown
+        source={post.body}
+        className="w-full bg-primary-900 text-primary-100 mt-5 focus:outline-none"
+      />
     </div>
   );
 };
