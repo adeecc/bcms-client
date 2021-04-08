@@ -9,7 +9,7 @@ import Dashboard from "../components/Dashboard";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 
-import Courses from "../components/Courses";
+import Courses from "../components/Course/Courses";
 import CourseCreate from "../pages/CourseCreate";
 
 import CourseDetail from "../components/Course/CourseDetail";
