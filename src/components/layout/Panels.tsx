@@ -5,7 +5,7 @@ import { GridPanel, HeaderWrapper } from "./Wrappers";
 
 import logo from "../../img/logo2.png";
 import ProfileCard from "../User/ProfileCard";
-import GlobalSearch from "../ui/GlobalSearch";
+import GlobalSearch from "../common/GlobalSearch";
 import { UserContext } from "../../global/context/userContext";
 import AdminToolCard from "../User/AdminTool";
 import CourseFeed from "../Course/CourseFeed";

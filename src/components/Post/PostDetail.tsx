@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import MDEditor from "@uiw/react-md-editor";
 
 import { Post } from "../../global/interfaces/Post";
-import Tag from "../ui/Tag";
+import Tag from "../common/Tag";
 
 interface Props {}
 
