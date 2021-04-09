@@ -33,7 +33,7 @@ const CourseList: React.FC<Props> = ({ maxCourses }) => {
           name={value.name}
           year={value.year}
           sem={value.sem}
-          instructor={value.instructorName}
+          instructor={value.instructor_name}
         />
       ))}
     </div>

@@ -5,6 +5,7 @@ import { PlusIcon } from "@heroicons/react/solid";
 import { Course } from "../../global/interfaces/Course";
 import PostCreateModal from "../modals/PostCreateModal";
 import PostList from "../Post/PostList";
+import { getCourseDetail } from "../../api/courseClient";
 
 interface Props {}
 
@@ -17,17 +18,7 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
   const [isInstructor, setIsInstructor] = useState<boolean>(() => true);
   const [isEnrolled, setIsEnrolled] = useState<boolean>(() => false);
 
-  const [course, setCourse] = useState<Course | null>(() => {
-    return {
-      cid: id,
-      code: "CS F214",
-      name: "Logic in Computer Science",
-      sem: "1",
-      year: "2020",
-      instructorId: 1,
-      instructorName: "DR. V Ramaswamy",
-    };
-  });
+  const [course, setCourse] = useState<Course | null>();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -42,15 +33,9 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
   const onClickEnroll = (e: React.SyntheticEvent) => {};
 
   const loadCourseDetails = async () => {
-    setCourse({
-      cid: id,
-      code: "CS F212",
-      name: "Database Systems",
-      sem: "1",
-      year: "2020",
-      instructorId: 1,
-      instructorName: "DR. R Gururaj",
-    });
+    const res = await getCourseDetail(id);
+    console.log(res);
+    setCourse(res);
 
     setIsLoading(false);
   };
@@ -58,17 +43,17 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     // Data Required
     // interface meh {
-    //     courseName: string;
-    //     courseCode: string;
-    //     courseInstructorId: string; // -> courseInstrucorName: string
-    //     courseYear: string;
-    //     courseSem: string;
-    //     userIsEntrolled: boolean; // derived from locally Stored users course
-    //     userIsInstructor: boolean; // derived from courseInstructorId & userId
+    // cid: string;
+    // code: string;
+    // name: string;
+    // sem: string;
+    // year: string;
+    // instructor_id: number | string;
+    // instructor_name: string;
     // }
 
     loadCourseDetails();
-  }, []);
+  }, [id]);
 
   return isLoading || !course ? (
     <h3 className="text-primary-200 text-center">Loading...</h3>
@@ -116,7 +101,7 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
         <h4 className="text-primary-300 mr-3">
           Sem {course.sem} | {course.year}
         </h4>
-        <h4 className="text-accent mr-4">{course.instructorName}</h4>
+        <h4 className="text-accent mr-4">{course.instructor_name}</h4>
       </div>
       <PostList courseId={course.cid} />
     </div>

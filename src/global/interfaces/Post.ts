@@ -1,9 +1,13 @@
+
+export interface Tag {
+  tag: string;
+}
 export interface Post {
-  id: string;
+  pid: string | number;
   title: string;
   body: string;
-  courseName: string;
+  posted_in: number;
   created_at: string;
   updated_at: string;
-  tags?: string[];
+  tags?: Tag[];
 }

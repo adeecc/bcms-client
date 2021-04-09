@@ -13,7 +13,7 @@ const UserCourse: React.FC<Props> = () => {
 
   const loadCourses = async () => {
     const res = await getUserCourses(state.userInfo?.id || -1);
-    console.log(res[0]);
+    console.log(res);
     setCourses(res);
   };
 
@@ -31,7 +31,7 @@ const UserCourse: React.FC<Props> = () => {
           name={value.name}
           year={value.year}
           sem={value.sem}
-          instructor={value.instructorName}
+          instructor={value.instructor_name}
         />
       ))}
     </div>

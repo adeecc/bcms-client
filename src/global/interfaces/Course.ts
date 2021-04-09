@@ -4,6 +4,6 @@ export interface Course {
   name: string;
   sem: string;
   year: string;
-  instructorId: number | string;
-  instructorName: string;
+  instructor_id: number | string;
+  instructor_name: string;
 }

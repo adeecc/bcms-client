@@ -22,11 +22,13 @@ const PostList: React.FC<Props> = () => {
     if (id) {
       const loadedPosts = await getCoursePosts(id);
 
+      console.log(loadedPosts)
+
       // relabel the .post_id field to .id 
-      loadedPosts.forEach((el: any) => {
-        el.id = el.post_id;
-        delete el.post_id;
-      });
+      // loadedPosts.forEach((el: any) => {
+      //   el.pid = el.post_id;
+      //   delete el.post_id;
+      // });
 
       setPosts(loadedPosts);
     } else {
@@ -49,9 +51,9 @@ const PostList: React.FC<Props> = () => {
         posts.map((value, index) => (
           <PostCard
             key={index}
-            id={value.id}
+            id={value.pid}
             title={value.title}
-            courseName={value.courseName}
+            courseName={"Course Name"} // value.posted_in}
             created_at={value.created_at}
             updated_at={value.updated_at}
             tags={value.tags}

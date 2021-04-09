@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Tag from "../common/Tag";
+import { Tag } from "../../global/interfaces/Post";
+import TagBullet from "../common/TagBullet";
 
 interface Props {
-  id: string;
+  id: string | number;
   title: string;
   courseName: string;
   created_at: string;
   updated_at: string;
-  tags?: string[];
+  tags?: Tag[];
 }
 
-const Post: React.FC<Props> = ({
+const PostCard: React.FC<Props> = ({
   id,
   title,
   courseName,
@@ -64,7 +65,7 @@ const Post: React.FC<Props> = ({
             if (index === 3) return "..."
             if (index > 3) return "";
             return (
-              <Tag key={index} label={value} />
+              <TagBullet key={index} label={value.tag} />
             );
           })}
         </div>
@@ -73,4 +74,4 @@ const Post: React.FC<Props> = ({
   );
 };
 
-export default Post;
+export default PostCard;
