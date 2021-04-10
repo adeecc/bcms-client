@@ -3,10 +3,10 @@ import { useParams } from "react-router";
 
 import PostCard from "./PostCard";
 
-import postData from "../../modules/samplePosts";
 import { Post } from "../../global/interfaces/Post";
 
 import { getCoursePosts } from "../../api/courseClient";
+import { getNotifications } from "../../api/notificationClient";
 
 interface Props {
   courseId?: string;
@@ -21,27 +21,14 @@ const PostList: React.FC<Props> = () => {
     let loadedPosts;
     if (id) {
       const loadedPosts = await getCoursePosts(id);
-
-      console.log(loadedPosts)
-
-      // relabel the .post_id field to .id 
-      // loadedPosts.forEach((el: any) => {
-      //   el.pid = el.post_id;
-      //   delete el.post_id;
-      // });
-
       setPosts(loadedPosts);
     } else {
-      const loadedPosts = JSON.parse(postData);
+      const loadedPosts = await getNotifications();
       setPosts(loadedPosts);
-      console.table(loadedPosts);
     }
   };
 
   useEffect(() => {
-    // Get Posts from the API
-    // const loadedPosts = axiosClient.get(`{apiBaseUrl}/posts/courseId`);
-
     loadPosts();
   }, [id]);
 
@@ -53,7 +40,7 @@ const PostList: React.FC<Props> = () => {
             key={index}
             id={value.pid}
             title={value.title}
-            courseName={"Course Name"} // value.posted_in}
+            courseName={value.name || ""}
             created_at={value.created_at}
             updated_at={value.updated_at}
             tags={value.tags}
