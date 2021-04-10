@@ -7,7 +7,7 @@ const getPostDetail = async (post_id: string | number) => {
     ] = `$Bearer ${localStorage.getItem("access-token")}`;
 
     const response = await baseClient.get(`posts/${post_id}`);
-    
+
     return response.data;
   } catch (error) {
     console.error(error);

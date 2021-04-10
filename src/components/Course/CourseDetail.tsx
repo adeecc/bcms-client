@@ -34,24 +34,11 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
 
   const loadCourseDetails = async () => {
     const res = await getCourseDetail(id);
-    console.log(res);
     setCourse(res);
-
     setIsLoading(false);
   };
 
   useEffect(() => {
-    // Data Required
-    // interface meh {
-    // cid: string;
-    // code: string;
-    // name: string;
-    // sem: string;
-    // year: string;
-    // instructor_id: number | string;
-    // instructor_name: string;
-    // }
-
     loadCourseDetails();
   }, [id]);
 

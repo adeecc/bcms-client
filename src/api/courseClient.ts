@@ -49,7 +49,6 @@ const getCoursePosts = async (cid: string | number) => {
       "authorization"
     ] = `$Bearer ${localStorage.getItem("access-token")}`;
     const response = await baseClient.get(`courses/${cid}/posts`);
-    console.log(response)
 
     return response.data;
   } catch (error) {

@@ -20,17 +20,19 @@ const PostCard: React.FC<Props> = ({
   updated_at,
   tags,
 }) => {
-  const [createdAtString, setCreatedAtString] = useState(
-    new Date(created_at).toDateString()
-  );
-  const [updatedAtString, setUpdatedAtString] = useState(
-    new Date(updated_at).toDateString()
-  );
+  const [createdAtString, setCreatedAtString] = useState<string>();
+  const [updatedAtString, setUpdatedAtString] = useState<string>();
 
   const [isModified, setIsModified] = useState<boolean>(false);
 
   useEffect(() => {
-    if (new Date(updated_at).getTime() - new Date(created_at).getTime() > 5000) {
+    setCreatedAtString(new Date(created_at).toDateString());
+    setUpdatedAtString(new Date(updated_at).toDateString());
+
+    if (
+      new Date(updated_at).getTime() - new Date(created_at).getTime() >
+      5000
+    ) {
       setIsModified(true);
     }
   }, [updated_at, created_at]);
@@ -62,11 +64,9 @@ const PostCard: React.FC<Props> = ({
         <div className="text-accent pt-2">{courseName}</div>
         <div className="flex text-primary-300 pt-2">
           {tags?.map((value, index) => {
-            if (index === 3) return "..."
+            if (index === 3) return "...";
             if (index > 3) return "";
-            return (
-              <TagBullet key={index} label={value.tag} />
-            );
+            return <TagBullet key={index} label={value.tag} />;
           })}
         </div>
       </div>
