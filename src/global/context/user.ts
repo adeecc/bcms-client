@@ -9,6 +9,7 @@ export type UserInfo = {
   id: number;
   username: string;
   name?: string;
+  bio?: string;
   email?: string;
   role: UserRoles[];
 };

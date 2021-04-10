@@ -36,9 +36,7 @@ const ProfileCard: React.FC<Props> = () => {
         </div>
       </div>
       <div className="flex text-primary-300">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae facere
-        dolor dignissimos nam illum blanditiis voluptatibus enim, itaque eaque.
-        Iusto veniam et cumque vel animi?
+        {state.userInfo?.bio || "Add a bio today!"}
       </div>
     </div>
   );
