@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../global/context/userContext";
 import CourseCreateModal from "../modals/CourseCreateModal";
 
@@ -14,7 +14,7 @@ const AdminToolCard: React.FC<Props> = () => {
   const { state } = useContext(UserContext);
   const history = useHistory()
 
-  const IsAdmin = !state.userInfo?.role.includes(UserRoles.Admin);
+  const IsAdmin = state.userInfo?.role.includes(UserRoles.Admin);
   const IsFaculty = state.userInfo?.role.includes(UserRoles.Faculty);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
