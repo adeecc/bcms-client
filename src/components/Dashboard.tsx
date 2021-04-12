@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PostList from "./Post/PostList";
 
 import { clearAllNotifications } from "../api/notificationClient";
+import { UserContext } from "../global/context/userContext";
+import { UserRoles } from "../global/context/user";
+import CourseList from "./Course/CourseList";
+import Notifications from "./User/Notifications";
 
 interface Props {}
 
-const Dashboard: React.FC = (props: Props) => {
+const AdminDashboard: React.FC = (props: Props) => {
   const [reload, setReload] = useState<boolean>(false);
   const clearNotifications = (e: React.SyntheticEvent) => {
     clearAllNotifications();
@@ -30,6 +34,51 @@ const Dashboard: React.FC = (props: Props) => {
       <PostList maxPosts={15} />;
     </>
   );
+};
+
+const FacultyDashboard: React.FC = (props: Props) => {
+  const [reload, setReload] = useState<boolean>(false);
+  const clearNotifications = (e: React.SyntheticEvent) => {
+    clearAllNotifications();
+    setReload(true);
+  };
+
+  useEffect(() => {
+    setReload(false);
+  }, [reload]);
+
+  return (
+    <>
+      <div className="flex justify-between items-end mb-5">
+        <h3 className="text-primary-100 my-auto">Your Courses</h3>
+        <button
+          onClick={clearNotifications}
+          className="py-2 px-6 my-auto rounded-lg text-button bg-accent"
+        >
+          Clear Notifications
+        </button>
+      </div>
+      <CourseList />;
+    </>
+  );
+};
+
+
+const Dashboard: React.FC = (props: Props) => {
+  const { state } = useContext(UserContext);
+
+  const isAdmin = state.userInfo?.role.includes(UserRoles.Admin);
+  const isFaculty = state.userInfo?.role.includes(UserRoles.Faculty);
+
+  useEffect(() => {
+    
+  }, []);
+
+
+  if (isAdmin) return <AdminDashboard />
+  if (isFaculty) return <FacultyDashboard />
+  
+  return <Notifications />
 };
 
 export default Dashboard;

@@ -14,8 +14,8 @@ const AdminToolCard: React.FC<Props> = () => {
   const { state } = useContext(UserContext);
   const history = useHistory()
 
-  const IsAdmin = state.userInfo?.role.includes(UserRoles.Admin);
-  const IsFaculty = state.userInfo?.role.includes(UserRoles.Faculty);
+  const isAdmin = state.userInfo?.role.includes(UserRoles.Admin);
+  const isFaculty = state.userInfo?.role.includes(UserRoles.Faculty);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -33,7 +33,7 @@ const AdminToolCard: React.FC<Props> = () => {
 
   // console.log(state);
 
-  return IsAdmin || IsFaculty ? (
+  return isAdmin || isFaculty ? (
     <div className="max-w-sm rounded-lg overflow-hidden flex flex-col">
       <div className="px-8 py-6 bg-primary-800 border-b border-primary-600">
         <h4 className="text-primary-100 font-bold">Privilege Tools</h4>
@@ -49,7 +49,7 @@ const AdminToolCard: React.FC<Props> = () => {
           </button>
           <CourseCreateModal isOpen={modalIsOpen} onRequestClose={closeModal} />
         </div>
-        {IsAdmin && (
+        {isAdmin && (
           <div className="w-full flex justify-between my-auto">
             <h5 className="text-primary-200 font-bold my-auto">
               Manage Roles
@@ -62,7 +62,7 @@ const AdminToolCard: React.FC<Props> = () => {
             </button>
           </div>
         )}
-        {IsAdmin && (
+        {isAdmin && (
           <div className="w-full flex justify-between my-auto">
             <h5 className="text-primary-200 font-bold my-auto">
               Generate Reports
