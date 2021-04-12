@@ -1,34 +1,38 @@
 import React, { useState, useEffect } from "react";
 import MDEditor from "@uiw/react-md-editor";
+import { createPost } from "../../api/postClient";
 
 interface Props {
-  courseId: number;
+  courseId: string | number;
+  courseCode: string;
+  courseName: string;
 }
 
 // @todo: Clean Up Code and UI
 // @todo: Implement deletion of tags
 
-const PostCreateForm: React.FC<Props> = ({ courseId }) => {
+const PostCreateForm: React.FC<Props> = ({
+  courseId,
+  courseCode,
+  courseName,
+}) => {
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
   const [tags, setTags] = useState<string>("");
 
-  const [courseCode, setCourseCode] = useState<string>("");
-  const [courseName, setCourseName] = useState<string>("");
+  const [posted, setPosted] = useState<boolean>(false);
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
+    const res = await createPost(courseId, title, body);
+    console.log(res);
 
-    console.log(title);
-    console.log(body);
-    console.log(tags);
+    console.table({ title, body, tags });
+    setPosted(true);
+    setTitle("");
+    setBody("");
+    setTags("");
   };
-
-  useEffect(() => {
-    // Get Value from API
-    setCourseName("Database Systems");
-    setCourseCode("CS F212");
-  }, []);
 
   return (
     <div className="w-full flex flex-col">
@@ -37,6 +41,7 @@ const PostCreateForm: React.FC<Props> = ({ courseId }) => {
         <h4 className="text-primary-300 font-bold">
           {courseCode} {courseName}.
         </h4>
+        {posted && <h4 className="text-accent font-bold">Posted!</h4>}
       </div>
 
       <form
@@ -53,9 +58,12 @@ const PostCreateForm: React.FC<Props> = ({ courseId }) => {
             name="title"
             type="text"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              setPosted(false);
+              setTitle(e.target.value);
+            }}
             required
-            className="w-full bg-primary-100 hover:bg-primary-100 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+            className="w-full bg-primary-100 hover:bg-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
           />
         </div>
         <div className="field-group">
@@ -65,6 +73,7 @@ const PostCreateForm: React.FC<Props> = ({ courseId }) => {
           <MDEditor
             value={body}
             onChange={(value: string | undefined) => {
+              setPosted(false);
               value && setBody(value);
             }}
             preview="edit"
@@ -83,9 +92,12 @@ const PostCreateForm: React.FC<Props> = ({ courseId }) => {
             name="tags"
             type="tags"
             value={tags}
-            onChange={(e) => setTags(e.target.value)}
+            onChange={(e) => {
+              setPosted(false);
+              setTags(e.target.value);
+            }}
             required
-            className="w-full bg-primary-100 hover:bg-primary-100 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+            className="w-full bg-primary-100 hover:bg-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
           />
         </div>
         <div className="field-group col-span-1">

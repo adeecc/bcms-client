@@ -3,7 +3,9 @@ import { Modal } from "./Modal";
 import PostCreateForm from "../forms/PostCreateForm";
 
 interface PostCreateModalProps {
-    courseId: string;
+  courseId: string | number;
+  courseName: string;
+  courseCode: string;
   isOpen: boolean;
   onRequestClose: () => void;
 }
@@ -11,15 +13,17 @@ interface PostCreateModalProps {
 const PostCreateModal: React.FC<PostCreateModalProps> = ({
   isOpen,
   onRequestClose,
+  courseId,
+  courseName,
+  courseCode,
 }) => {
-
   //   if (!state.isLoggedIn) {
   //     return null;
   //   }
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
-      <PostCreateForm courseId={0}/>
+      <PostCreateForm courseId={courseId} courseCode={courseCode} courseName={courseName}/>
     </Modal>
   );
 };

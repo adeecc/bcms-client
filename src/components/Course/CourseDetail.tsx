@@ -106,6 +106,8 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
             </button>
             <PostCreateModal
               courseId={id}
+              courseCode={course.code}
+              courseName={course.name}
               isOpen={modalIsOpen}
               onRequestClose={closeModal}
             />
