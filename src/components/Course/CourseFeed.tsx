@@ -24,7 +24,7 @@ const CourseFeed: React.FC<Props> = () => {
         <h3 className="text-primary-100 my-auto font-bold">Your Courses</h3>
 
         <div className="flex flex-col space-y-7">
-          {courses?.map((value, index) => (
+          {courses?.map((value) => (
             <Link
               key={value.cid}
               to={`/course/${value.cid}`}

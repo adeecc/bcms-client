@@ -80,7 +80,7 @@ const enrollToCourse = async (cid: string | number, uid: string | number) => {
 
     const data = {
       id: uid,
-    }
+    };
 
     const response = await baseClient.post(`courses/${cid}/enroll`, data);
 
@@ -102,9 +102,35 @@ const withdrawFromCourse = async (
 
     const data = {
       id: uid,
-    }
+    };
 
     const response = await baseClient.post(`courses/${cid}/disenroll`, data);
+
+    return response.data;
+  } catch (error) {}
+};
+
+const createCourse = async (
+  name: string,
+  code: string,
+  year: string,
+  sem: string
+) => {
+  try {
+    baseClient.defaults.headers.common[
+      "authorization"
+    ] = `$Bearer ${localStorage.getItem("access-token")}`;
+
+    const data = {
+      course: {
+        name,
+        code,
+        year,
+        sem,
+      },
+    };
+
+    const response = await baseClient.post(`courses/create`, data);
 
     return response.data;
   } catch (error) {}
@@ -118,4 +144,5 @@ export {
   getCoursePosts,
   enrollToCourse,
   withdrawFromCourse,
+  createCourse,
 };

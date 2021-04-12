@@ -1,26 +1,38 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
+
+import { createCourse } from "../../api/courseClient";
 
 interface Props {}
 
 const CourseCreateForm: React.FC<Props> = (props: Props) => {
+  const history = useHistory();
+
   const [name, setName] = useState<string>("");
   const [code, setCode] = useState<string>("");
   const [year, setYear] = useState<string>("");
   const [sem, setSem] = useState<string>("");
+  const [created, setCreated] = useState<boolean>(false);
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
+    const res = await createCourse(name, code, year, sem);
+    console.log(res);
 
-    console.log(name, code, year, sem);
+    console.table({ name, code, year, sem });
+
+    setCreated(true);
+    setName("");
+    setCode("");
+    setYear("");
+    setSem("");
   };
 
   return (
     <div className="w-full flex flex-col">
       <div className="header mb-8 ">
         <h3 className="text-primary-100">Create a Course</h3>
-        {/* <h4 className="text-primary-300 font-bold">
-          {courseCode} {courseName}.
-        </h4> */}
+        {created && <h4 className="text-accent font-bold">Created!</h4>}
       </div>
       <form
         className="grid grid-cols-1 md:grid-cols-3 gap-4"
@@ -36,7 +48,10 @@ const CourseCreateForm: React.FC<Props> = (props: Props) => {
             name="name"
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setCreated(false);
+              setName(e.target.value);
+            }}
             required
             className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
           />
@@ -51,7 +66,10 @@ const CourseCreateForm: React.FC<Props> = (props: Props) => {
             name="code"
             type="text"
             value={code}
-            onChange={(e) => setCode(e.target.value)}
+            onChange={(e) => {
+              setCreated(false);
+              setCode(e.target.value);
+            }}
             className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
           />
         </div>
@@ -65,7 +83,10 @@ const CourseCreateForm: React.FC<Props> = (props: Props) => {
             name="year"
             type="text"
             value={year}
-            onChange={(e) => setYear(e.target.value)}
+            onChange={(e) => {
+              setCreated(false);
+              setYear(e.target.value);
+            }}
             className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
           />
         </div>
@@ -80,7 +101,10 @@ const CourseCreateForm: React.FC<Props> = (props: Props) => {
             name="sem"
             type="text"
             value={sem}
-            onChange={(e) => setSem(e.target.value)}
+            onChange={(e) => {
+              setCreated(false);
+              setSem(e.target.value);
+            }}
             className="w-full bg-primary-700 hover:bg-primary-600 text-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
           />
         </div>
