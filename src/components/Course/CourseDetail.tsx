@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
 import { PlusIcon } from "@heroicons/react/solid";
 
 import { Course } from "../../global/interfaces/Course";
 import PostCreateModal from "../modals/PostCreateModal";
 import PostList from "../Post/PostList";
-import { getCourseDetail } from "../../api/courseClient";
+import {
+  getCourseDetail,
+  getUserCourses,
+  enrollToCourse,
+  withdrawFromCourse,
+} from "../../api/courseClient";
+import { UserContext } from "../../global/context/userContext";
 
 interface Props {}
 
@@ -13,14 +19,16 @@ interface Props {}
 
 const CourseDetail: React.FC<Props> = ({ children }) => {
   const { id } = useParams<{ id: string }>();
-  const [isLoading, setIsLoading] = useState(true);
 
-  const [isInstructor, setIsInstructor] = useState<boolean>(() => true);
-  const [isEnrolled, setIsEnrolled] = useState<boolean>(() => false);
+  const { state } = useContext(UserContext);
 
-  const [course, setCourse] = useState<Course | null>();
+  const history = useHistory();
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isInstructor, setIsInstructor] = useState<boolean>();
+  const [isEnrolled, setIsEnrolled] = useState<boolean>();
+  const [course, setCourse] = useState<Course>();
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -30,17 +38,53 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
     setModalIsOpen(true);
   };
 
-  const onClickEnroll = (e: React.SyntheticEvent) => {};
+  const onClickEnroll = async (e: React.SyntheticEvent) => {
+    const res = await enrollToCourse(
+      course?.cid || -1,
+      state.userInfo?.id || -1
+    );
+
+    setIsEnrolled(true);
+  };
+
+  const onClickDisenroll = async (e: React.SyntheticEvent) => {
+    const res = await withdrawFromCourse(
+      course?.cid || -1,
+      state.userInfo?.id || -1
+    );
+
+    setIsEnrolled(false);
+    history.push("/user/course");
+  };
 
   const loadCourseDetails = async () => {
     const res = await getCourseDetail(id);
     setCourse(res);
+
+    setIsInstructor(res?.instructor_id === state.userInfo?.id);
+
+    const userCourses: Course[] = await getUserCourses(
+      state.userInfo?.id || -1
+    );
+    console.log(userCourses);
+    console.table(res);
+
+    const indexOfCourseInUserCourses = userCourses.findIndex(
+      (o) => o.cid === res?.cid
+    );
+
+    setIsEnrolled(indexOfCourseInUserCourses >= 0);
+
+    console.table({ isEnrolled, isInstructor });
+
     setIsLoading(false);
   };
 
   useEffect(() => {
     loadCourseDetails();
-  }, [id]);
+  }, [id, state]);
+
+  useEffect(() => {}, [isEnrolled, isInstructor]);
 
   return isLoading || !course ? (
     <h3 className="text-primary-200 text-center">Loading...</h3>
@@ -68,6 +112,15 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
           </div>
         )}
 
+        {!isInstructor && isEnrolled && (
+          <button
+            className="py-2 px-6 my-auto rounded-lg text-button bg-accent focus:outline-none"
+            onClick={onClickDisenroll}
+          >
+            Withdraw
+          </button>
+        )}
+
         {!isEnrolled && !isInstructor && (
           <button
             className="py-2 px-6 my-auto rounded-lg text-button bg-accent focus:outline-none"
@@ -76,13 +129,6 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
             Enroll
           </button>
         )}
-
-        {/* {(!isEnrolled || isInstructor) && (
-          {isInstructor ? () : ()}
-          // <button className="py-2 px-6 my-auto rounded-lg text-button bg-accent">
-          //   <SvgPlus />
-          // </button>
-        )} */}
       </div>
       <div className="flex mb-5">
         <h4 className="text-primary-300 mr-3">

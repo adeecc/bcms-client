@@ -1,27 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
 
-import { getAllCourses } from "../../api/courseClient";
+import { getAllCourses, getProfCourses } from "../../api/courseClient";
 
 import { Course } from "../../global/interfaces/Course";
+import { UserContext } from "../../global/context/userContext";
+import { UserRoles } from "../../global/context/user";
 
 interface Props {
   userId?: number;
   maxCourses?: number;
 }
 
-const CourseList: React.FC<Props> = ({ maxCourses }) => {
-  const [courses, setCourses] = useState<Course[] | null>(null);
+const CourseList: React.FC<Props> = () => {
+  const { state } = useContext(UserContext);
+  const [courses, setCourses] = useState<Course[]>();
+
+  const isFaculty = state.userInfo?.role.includes(UserRoles.Faculty);
 
   const loadCourses = async () => {
-    const res = await getAllCourses();
-    console.log(res[0]);
-    setCourses(res.slice(maxCourses));
+    if (isFaculty) {
+      const res = await getProfCourses(state.userInfo?.id || -1);
+      console.log(res);
+      setCourses(res);
+    } else {
+      const res = await getAllCourses();
+      console.log(res);
+      setCourses(res);
+    }
   };
 
   useEffect(() => {
     loadCourses();
-  }, []);
+  }, [state]);
 
   return (
     <div>
