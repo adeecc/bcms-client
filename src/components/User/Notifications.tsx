@@ -23,7 +23,7 @@ const Notifications = (props: Props) => {
           <h3 className="text-primary-100 my-auto">Your Feed</h3>
           <button
             onClick={clearNotifications}
-            className="py-2 px-6 my-auto rounded-lg text-button bg-accent"
+            className="py-2 px-6 my-auto rounded-lg text-button bg-accent outline-none focus:outline-none hover:bg-accent-hover"
           >
             Clear Notifications
           </button>

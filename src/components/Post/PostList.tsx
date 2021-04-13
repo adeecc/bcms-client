@@ -18,7 +18,6 @@ const PostList: React.FC<Props> = () => {
   const [posts, setPosts] = useState<Post[] | null>(null);
 
   const loadPosts = async () => {
-    let loadedPosts;
     if (id) {
       const loadedPosts = await getCoursePosts(id);
       setPosts(loadedPosts);

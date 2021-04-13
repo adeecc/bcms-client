@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import MDEditor from "@uiw/react-md-editor";
-import { createPost } from "../../api/postClient";
+import { createPost, getAllTags, updatePost } from "../../api/postClient";
+import { Post, Tag } from "../../global/interfaces/Post";
 
 interface Props {
   courseId: string | number;
   courseCode: string;
   courseName: string;
+  post?: Post;
 }
 
 // @todo: Clean Up Code and UI
@@ -15,24 +17,51 @@ const PostCreateForm: React.FC<Props> = ({
   courseId,
   courseCode,
   courseName,
+  post,
 }) => {
-  const [title, setTitle] = useState<string>("");
-  const [body, setBody] = useState<string>("");
-  const [tags, setTags] = useState<string>("");
+  const [title, setTitle] = useState<string>(post?.title || "");
+  const [body, setBody] = useState<string>(post?.body || "");
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>();
 
   const [posted, setPosted] = useState<boolean>(false);
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    const res = await createPost(courseId, title, body);
-    console.log(res);
 
-    console.table({ title, body, tags });
+    if (!post) {
+      const res = await createPost(courseId, title, body, selectedTags);
+      console.log(res);
+    } else {
+      const res = await updatePost(post.pid, title, body, selectedTags);
+      console.log(res);
+    }
+
     setPosted(true);
     setTitle("");
     setBody("");
-    setTags("");
+    setSelectedTags([]);
   };
+
+  const loadTags = async () => {
+    const res = await getAllTags();
+    console.log(res);
+    setTags(res);
+
+    console.log("Received Post: ", post);
+
+    if (post?.tags) {
+      setSelectedTags(
+        post.tags.map((value: Tag) => {
+          return value.tid?.toString() || "";
+        })
+      );
+    }
+  };
+
+  useEffect(() => {
+    loadTags();
+  }, []);
 
   return (
     <div className="w-full flex flex-col">
@@ -63,7 +92,7 @@ const PostCreateForm: React.FC<Props> = ({
               setTitle(e.target.value);
             }}
             required
-            className="w-full bg-primary-100 hover:bg-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+            className="w-full form-input bg-primary-100 hover:bg-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
           />
         </div>
         <div className="field-group">
@@ -87,18 +116,27 @@ const PostCreateForm: React.FC<Props> = ({
           <label htmlFor="tags" className="font-medium text-primary-100">
             Tags
           </label>
-          <input
-            id="tags"
+          <select
+            multiple
             name="tags"
-            type="tags"
-            value={tags}
+            id="tags"
             onChange={(e) => {
-              setPosted(false);
-              setTags(e.target.value);
+              const value = Array.from(
+                e.target.selectedOptions,
+                (option) => option.value
+              );
+              setSelectedTags(value);
+              console.log(value);
             }}
-            required
-            className="w-full bg-primary-100 hover:bg-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
-          />
+            value={selectedTags}
+            className="form-multi-select w-full bf-primary-100 hover:bg-primary-100 border border-primary-600 px-3 py-2 mt-1 rounded-lg shadow-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+          >
+            {tags?.map((value: Tag) => (
+              <option key={value.tid} value={value.tid || -1}>
+                {value.tag}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="field-group col-span-1">
           <input
