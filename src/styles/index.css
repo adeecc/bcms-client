@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
-@import "tailwindcss/base";
-@import "tailwindcss/utilities";
+
+@tailwind base;
+@tailwind utilities;
 
 h1,
 h2,
@@ -70,4 +71,24 @@ body {
 
 .ql-editor {
   padding: 0 !important;
+}
+
+@layer base {
+  [type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    @apply border border-transparent focus:outline-none focus:ring-0 focus:ring-transparent ;
+  }
 }
