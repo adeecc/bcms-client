@@ -1,35 +1,61 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
 import MDEditor from "@uiw/react-md-editor";
 
 import { Post } from "../../global/interfaces/Post";
 import TagBullet from "../common/TagBullet";
-import { getPostDetail } from "../../api/postClient";
+import { deletePost, getPostDetail } from "../../api/postClient";
 import { getCourseDetail } from "../../api/courseClient";
 import { Course } from "../../global/interfaces/Course";
+import { UserContext } from "../../global/context/userContext";
+import PostCreateModal from "../modals/PostCreateModal";
 
 interface Props {}
 
 const PostDetail: React.FC<Props> = () => {
   const { id } = useParams<{ id: string }>();
+  const { state } = useContext(UserContext);
+  const history = useHistory();
+
   const [isLoading, setIsLoading] = useState(true);
 
   const [post, setPost] = useState<Post>();
   const [parentCourse, setParentCourse] = useState<Course>();
-
+  const [isInstructor, setIsInstructor] = useState(false);
   const [isModified, setIsModified] = useState<boolean>(false);
+
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const onClickEditPost = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    setModalIsOpen(true);
+  };
+
+  const onClickDeletePost = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    await deletePost(id);
+    history.push(`/course/${parentCourse?.cid || ""}`);
+  };
 
   const loadData = async () => {
     const post: Post = await getPostDetail(id);
     console.log(post);
 
-    const parentCourse = await getCourseDetail(post.posted_in);
+    const parentCourse: Course = await getCourseDetail(post.posted_in);
     console.log(parentCourse);
 
     setPost(post);
     setParentCourse(parentCourse);
 
     setIsLoading(false);
+
+    if (parentCourse?.instructor_id === state.userInfo?.id) {
+      setIsInstructor(true);
+    }
   };
 
   useEffect(() => {
@@ -62,9 +88,7 @@ const PostDetail: React.FC<Props> = () => {
                 </div>
               )}
             </div>
-            <h4 className="text-primary-200 my-auto">
-              ({parentCourse?.name})
-            </h4>
+            <h4 className="text-primary-200 my-auto">({parentCourse?.name})</h4>
           </div>
           <div className="flex justify-between mb-16">
             <h4 className="text-accent mr-4 my-auto">
@@ -80,6 +104,31 @@ const PostDetail: React.FC<Props> = () => {
             source={post.body}
             className="w-full bg-primary-900 text-primary-100 mt-5 focus:outline-none"
           />
+
+          {isInstructor && (
+            <div className="flex flex-row space-x-5 my-auto justify-end">
+              <button
+                className="py-2 px-6 my-auto rounded-lg text-button bg-accent outline-none focus:outline-none"
+                onClick={onClickEditPost}
+              >
+                Edit
+              </button>
+              <PostCreateModal
+                post={post}
+                courseId={id}
+                courseCode={parentCourse?.code || ""}
+                courseName={parentCourse?.name || ""}
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+              />
+              <button
+                className="py-2 px-6 my-auto rounded-lg text-button bg-accent outline-none focus:outline-none"
+                onClick={onClickDeletePost}
+              >
+                Delete
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <h4 className="text-primary-300 text-center">Post not found...</h4>

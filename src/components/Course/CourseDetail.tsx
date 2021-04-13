@@ -84,7 +84,7 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
     loadCourseDetails();
   }, [id, state]);
 
-  useEffect(() => {}, [isEnrolled, isInstructor]);
+  useEffect(() => {}, [isEnrolled, isInstructor, modalIsOpen]);
 
   return isLoading || !course ? (
     <h3 className="text-primary-200 text-center">Loading...</h3>
