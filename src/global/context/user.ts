@@ -11,7 +11,7 @@ export type UserInfo = {
   name?: string;
   bio?: string;
   email?: string;
-  role: UserRoles[];
+  roles: UserRoles[];
 };
 
 export type UserType = {

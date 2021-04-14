@@ -56,25 +56,25 @@ const RoleManagement: React.FC<RoleManagementProps> = () => {
         id: 1,
         username: "adichopra11",
         fullName: "Aditya Chopra",
-        role: [UserRoles.Admin, UserRoles.Student],
+        roles: [UserRoles.Admin, UserRoles.Student],
       },
       {
         id: 2,
         username: "sike",
         fullName: "Sidharth Anand",
-        role: [UserRoles.Admin, UserRoles.Student],
+        roles: [UserRoles.Admin, UserRoles.Student],
       },
       {
         id: 3,
         username: "simp",
         fullName: "Aryan Arora",
-        role: [UserRoles.Admin, UserRoles.Student],
+        roles: [UserRoles.Admin, UserRoles.Student],
       },
       {
         id: 4,
         username: "chaubz",
         fullName: "Aryan Chaubal",
-        role: [UserRoles.Admin, UserRoles.Student],
+        roles: [UserRoles.Admin, UserRoles.Student],
       },
     ];
 
@@ -97,7 +97,7 @@ const RoleManagement: React.FC<RoleManagementProps> = () => {
             id={value.id}
             username={value.username}
             name={value.name || ""}
-            roles={value.role}
+            roles={value.roles}
           />
         ))}
       </div>

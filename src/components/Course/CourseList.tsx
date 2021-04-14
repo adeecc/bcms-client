@@ -16,7 +16,7 @@ const CourseList: React.FC<Props> = () => {
   const { state } = useContext(UserContext);
   const [courses, setCourses] = useState<Course[]>();
 
-  const isFaculty = state.userInfo?.role.includes(UserRoles.Faculty);
+  const isFaculty = state.userInfo?.roles.includes(UserRoles.Faculty);
 
   const loadCourses = async () => {
     if (isFaculty) {

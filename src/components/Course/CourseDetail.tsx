@@ -70,7 +70,7 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
     const res = await getCourseDetail(id);
     setCourse(res);
 
-    setIsAdmin(state.userInfo?.role.includes(UserRoles.Admin) || false);
+    setIsAdmin(state.userInfo?.roles.includes(UserRoles.Admin) || false);
     setIsInstructor(res?.instructor_id === state.userInfo?.id);
 
     const userCourses: Course[] = await getUserCourses(

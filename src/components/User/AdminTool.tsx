@@ -13,8 +13,8 @@ const AdminToolCard: React.FC<Props> = () => {
   const { state } = useContext(UserContext);
   const history = useHistory();
 
-  const isAdmin = state.userInfo?.role.includes(UserRoles.Admin);
-  const isFaculty = state.userInfo?.role.includes(UserRoles.Faculty);
+  const isAdmin = state.userInfo?.roles.includes(UserRoles.Admin);
+  const isFaculty = state.userInfo?.roles.includes(UserRoles.Faculty);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
