@@ -29,7 +29,7 @@ const PostList: React.FC<Props> = () => {
 
   useEffect(() => {
     loadPosts();
-  }, [id]);
+  });
 
   return (
     <div>
