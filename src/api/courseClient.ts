@@ -133,7 +133,25 @@ const createCourse = async (
     const response = await baseClient.post(`courses/create`, data);
 
     return response.data;
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    return {};
+  }
+};
+
+const deleteCourse = async (cid: string | number) => {
+  try {
+    baseClient.defaults.headers.common[
+      "authorization"
+    ] = `$Bearer ${localStorage.getItem("access-token")}`;
+
+    const response = await baseClient.delete(`courses/${cid}`);
+    return response.data;
+    
+  } catch (error) {
+    console.error(error);
+    return {};
+  }
 };
 
 export {
@@ -145,4 +163,5 @@ export {
   enrollToCourse,
   withdrawFromCourse,
   createCourse,
+  deleteCourse,
 };

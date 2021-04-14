@@ -71,8 +71,8 @@ const Dashboard: React.FC = (props: Props) => {
   const isFaculty = state.userInfo?.role.includes(UserRoles.Faculty);
 
   useEffect(() => {
-    
-  }, []);
+    console.log(state);
+  }, );
 
 
   if (isAdmin) return <AdminDashboard />

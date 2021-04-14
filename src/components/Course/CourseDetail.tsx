@@ -10,8 +10,10 @@ import {
   getUserCourses,
   enrollToCourse,
   withdrawFromCourse,
+  deleteCourse,
 } from "../../api/courseClient";
 import { UserContext } from "../../global/context/userContext";
+import { UserRoles } from "../../global/context/user";
 
 interface Props {}
 
@@ -25,8 +27,9 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
   const history = useHistory();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isInstructor, setIsInstructor] = useState<boolean>();
-  const [isEnrolled, setIsEnrolled] = useState<boolean>();
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [isInstructor, setIsInstructor] = useState<boolean>(false);
+  const [isEnrolled, setIsEnrolled] = useState<boolean>(false);
   const [course, setCourse] = useState<Course>();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
@@ -57,10 +60,17 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
     history.push("/user/course");
   };
 
+  const onClickDeletePost = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    await deleteCourse(id);
+    history.push("/dashboard");
+  };
+
   const loadCourseDetails = async () => {
     const res = await getCourseDetail(id);
     setCourse(res);
 
+    setIsAdmin(state.userInfo?.role.includes(UserRoles.Admin) || false);
     setIsInstructor(res?.instructor_id === state.userInfo?.id);
 
     const userCourses: Course[] = await getUserCourses(
@@ -139,6 +149,16 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
         <h4 className="text-accent mr-4">{course.instructor_name}</h4>
       </div>
       <PostList courseId={course.cid} />
+      {(isInstructor || isAdmin) && (
+        <div className="flex flex-row space-x-5 my-auto justify-end">
+          <button
+            className="py-2 px-6 my-auto rounded-lg text-button bg-accent outline-none focus:outline-none"
+            onClick={onClickDeletePost}
+          >
+            Delete Course
+          </button>
+        </div>
+      )}
     </div>
   );
 };
