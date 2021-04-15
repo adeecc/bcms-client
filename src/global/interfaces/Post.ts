@@ -12,4 +12,5 @@ export interface Post {
   created_at: string;
   updated_at: string;
   tags?: Tag[];
+  course_name?: string;
 }

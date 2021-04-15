@@ -5,4 +5,5 @@ export interface User {
   username: string;
   fullName: string;
   courses?: Course[];
+  display_name?: string;
 }
