@@ -1,113 +1,42 @@
-import { AxiosRequestConfig } from "axios";
-import { baseClient } from "./axiosClient";
+import { client } from "./axiosClient";
 
 const getAllCourses = async () => {
-  try {
-    // console.log(baseClient.defaults.headers.common["authorization"])
-    baseClient.defaults.headers.common[
-      "authorization"
-    ] = `$Bearer ${localStorage.getItem("access-token")}`;
-    const response = await baseClient.get("courses/");
-
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return {};
-  }
+  return await client.get("course");
 };
 
 const getUserCourses = async (uid: string | number) => {
-  try {
-    baseClient.defaults.headers.common[
-      "authorization"
-    ] = `$Bearer ${localStorage.getItem("access-token")}`;
-    const response = await baseClient.get(`/users/${uid}/courses/student`);
-
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return {};
-  }
+  return await client.get(`/users/${uid}/courses/student`);
 };
 
 const getProfCourses = async (uid: string | number) => {
-  try {
-    baseClient.defaults.headers.common[
-      "authorization"
-    ] = `$Bearer ${localStorage.getItem("access-token")}`;
-
-    const response = await baseClient.get(`/users/${uid}/courses/prof`);
-    console.log(response.data);
-
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return {};
-  }
+  return await client.get(`/users/${uid}/courses/prof`);
 };
 
 const getCourseDetail = async (cid: string | number) => {
-  try {
-    baseClient.defaults.headers.common[
-      "authorization"
-    ] = `$Bearer ${localStorage.getItem("access-token")}`;
-
-    const response = await baseClient.get(`courses/${cid}`);
-
-    return response.data;
-  } catch (error) {}
+  return await client.get(`courses/${cid}`);
 };
 
 const getCoursePosts = async (cid: string | number) => {
-  try {
-    baseClient.defaults.headers.common[
-      "authorization"
-    ] = `$Bearer ${localStorage.getItem("access-token")}`;
-    const response = await baseClient.get(`courses/${cid}/posts`);
-
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return {};
-  }
+  return await client.get(`courses/${cid}/posts`);
 };
 
 const enrollToCourse = async (cid: string | number, uid: string | number) => {
-  try {
-    baseClient.defaults.headers.common[
-      "authorization"
-    ] = `$Bearer ${localStorage.getItem("access-token")}`;
+  const data = {
+    id: uid,
+  };
 
-    const data = {
-      id: uid,
-    };
-
-    const response = await baseClient.post(`courses/${cid}/enroll`, data);
-
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return {};
-  }
+  return await client.post(`courses/${cid}/enroll`, data);
 };
 
 const withdrawFromCourse = async (
   cid: string | number,
   uid: string | number
 ) => {
-  try {
-    baseClient.defaults.headers.common[
-      "authorization"
-    ] = `$Bearer ${localStorage.getItem("access-token")}`;
+  const data = {
+    id: uid,
+  };
 
-    const data = {
-      id: uid,
-    };
-
-    const response = await baseClient.post(`courses/${cid}/disenroll`, data);
-
-    return response.data;
-  } catch (error) {}
+  return await client.post(`courses/${cid}/disenroll`, data);
 };
 
 const createCourse = async (
@@ -116,42 +45,20 @@ const createCourse = async (
   year: string,
   sem: string
 ) => {
-  try {
-    baseClient.defaults.headers.common[
-      "authorization"
-    ] = `$Bearer ${localStorage.getItem("access-token")}`;
+  const data = {
+    course: {
+      name,
+      code,
+      year,
+      sem,
+    },
+  };
 
-    const data = {
-      course: {
-        name,
-        code,
-        year,
-        sem,
-      },
-    };
-
-    const response = await baseClient.post(`courses/create`, data);
-
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return {};
-  }
+  return await client.post(`courses/create`, data);
 };
 
 const deleteCourse = async (cid: string | number) => {
-  try {
-    baseClient.defaults.headers.common[
-      "authorization"
-    ] = `$Bearer ${localStorage.getItem("access-token")}`;
-
-    const response = await baseClient.delete(`courses/${cid}`);
-    return response.data;
-    
-  } catch (error) {
-    console.error(error);
-    return {};
-  }
+  return await client.delete(`courses/${cid}`);
 };
 
 export {
