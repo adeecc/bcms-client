@@ -1,24 +1,23 @@
 import React from "react";
 import { SearchIcon } from "@heroicons/react/solid";
-import { search } from "../../api/searchClient";
+import { search } from "../../api/miscClient";
 import { Course } from "../../global/interfaces/Course";
 import { User } from "../../global/interfaces/User";
 import { Post } from "../../global/interfaces/Post";
 
-interface Props { }
+interface Props {}
 
 const GlobalSearch: React.FC<Props> = (props: Props) => {
-
   interface searchInterface {
-    courses: Array<Course>,
-    users: Array<User>,
-    posts: Array<Post>
-  };
+    courses: Array<Course>;
+    users: Array<User>;
+    posts: Array<Post>;
+  }
 
   const [searchResult, setSearchResult] = React.useState<searchInterface>({
     users: Array<User>(),
     courses: Array<Course>(),
-    posts: Array<Post>()
+    posts: Array<Post>(),
   });
   const [searchString, setSearchString] = React.useState<string>("");
   const [lastSearch, setLastSearch] = React.useState<number>(-1);
@@ -31,7 +30,7 @@ const GlobalSearch: React.FC<Props> = (props: Props) => {
       const res = await search(query);
 
       setSearchResult(res);
-    }
+    };
 
     setLastSearch(window.setTimeout(update, 50));
   };
@@ -39,17 +38,16 @@ const GlobalSearch: React.FC<Props> = (props: Props) => {
   const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
     const value: string = e.currentTarget.value;
 
-    if (value.length > 0)
-      getSearchResults(value);
+    if (value.length > 0) getSearchResults(value);
     else
       setSearchResult({
         users: Array<User>(),
         courses: Array<Course>(),
-        posts: Array<Post>()
+        posts: Array<Post>(),
       });
 
     setSearchString(value);
-  }
+  };
 
   return (
     <div className="w-full">
@@ -69,40 +67,51 @@ const GlobalSearch: React.FC<Props> = (props: Props) => {
       </div>
       <div className="absolute flex justify-center w-full">
         <div className="mt-2 bg-primary-700 rounded-md shadow-lg overflow-hidden z-20 w-full">
-        {showResults && (
-          <div>
-            {searchResult.courses.slice(0, 5).map(course => (
-              <a href={"/course/" + course.cid} className="flex items-center px-4 py-3 border-none hover:bg-primary-600 -mx-2">
-                <div className="flex justify-between text-primary-100 w-full px-5 items-center">
-                  <span className="text-md">{course.name}</span>
-                  <p className="text-sm">
-                    {course.code}&nbsp;
-                    <span className="text-accent">{course.instructor_name}</span>
-                  </p>
-                </div>
-              </a>
-            ))}
-            {searchResult.posts.slice(0, 5).map(post => (
-              <a href={"/post/" + post.pid} className="flex items-center px-4 py-3 border-none hover:bg-primary-600 -mx-2">
-                <div className="flex justify-between text-primary-100 w-full px-5 items-center">
-                  <span className="text-md">{post.title}</span>
-                  <p className="text-sm">
-                    Posted in&nbsp;
-                    <span className="text-accent">{post.course_name}</span>
-                  </p>
-                </div>
-              </a>
-            ))}
-            {searchResult.users.slice(0, 5).map(user => (
-              <a href="#" className="flex items-center px-4 py-3 border-none hover:bg-primary-600 -mx-2">
-                <div className="flex justify-between text-primary-100 w-full px-5 items-center">
-                  <span className="text-md">@{user.username}</span>
-                  <span className="text-sm">{user.display_name}</span>
-                </div>
-              </a>
-            ))}
-          </div>
-        )}
+          {showResults && (
+            <div>
+              {searchResult?.courses?.slice(0, 5).map((course) => (
+                <a
+                  href={"/course/" + course.cid}
+                  className="flex items-center px-4 py-3 border-none hover:bg-primary-600 -mx-2"
+                >
+                  <div className="flex justify-between text-primary-100 w-full px-5 items-center">
+                    <span className="text-md">{course.name}</span>
+                    <p className="text-sm">
+                      {course.code}&nbsp;
+                      <span className="text-accent">
+                        {course.instructor_name}
+                      </span>
+                    </p>
+                  </div>
+                </a>
+              ))}
+              {searchResult?.posts?.slice(0, 5).map((post) => (
+                <a
+                  href={"/post/" + post.pid}
+                  className="flex items-center px-4 py-3 border-none hover:bg-primary-600 -mx-2"
+                >
+                  <div className="flex justify-between text-primary-100 w-full px-5 items-center">
+                    <span className="text-md">{post.title}</span>
+                    <p className="text-sm">
+                      Posted in&nbsp;
+                      <span className="text-accent">{post.course_name}</span>
+                    </p>
+                  </div>
+                </a>
+              ))}
+              {searchResult?.users?.slice(0, 5).map((user) => (
+                <a
+                  href="#"
+                  className="flex items-center px-4 py-3 border-none hover:bg-primary-600 -mx-2"
+                >
+                  <div className="flex justify-between text-primary-100 w-full px-5 items-center">
+                    <span className="text-md">@{user.username}</span>
+                    <span className="text-sm">{user.display_name}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
