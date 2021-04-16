@@ -16,7 +16,7 @@ const isAuthorized = (
   user: UserType,
   allowedRoles: Array<UserRoles>
 ): Boolean => {
-  // console.log(user, allowedRoles);
+  console.log(user, allowedRoles);
   const roles: UserRoles[] = user?.userInfo?.roles || [];
     return (
       user.isLoggedIn &&
@@ -42,7 +42,7 @@ const GuardedRoute: React.FC<any> = ({ Component, roles, ...rest }) => {
         },
       });
     }
-  }, [dispatch]);
+  }, []);
 
   return (
     <Route
