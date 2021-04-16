@@ -4,6 +4,7 @@ import { search } from "../../api/miscClient";
 import { Course } from "../../global/interfaces/Course";
 import { User } from "../../global/interfaces/User";
 import { Post } from "../../global/interfaces/Post";
+import { Link } from "react-router-dom";
 
 interface Props {}
 
@@ -61,7 +62,7 @@ const GlobalSearch: React.FC<Props> = (props: Props) => {
           className="w-full py-3 px-4 rounded-8 bg-transparent placeholder-primary-300 focus:outline-none focus:border-transparent"
           value={searchString}
           onChange={handleSearch}
-          onBlur={() => setShowResults(false)}
+          // onBlur={() => setShowResults(false)}
           onFocus={() => setShowResults(true)}
         />
       </div>
@@ -70,8 +71,8 @@ const GlobalSearch: React.FC<Props> = (props: Props) => {
           {showResults && (
             <div>
               {searchResult?.courses?.slice(0, 5).map((course) => (
-                <a
-                  href={"/course/" + course.cid}
+                <Link
+                  to={`/course/${course.cid}`}
                   className="flex items-center px-4 py-3 border-none hover:bg-primary-600 -mx-2"
                 >
                   <div className="flex justify-between text-primary-100 w-full px-5 items-center">
@@ -83,11 +84,11 @@ const GlobalSearch: React.FC<Props> = (props: Props) => {
                       </span>
                     </p>
                   </div>
-                </a>
+                </Link>
               ))}
               {searchResult?.posts?.slice(0, 5).map((post) => (
-                <a
-                  href={"/post/" + post.pid}
+                <Link
+                  to={`/post/${post.pid}`}
                   className="flex items-center px-4 py-3 border-none hover:bg-primary-600 -mx-2"
                 >
                   <div className="flex justify-between text-primary-100 w-full px-5 items-center">
@@ -97,18 +98,18 @@ const GlobalSearch: React.FC<Props> = (props: Props) => {
                       <span className="text-accent">{post.course_name}</span>
                     </p>
                   </div>
-                </a>
+                </Link>
               ))}
               {searchResult?.users?.slice(0, 5).map((user) => (
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="flex items-center px-4 py-3 border-none hover:bg-primary-600 -mx-2"
                 >
                   <div className="flex justify-between text-primary-100 w-full px-5 items-center">
                     <span className="text-md">@{user.username}</span>
                     <span className="text-sm">{user.display_name}</span>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
           )}
