@@ -1,15 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { UserRoles, UserInfo } from "../../global/context/user";
 import { PlusCircleIcon } from "@heroicons/react/outline";
 
+import { UserRoles, UserInfo } from "../../global/context/user";
+import { getAllUsers } from "../../api/miscClient";
+
+interface RoleDropdownProps {
+  uid: string | number;
+  userRoles?: UserRoles[];
+}
+
+const RoleDropdown: React.FC<RoleDropdownProps> = ({ uid, userRoles }) => {
+  const [roles, setRoles] = useState<UserRoles[]>([
+    UserRoles.Admin,
+    UserRoles.Faculty,
+    UserRoles.Student,
+  ]);
+
+  return (
+    <div className="absolute mt-9 z-10 px-3 py-2 flex flex-col space-y-2 bg-primary-700 rounded-lg shadow-xl justify-center">
+      {roles?.map((element: UserRoles) => {
+        if (!userRoles?.includes(element))
+          return <button className="w-full text-primary-100">{element}</button>;
+      })}
+    </div>
+  );
+};
+
 interface UserRowProps {
-  id: any;
+  id: string | number;
   username: string;
   name: string;
-  roles: UserRoles[] | null;
+  roles: UserRoles[];
 }
 
 const UserRow: React.FC<UserRowProps> = ({ id, username, name, roles }) => {
+  const [showDropDown, setShowDropDown] = useState<boolean>(false);
+
+  const toggleDropdown = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    setShowDropDown(!showDropDown);
+  };
+
   return (
     <div
       key={id}
@@ -30,15 +61,20 @@ const UserRow: React.FC<UserRowProps> = ({ id, username, name, roles }) => {
           <div className="text-primary-300">@{username}</div>
         </div>
 
-        <div className="flex justify-end space-x-2 my-auto col-span-5">
+        <div className="flex relative justify-end space-x-2 my-auto col-span-5">
           {roles?.map((value, index) => (
             <button className="bg-primary-700 rounded-lg px-2 text-primary-200 my-auto outline-none focus:outline-none">
               {value}
             </button>
           ))}
-          <button className="text-primary-200 rounded-lg outline-none focus:outline-none">
+          <button
+            className="text-primary-200 rounded-lg outline-none focus:outline-none"
+            onClick={toggleDropdown}
+          >
             <PlusCircleIcon className="w-5" />
           </button>
+
+          {showDropDown && <RoleDropdown uid={id} userRoles={roles} />}
         </div>
       </div>
     </div>
@@ -48,37 +84,17 @@ const UserRow: React.FC<UserRowProps> = ({ id, username, name, roles }) => {
 interface RoleManagementProps {}
 
 const RoleManagement: React.FC<RoleManagementProps> = () => {
-  const [users, setUsers] = useState<UserInfo[] | null>(null);
+  const [users, setUsers] = useState<UserInfo[]>();
+
+  const loadUsers = async () => {
+    const res = await getAllUsers();
+    console.log(res);
+
+    setUsers(res);
+  };
 
   useEffect(() => {
-    const newUsers = [
-      {
-        id: 1,
-        username: "adichopra11",
-        fullName: "Aditya Chopra",
-        roles: [UserRoles.Admin, UserRoles.Student],
-      },
-      {
-        id: 2,
-        username: "sike",
-        fullName: "Sidharth Anand",
-        roles: [UserRoles.Admin, UserRoles.Student],
-      },
-      {
-        id: 3,
-        username: "simp",
-        fullName: "Aryan Arora",
-        roles: [UserRoles.Admin, UserRoles.Student],
-      },
-      {
-        id: 4,
-        username: "chaubz",
-        fullName: "Aryan Chaubal",
-        roles: [UserRoles.Admin, UserRoles.Student],
-      },
-    ];
-
-    setUsers(newUsers);
+    loadUsers();
     return () => {};
   }, []);
 
@@ -94,9 +110,9 @@ const RoleManagement: React.FC<RoleManagementProps> = () => {
       <div className="">
         {users?.map((value) => (
           <UserRow
-            id={value.id}
+            id={value.uid}
             username={value.username}
-            name={value.name || ""}
+            name={value.display_name || ""}
             roles={value.roles}
           />
         ))}

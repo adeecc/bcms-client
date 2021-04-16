@@ -6,12 +6,14 @@ enum UserRoles {
 };
 
 export type UserInfo = {
-  id: number;
+  uid: string | number;
+  id: string | number;
   username: string;
   name?: string;
   bio?: string;
   email?: string;
   roles: UserRoles[];
+  display_name?: string;
 };
 
 export type UserType = {
