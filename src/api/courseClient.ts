@@ -1,7 +1,7 @@
 import { client } from "./axiosClient";
 
 const getAllCourses = async () => {
-  return await client.get("course");
+  return await client.get("/courses");
 };
 
 const getUserCourses = async (uid: string | number) => {
