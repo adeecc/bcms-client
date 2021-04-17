@@ -6,6 +6,7 @@ import { UserRoles } from "../../global/context/user";
 
 import { PlusIcon, ArrowNarrowRightIcon } from "@heroicons/react/solid";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 interface Props {}
 
@@ -58,12 +59,11 @@ const AdminToolCard: React.FC<Props> = () => {
         {isAdmin && (
           <div className="w-full flex justify-between my-auto">
             <h5 className="text-primary-200 font-bold my-auto">Manage Roles</h5>
-            <button
+            <Link to="/roles"
               className="bg-primary-600 rounded ouline-none focus:ouline-none my-auto"
-              onClick={onClickRoleManagement}
             >
               <ArrowNarrowRightIcon className="p-1 w-8 text-primary-100" />
-            </button>
+            </Link>
           </div>
         )}
         {isAdmin && (
@@ -71,12 +71,12 @@ const AdminToolCard: React.FC<Props> = () => {
             <h5 className="text-primary-200 font-bold my-auto">
               Generate Reports
             </h5>
-            <button
+            <Link
               className="bg-primary-600 rounded ouline-none focus:ouline-none my-auto"
-              onClick={onClickCreateCourse}
+              to="/reports"
             >
               <ArrowNarrowRightIcon className="p-1 w-8 text-primary-100" />
-            </button>
+            </Link>
             <CourseCreateModal
               isOpen={modalIsOpen}
               onRequestClose={closeModal}

@@ -16,6 +16,8 @@ import CourseDetail from "../components/Course/CourseDetail";
 import PostDetail from "../components/Post/PostDetail";
 import RoleManagement from "../components/User/RoleManagement";
 import UserCourse from "../components/Course/UserCourse";
+import Reports from "../components/reports/Reports";
+import UserReports from "../components/reports/UserReports";
 
 interface Props {}
 
@@ -27,26 +29,24 @@ const Routes: React.FC<Props> = (props: Props) => {
       </Route>
 
       {/* Public Routes */}
-        <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/signin" component={SignIn} />
+      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/signin" component={SignIn} />
 
       {/* Private Routes: Require Login */}
 
-        <Grid>
-          <Switch>
-            <GuardedRoute exact path="/dashboard" Component={Dashboard} />
-            <GuardedRoute exact path="/user/course" Component={UserCourse} />
-            <GuardedRoute exact path="/course" Component={Courses} />
-            <GuardedRoute exact path="/course/:id" Component={CourseDetail} />
-            <GuardedRoute
-              exact
-              path="/course/create"
-              Component={CourseCreate}
-            />
-            <GuardedRoute exact path="/post/:id" Component={PostDetail} />
-            <GuardedRoute exact path="/roles" component={RoleManagement} />
-          </Switch>
-        </Grid>
+      <Grid>
+        <Switch>
+          <GuardedRoute exact path="/dashboard" Component={Dashboard} />
+          <GuardedRoute exact path="/user/course" Component={UserCourse} />
+          <GuardedRoute exact path="/course" Component={Courses} />
+          <GuardedRoute exact path="/course/:id" Component={CourseDetail} />
+          <GuardedRoute exact path="/course/create" Component={CourseCreate} />
+          <GuardedRoute exact path="/post/:id" Component={PostDetail} />
+          <GuardedRoute exact path="/roles" component={RoleManagement} />
+          <GuardedRoute exact path="/reports" component={Reports} />
+          <GuardedRoute exact path="/reports/users" component={UserReports} />
+        </Switch>
+      </Grid>
     </Switch>
   );
 };
