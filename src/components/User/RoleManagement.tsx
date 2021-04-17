@@ -19,8 +19,9 @@ const RoleDropdown: React.FC<RoleDropdownProps> = ({ uid, userRoles }) => {
   return (
     <div className="absolute mt-9 z-10 px-3 py-2 flex flex-col space-y-2 bg-primary-700 rounded-lg shadow-xl justify-center">
       {roles?.map((element: UserRoles) => {
-        if (!userRoles?.includes(element))
-          return <button className="w-full text-primary-100">{element}</button>;
+        return !userRoles?.includes(element) ? (
+          <button className="w-full text-primary-100">{element}</button>
+        ) : null;
       })}
     </div>
   );
@@ -110,6 +111,7 @@ const RoleManagement: React.FC<RoleManagementProps> = () => {
       <div className="">
         {users?.map((value) => (
           <UserRow
+            key={value.uid}
             id={value.uid}
             username={value.username}
             name={value.display_name || ""}
