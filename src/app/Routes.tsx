@@ -33,6 +33,7 @@ const Routes: React.FC<Props> = (props: Props) => {
       <Route exact path="/signin" component={SignIn} />
 
       {/* Private Routes: Require Login */}
+      <GuardedRoute exact path="/reports/users" component={UserReports} />
 
       <Grid>
         <Switch>
@@ -44,7 +45,6 @@ const Routes: React.FC<Props> = (props: Props) => {
           <GuardedRoute exact path="/post/:id" Component={PostDetail} />
           <GuardedRoute exact path="/roles" component={RoleManagement} />
           <GuardedRoute exact path="/reports" component={Reports} />
-          <GuardedRoute exact path="/reports/users" component={UserReports} />
         </Switch>
       </Grid>
     </Switch>

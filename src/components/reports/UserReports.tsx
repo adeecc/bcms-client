@@ -1,24 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useTable } from "react-table";
+import { useTable, Column, useSortBy } from "react-table";
 import { getAllUsers } from "../../api/miscClient";
+import RoleBullet from "../common/RoleBullet";
 
-// {
-//   uid: 1;
-//   display_name: "Abhishek Sarkar";
-//   username: "abhisheksarkar";
-//   email: "abhisheksarkar@bcms.com";
-//   phone_no: "9998887776";
-//   roles: ["faculty"];
-//   verified: true;
-//   created_at: "2021-04-09T17:13:47.383Z";
-//   updated_at: "2021-04-09T17:14:27.712Z";
-// }
-
-interface userData {
+interface UserData {
   uid: string | number;
-  display_name?: string;
+  display_name: string;
   username: string;
-  email?: string;
+  email: string;
   phone_no: string | number;
   roles: string[];
   verified: boolean;
@@ -29,7 +18,7 @@ interface userData {
 interface Props {}
 
 const UserReports: React.FC<Props> = () => {
-  const [data, setData] = useState<userData[]>([]);
+  const [data, setData] = useState<UserData[]>([]);
 
   const loadUserData = async () => {
     const res = await getAllUsers();
@@ -42,36 +31,100 @@ const UserReports: React.FC<Props> = () => {
     loadUserData();
   }, []);
 
+  const columns = useMemo<Column<UserData>[]>(
+    () => [
+      { Header: "ID", accessor: "uid" },
+      { Header: "Name", accessor: "display_name" },
+      { Header: "Username", accessor: "username" },
+      { Header: "Email", accessor: "email" },
+      { Header: "Contact", accessor: "phone_no" },
+      {
+        Header: "Roles",
+        accessor: "roles",
+        Cell: ({ cell: { value } }) => (
+          <div className="flex space-x-2 my-auto">
+            {value.map((el) => (
+              <RoleBullet value={el} />
+            ))}
+          </div>
+        ),
+      },
+      // { Header: "Verification", accessor: "verified" },
+      {
+        Header: "User Created",
+        accessor: "created_at",
+        Cell: ({ cell: { value } }) => (
+          <div className="flex space-x-2 my-auto">
+            {new Date(value).toLocaleString()}
+          </div>
+        ),
+      },
+      {
+        Header: "Last Updated",
+        accessor: "updated_at",
+        Cell: ({ cell: { value } }) => (
+          <div className="flex space-x-2 my-auto">
+            {new Date(value).toLocaleString()}
+          </div>
+        ),
+      },
+    ],
+    []
+  );
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable<UserData>({ columns, data }, useSortBy);
+
   return (
-    <div className="overflow-scroll">
-      <h1 className="text-primary-100">YEE</h1>
-      <table className="text-primary-100 table-auto">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Contact</th>
-          <th>Roles</th>
-          <th>Verification</th>
-          <th>Created</th>
-          <th>Last Updated</th>
-        </tr>
-        {data?.map((el: userData) => {
-          return (
-            <tr>
-              <th>{el.uid}</th>
-              <th>{el.display_name}</th>
-              <th>{el.username}</th>
-              <th>{el.email}</th>
-              <th>{el.phone_no}</th>
-              <th>{el.roles}</th>
-              <th>{el.verified}</th>
-              <th>{el.created_at}</th>
-              <th>{el.updated_at}</th>
+    <div className="overflow-x-scroll flex justify-center">
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                  className="border border-primary-700 text-primary-100 font-bold bg-primary-700"
+                >
+                  {console.log(column.getSortByToggleProps())}
+                  {column.render("Header")}
+                  <span>
+                    {" "}
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}{" "}
+                  </span>
+                </th>
+              ))}
             </tr>
-          );
-        })}
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row, i) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return (
+                    <td
+                      {...cell.getCellProps()}
+                      className="border border-primary-700 p-2 text-primary-100 bg-primary-800"
+                    >
+                      {cell.render("Cell")}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );
