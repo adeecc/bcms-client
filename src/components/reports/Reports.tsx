@@ -29,7 +29,7 @@ const Reports: React.FC<ReportsProps> = () => {
 
     {
       title: "Course Statistics and Information",
-      url: "",
+      url: "/reports/courses",
     },
 
     {

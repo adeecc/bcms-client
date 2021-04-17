@@ -1,7 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useTable, Column, useSortBy } from "react-table";
+import { Column } from "react-table";
+
+import ReportTable from "./ReportTable";
 import { getAllUsers } from "../../api/miscClient";
 import RoleBullet from "../common/RoleBullet";
+import { Link } from "react-router-dom";
 
 interface UserData {
   uid: string | number;
@@ -49,7 +52,6 @@ const UserReports: React.FC<Props> = () => {
           </div>
         ),
       },
-      // { Header: "Verification", accessor: "verified" },
       {
         Header: "User Created",
         accessor: "created_at",
@@ -72,60 +74,17 @@ const UserReports: React.FC<Props> = () => {
     []
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable<UserData>({ columns, data }, useSortBy);
-
   return (
-    <div className="overflow-x-scroll flex justify-center">
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                  className="border border-primary-700 text-primary-100 font-bold bg-primary-700"
-                >
-                  {console.log(column.getSortByToggleProps())}
-                  {column.render("Header")}
-                  <span>
-                    {" "}
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? " 🔽"
-                        : " 🔼"
-                      : ""}{" "}
-                  </span>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      {...cell.getCellProps()}
-                      className="border border-primary-700 p-2 text-primary-100 bg-primary-800"
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <div className="">
+      <div className="w-full flex justify-around">
+        <h1 className="text-primary-100 font-bold">User Report</h1>
+        <Link to="/reports" className="my-auto">
+          <h4 className="text-primary-300 hover:text-primary-200 font-bold">
+            Go Back
+          </h4>
+        </Link>
+      </div>
+      <ReportTable columns={columns} data={data} />
     </div>
   );
 };

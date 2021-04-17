@@ -18,6 +18,7 @@ import RoleManagement from "../components/User/RoleManagement";
 import UserCourse from "../components/Course/UserCourse";
 import Reports from "../components/reports/Reports";
 import UserReports from "../components/reports/UserReports";
+import CourseReports from "../components/reports/CourseReports";
 
 interface Props {}
 
@@ -34,6 +35,8 @@ const Routes: React.FC<Props> = (props: Props) => {
 
       {/* Private Routes: Require Login */}
       <GuardedRoute exact path="/reports/users" component={UserReports} />
+      <GuardedRoute exact path="/reports/courses" component={CourseReports} />
+      <GuardedRoute exact path="/reports/posts" component={CourseReports} />
 
       <Grid>
         <Switch>
