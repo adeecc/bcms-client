@@ -1,8 +1,11 @@
 import React from "react";
+
 import {ensurePluginOrder, Hooks, TableInstance, Row, ColumnInstance, HeaderProps, Column} from "react-table";
 
 import {jsPDF} from "jspdf";
 import autoTable from "jspdf-autotable";
+
+import {unparse} from "papaparse";
 
 const defaultFilename = (filetype: string) :string => {
     return "bcms-data";
@@ -36,9 +39,10 @@ const getCellExportValueDefault = (row: Row, col: ColumnInstance) => {
 }
 
 const convertDataToBlob = (data: any[][], columns: ColumnInstance<{}>[], filename: string, filetype: string): Blob | null => {
+    const headerNames: string[] = columns.map((column) => column.exportValue ? column.exportValue.toString() : "");
+
     switch(filetype) {
         case "pdf":
-            const headerNames: string[] = columns.map((column) => column.exportValue ? column.exportValue.toString() : "");
             const doc = new jsPDF();
             autoTable(doc, {
               head: [headerNames],
@@ -56,6 +60,10 @@ const convertDataToBlob = (data: any[][], columns: ColumnInstance<{}>[], filenam
             doc.save(`${filename}.pdf`);
 
             return null;
+
+        case "csv":
+            const csvString = unparse({ fields: headerNames, data });
+            return new Blob([csvString], { type: "text/csv" });
     }
 
     return null;

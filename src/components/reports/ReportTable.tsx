@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
+
 import { useTable, Column, useSortBy } from "react-table";
 import {useExportData, convertDataToBlob} from "./export-table";
+
 import { Menu, Item, Separator, Submenu, useContextMenu, TriggerEvent } from 'react-contexify';
 
 import 'react-contexify/dist/ReactContexify.css';
@@ -78,7 +80,6 @@ const ReportTable: React.FC<Props> = ({columns, data}) => {
                     <td
                       {...cell.getCellProps()}
                       className="border border-primary-700 p-2 text-primary-100 bg-primary-800"
-                      onClick={() => {console.log("clicked", exportData); exportData("pdf", ["User Created", "Last Updated", "Roles"]);}}
                       onContextMenu={event => handleContextMenu(event)}
                     >
                       {cell.render("Cell")}
@@ -92,7 +93,7 @@ const ReportTable: React.FC<Props> = ({columns, data}) => {
       </table>
       <Menu id={MENU}>
           <Item onClick={() => exportData("pdf", ["User Created", "Last Updated", "Roles"])}>Export as PDF</Item>
-          <Item onClick={handleItemClick}>Export as CSV</Item>
+          <Item onClick={() => exportData("csv")}>Export as CSV</Item>
       </Menu>
     </div>
   );
