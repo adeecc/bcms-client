@@ -1,0 +1,12 @@
+.react-contexify {
+    background: var(--color-primary-700);
+}
+
+.react-contexify__item__content {
+    color: var(--color-button-text);
+}
+
+.react-contexify__item:not(.react-contexify__item--disabled):hover > .react-contexify__item__content,
+ .react-contexify__item:not(.react-contexify__item--disabled):focus > .react-contexify__item__content {
+     background: var(--color-accent);
+ }

@@ -76,7 +76,7 @@ const UserReports: React.FC<Props> = () => {
 
   return (
     <div className="">
-      <div className="w-full flex justify-around">
+      <div className="w-4/5 flex justify-between ml-40 pl-20">
         <h1 className="text-primary-100 font-bold">User Report</h1>
         <Link to="/reports" className="my-auto">
           <h4 className="text-primary-300 hover:text-primary-200 font-bold">
