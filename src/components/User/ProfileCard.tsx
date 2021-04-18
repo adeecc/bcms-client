@@ -1,4 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { getNotifications } from "../../api/notificationClient";
+import { getUserCourses } from "../../api/courseClient";
+
 import { UserContext } from "../../global/context/userContext";
 
 interface Props {}
@@ -6,7 +9,23 @@ interface Props {}
 const ProfileCard: React.FC<Props> = () => {
   const { state } = useContext(UserContext);
 
-  // console.log(state);
+  const [numNotifications, setNumNotifications] = useState(0);
+  const [numCourses, setNumCourses] = useState(0);
+
+  const loadNumNotifs = async () => {
+    const res = await getNotifications();
+    setNumNotifications(res?.length);
+  };
+
+  const loadNumCourse = async () => {
+    const res = await getUserCourses(state.userInfo?.id || -1);
+    setNumCourses(res?.length);
+  };
+
+  useEffect(() => {
+    loadNumNotifs();
+    loadNumCourse();
+  }, [state]);
 
   return (
     <div className="max-w-sm bg-primary-800 rounded-lg shadow flex flex-col px-8 py-6 space-y-5">
@@ -27,11 +46,11 @@ const ProfileCard: React.FC<Props> = () => {
       </div>
       <div className="flex space-x-4">
         <div className="registered flex space-x-2">
-          <div className="text-primary-100 font-bold">{23}</div>
+          <div className="text-primary-100 font-bold">{numCourses}</div>
           <div className="text-primary-300">Courses</div>
         </div>
         <div className="notifiations flex space-x-2">
-          <div className="text-primary-100 font-bold">{12}</div>
+          <div className="text-primary-100 font-bold">{numNotifications}</div>
           <div className="text-primary-300">Notifications</div>
         </div>
       </div>

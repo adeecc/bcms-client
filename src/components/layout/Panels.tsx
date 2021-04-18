@@ -58,12 +58,12 @@ const RightPanel: React.FC<PanelProps> = ({ gridStyle }) => {
   const { state, dispatch } = useContext(UserContext);
 
   const logoutHandler = (e: React.SyntheticEvent) => {
-      dispatch({
-        type: ActionTypes.LogOut,
-        payload: {}
-      });
+    dispatch({
+      type: ActionTypes.LogOut,
+      payload: {},
+    });
 
-      history.replace("/signin");
+    history.replace("/signin");
   };
 
   return (

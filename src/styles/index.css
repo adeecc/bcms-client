@@ -65,7 +65,7 @@ p.small {
 
 html,
 body {
-  background-color: var(--color-primary-900);
+  @apply bg-primary-900;
   min-height: 100%;
 }
 
