@@ -1,10 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
+
 import { useTable, Column, useSortBy } from "react-table";
+import {useExportData, convertDataToBlob} from "./export-table";
+
+import { Menu, Item, Separator, Submenu, useContextMenu, TriggerEvent } from 'react-contexify';
+
+import 'react-contexify/dist/ReactContexify.css';
+import './table-content-menu.css';
 
 interface Props {
   columns: any,
   data: any
 }
+
+const MENU = 'export_menu';
 
 const ReportTable: React.FC<Props> = ({columns, data}) => {
 
@@ -14,7 +23,26 @@ const ReportTable: React.FC<Props> = ({columns, data}) => {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({ columns, data }, useSortBy);
+    exportData
+  } = useTable({ columns, data}, useSortBy, useExportData);
+
+  const {show} = useContextMenu({
+    id: MENU
+  });
+
+  const handleContextMenu = (event: TriggerEvent) => {
+    console.log(event);
+    event.preventDefault();
+    show(event, {
+      props: {
+        key: 'value'
+      }
+    });
+  };
+
+  const handleItemClick = ({event, props}: any) => {
+    console.log(event, props);
+  };
 
   return (
     <div className="overflow-x-scroll flex justify-center">
@@ -52,6 +80,7 @@ const ReportTable: React.FC<Props> = ({columns, data}) => {
                     <td
                       {...cell.getCellProps()}
                       className="border border-primary-700 p-2 text-primary-100 bg-primary-800"
+                      onContextMenu={event => handleContextMenu(event)}
                     >
                       {cell.render("Cell")}
                     </td>
@@ -62,6 +91,10 @@ const ReportTable: React.FC<Props> = ({columns, data}) => {
           })}
         </tbody>
       </table>
+      <Menu id={MENU}>
+          <Item onClick={() => exportData("pdf", ["User Created", "Last Updated", "Roles"])}>Export as PDF</Item>
+          <Item onClick={() => exportData("csv")}>Export as CSV</Item>
+      </Menu>
     </div>
   );
 };
