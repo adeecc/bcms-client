@@ -4,38 +4,47 @@ import { PlusCircleIcon } from "@heroicons/react/outline";
 import { UserRoles, UserInfo } from "../../global/context/user";
 import { getAllUsers } from "../../api/miscClient";
 
-interface RoleDropdownProps {
-  uid: string | number;
-  userRoles?: UserRoles[];
+import {addRoleToUser, removeRoleFromUser, getAllRoles} from "../../api/roleClient";
+
+interface roleID {
+  rid?: number | string;
+  label?: string;
 }
 
-const RoleDropdown: React.FC<RoleDropdownProps> = ({ uid, userRoles }) => {
+interface UserRowProps {
+  id: string | number;
+  username: string;
+  name: string;
+  userRoles: UserRoles[];
+  roleIds: roleID[];
+}
+
+const UserRow: React.FC<UserRowProps> = ({ id, username, name, userRoles, roleIds }) => {
+  const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [roles, setRoles] = useState<UserRoles[]>([
     UserRoles.Admin,
     UserRoles.Faculty,
     UserRoles.Student,
   ]);
 
-  return (
-    <div className="absolute mt-9 z-10 px-3 py-2 flex flex-col space-y-2 bg-primary-700 rounded-lg shadow-xl justify-center">
-      {roles?.map((element: UserRoles) => {
-        return !userRoles?.includes(element) ? (
-          <button className="w-full text-primary-100">{element}</button>
-        ) : null;
-      })}
-    </div>
-  );
-};
+  const [userRolesState, setUserRolesState] = useState<UserRoles[]>(userRoles);
 
-interface UserRowProps {
-  id: string | number;
-  username: string;
-  name: string;
-  roles: UserRoles[];
-}
+  const addRole = (label: UserRoles) => {
+    const rid = roleIds.map(d => d.label).indexOf(label) + 1;
+    addRoleToUser(id, rid);
+    setUserRolesState([...userRolesState, label]);
+  };
 
-const UserRow: React.FC<UserRowProps> = ({ id, username, name, roles }) => {
-  const [showDropDown, setShowDropDown] = useState<boolean>(false);
+  const removeRole = (label: UserRoles) => {
+    const rid = roleIds.map(d => d.label).indexOf(label) + 1;
+    removeRoleFromUser(id, rid);
+    
+    const newState = userRolesState;
+    newState.splice(newState.indexOf(label), 1);
+    console.log(newState);
+
+    setUserRolesState([...newState]);
+  }
 
   const toggleDropdown = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -63,8 +72,11 @@ const UserRow: React.FC<UserRowProps> = ({ id, username, name, roles }) => {
         </div>
 
         <div className="flex relative justify-end space-x-2 my-auto col-span-5">
-          {roles?.map((value, index) => (
-            <button className="bg-primary-700 rounded-lg px-2 text-primary-200 my-auto outline-none focus:outline-none">
+          {userRolesState?.map((value, index) => (
+            <button
+             className="bg-primary-700 rounded-lg px-2 text-primary-200 my-auto outline-none focus:outline-none hover:bg-accent hover:bg-opacity-75 hover:text-primary-700"
+             onClick={() => removeRole(value)}
+             >
               {value}
             </button>
           ))}
@@ -75,7 +87,15 @@ const UserRow: React.FC<UserRowProps> = ({ id, username, name, roles }) => {
             <PlusCircleIcon className="w-5" />
           </button>
 
-          {showDropDown && <RoleDropdown uid={id} userRoles={roles} />}
+          {showDropDown && 
+              <div className="absolute mt-9 z-10 px-3 py-2 flex flex-col space-y-2 bg-primary-700 rounded-md shadow-xl justify-center w-1/4">
+              {roles?.map((element: UserRoles) => {
+                return !userRolesState?.includes(element) ? (
+                <button className="w-full text-primary-100 text-left" onClick={() => addRole(element)}>{element}</button>
+                ) : null;
+              })}
+            </div>
+          }
         </div>
       </div>
     </div>
@@ -86,6 +106,7 @@ interface RoleManagementProps {}
 
 const RoleManagement: React.FC<RoleManagementProps> = () => {
   const [users, setUsers] = useState<UserInfo[]>();
+  const [roleIds, setRoleIds] = useState<roleID[]>([]);
 
   const loadUsers = async () => {
     const res = await getAllUsers();
@@ -97,6 +118,14 @@ const RoleManagement: React.FC<RoleManagementProps> = () => {
   useEffect(() => {
     loadUsers();
     return () => {};
+  }, []);
+
+  const getAllRoleIds = async () => {
+    setRoleIds(await getAllRoles());
+  }
+
+  useEffect(() => {
+    getAllRoleIds();
   }, []);
 
   return (
@@ -115,7 +144,8 @@ const RoleManagement: React.FC<RoleManagementProps> = () => {
             id={value.uid}
             username={value.username}
             name={value.display_name || ""}
-            roles={value.roles}
+            userRoles={value.roles}
+            roleIds={roleIds}
           />
         ))}
       </div>
