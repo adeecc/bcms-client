@@ -6,7 +6,6 @@ import PostCard from "./PostCard";
 import { Post } from "../../global/interfaces/Post";
 
 import { getCoursePosts } from "../../api/courseClient";
-import { getNotifications } from "../../api/notificationClient";
 import { client } from "../../api/axiosClient";
 
 interface Props {
@@ -18,21 +17,21 @@ const PostList: React.FC<Props> = () => {
   const { id } = useParams<{ id: string }>();
   const [posts, setPosts] = useState<Post[] | null>(null);
 
-  const loadPosts = async () => {
-    if (id) {
-      const loadedPosts = await getCoursePosts(id);
-      setPosts(loadedPosts);
-    } else {
-      // const loadedPosts = await getNotifications();
-      const loadedPosts = await client.get("notification/");
-      // if (loadedPosts) {
-      setPosts(loadedPosts);
-      console.log(loadedPosts);
-      // }
-    }
-  };
-
   useEffect(() => {
+    const loadPosts = async () => {
+      if (id) {
+        const loadedPosts = await getCoursePosts(id);
+        setPosts(loadedPosts);
+      } else {
+        // const loadedPosts = await getNotifications();
+        const loadedPosts = await client.get("notification/");
+        // if (loadedPosts) {
+        setPosts(loadedPosts);
+        console.log(loadedPosts);
+        // }
+      }
+    };
+    
     loadPosts();
   }, [id]);
 

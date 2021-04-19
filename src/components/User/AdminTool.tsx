@@ -1,18 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../../global/context/userContext";
 import CourseCreateModal from "../modals/CourseCreateModal";
 
 import { UserRoles } from "../../global/context/user";
 
 import { PlusIcon, ArrowNarrowRightIcon } from "@heroicons/react/solid";
-import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
 interface Props {}
 
 const AdminToolCard: React.FC<Props> = () => {
   const { state } = useContext(UserContext);
-  const history = useHistory();
 
   const isAdmin = state.userInfo?.roles.includes(UserRoles.Admin);
   const isFaculty = state.userInfo?.roles.includes(UserRoles.Faculty);
@@ -25,10 +23,6 @@ const AdminToolCard: React.FC<Props> = () => {
 
   const onClickCreateCourse = (e: React.SyntheticEvent) => {
     setModalIsOpen(true);
-  };
-
-  const onClickRoleManagement = (e: React.SyntheticEvent) => {
-    history.push("/roles");
   };
 
   // console.log(state);

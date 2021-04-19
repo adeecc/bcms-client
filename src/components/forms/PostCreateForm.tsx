@@ -43,25 +43,25 @@ const PostCreateForm: React.FC<Props> = ({
     setSelectedTags([]);
   };
 
-  const loadTags = async () => {
-    const res = await getAllTags();
-    console.log(res);
-    setTags(res);
-
-    console.log("Received Post: ", post);
-
-    if (post?.tags) {
-      setSelectedTags(
-        post.tags.map((value: Tag) => {
-          return value.tid?.toString() || "";
-        })
-      );
-    }
-  };
-
   useEffect(() => {
+    const loadTags = async () => {
+      const res = await getAllTags();
+      console.log(res);
+      setTags(res);
+  
+      console.log("Received Post: ", post);
+  
+      if (post?.tags) {
+        setSelectedTags(
+          post.tags.map((value: Tag) => {
+            return value.tid?.toString() || "";
+          })
+        );
+      }
+    };
+
     loadTags();
-  }, []);
+  }, [post]);
 
   return (
     <div className="w-full flex flex-col">

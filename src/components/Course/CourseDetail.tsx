@@ -42,7 +42,7 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
   };
 
   const onClickEnroll = async (e: React.SyntheticEvent) => {
-    const res = await enrollToCourse(
+    await enrollToCourse(
       course?.cid || -1,
       state.userInfo?.id || -1
     );
@@ -51,7 +51,7 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
   };
 
   const onClickDisenroll = async (e: React.SyntheticEvent) => {
-    const res = await withdrawFromCourse(
+    await withdrawFromCourse(
       course?.cid || -1,
       state.userInfo?.id || -1
     );
@@ -66,33 +66,33 @@ const CourseDetail: React.FC<Props> = ({ children }) => {
     history.push("/dashboard");
   };
 
-  const loadCourseDetails = async () => {
-    const res = await getCourseDetail(id);
-    setCourse(res);
-
-    setIsAdmin(state.userInfo?.roles.includes(UserRoles.Admin) || false);
-    setIsInstructor(res?.instructor_id === state.userInfo?.id);
-
-    const userCourses: Course[] = await getUserCourses(
-      state.userInfo?.id || -1
-    );
-    console.log(userCourses);
-    console.table(res);
-
-    const indexOfCourseInUserCourses = userCourses.findIndex(
-      (o) => o.cid === res?.cid
-    );
-
-    setIsEnrolled(indexOfCourseInUserCourses >= 0);
-
-    console.table({ isEnrolled, isInstructor });
-
-    setIsLoading(false);
-  };
-
   useEffect(() => {
+    const loadCourseDetails = async () => {
+      const res = await getCourseDetail(id);
+      setCourse(res);
+  
+      setIsAdmin(state.userInfo?.roles.includes(UserRoles.Admin) || false);
+      setIsInstructor(res?.instructor_id === state.userInfo?.id);
+  
+      const userCourses: Course[] = await getUserCourses(
+        state.userInfo?.id || -1
+      );
+      console.log(userCourses);
+      console.table(res);
+  
+      const indexOfCourseInUserCourses = userCourses.findIndex(
+        (o) => o.cid === res?.cid
+      );
+  
+      setIsEnrolled(indexOfCourseInUserCourses >= 0);
+  
+      console.table({ isEnrolled, isInstructor });
+  
+      setIsLoading(false);
+    };
+
     loadCourseDetails();
-  }, [id, state]);
+  }, [id, state, isEnrolled, isInstructor]);
 
   useEffect(() => {}, [isEnrolled, isInstructor, modalIsOpen]);
 

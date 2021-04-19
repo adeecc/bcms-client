@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 
 import { createCourse } from "../../api/courseClient";
 
 interface Props {}
 
 const CourseCreateForm: React.FC<Props> = (props: Props) => {
-  const history = useHistory();
 
   const [name, setName] = useState<string>("");
   const [code, setCode] = useState<string>("");

@@ -18,21 +18,20 @@ const CourseList: React.FC<Props> = () => {
 
   const isFaculty = state.userInfo?.roles.includes(UserRoles.Faculty);
 
-  const loadCourses = async () => {
-    if (isFaculty) {
-      const res = await getProfCourses(state.userInfo?.id || -1);
-      console.log(res);
-      setCourses(res);
-    } else {
-      const res = await getAllCourses();
-      console.log(res);
-      setCourses(res);
-    }
-  };
-
   useEffect(() => {
+    const loadCourses = async () => {
+      if (isFaculty) {
+        const res = await getProfCourses(state.userInfo?.id || -1);
+        console.log(res);
+        setCourses(res);
+      } else {
+        const res = await getAllCourses();
+        console.log(res);
+        setCourses(res);
+      }
+    };
     loadCourses();
-  }, [state]);
+  }, [state, isFaculty]);
 
   return (
     <div>

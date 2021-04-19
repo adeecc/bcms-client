@@ -10,12 +10,12 @@ const CourseFeed: React.FC<Props> = () => {
   const [courses, setCourses] = useState<Course[] | null>(null);
   const { state } = useContext(UserContext);
 
-  const loadCourses = async () => {
-    const res = await getUserCourses(state.userInfo?.id || -1);
-    setCourses(res);
-  };
-
   useEffect(() => {
+    const loadCourses = async () => {
+      const res = await getUserCourses(state.userInfo?.id || -1);
+      setCourses(res);
+    };
+
     loadCourses();
   }, [state]);
   return (

@@ -16,7 +16,7 @@ const SignIn: React.FC<Props> = (props: Props) => {
     if(state.isLoggedIn) {
         history.push("/dashboard");
     }
-  }, []);
+  }, [state, history]);
 
   return (
     <div className="min-h-screen">

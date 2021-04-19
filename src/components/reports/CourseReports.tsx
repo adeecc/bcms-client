@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Column } from "react-table";
 
 import ReportTable from "./ReportTable";
-import RoleBullet from "../common/RoleBullet";
 import { Link } from "react-router-dom";
 import { getAllCourses } from "../../api/courseClient";
 

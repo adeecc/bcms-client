@@ -21,7 +21,7 @@ interface UserRowProps {
 
 const UserRow: React.FC<UserRowProps> = ({ id, username, name, userRoles, roleIds }) => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const [roles, setRoles] = useState<UserRoles[]>([
+  const [roles] = useState<UserRoles[]>([
     UserRoles.Admin,
     UserRoles.Faculty,
     UserRoles.Student,

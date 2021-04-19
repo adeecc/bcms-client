@@ -41,26 +41,26 @@ const PostDetail: React.FC<Props> = () => {
     history.push(`/course/${parentCourse?.cid || ""}`);
   };
 
-  const loadData = async () => {
-    const post: Post = await getPostDetail(id);
-    console.log(post);
-
-    const parentCourse: Course = await getCourseDetail(post.posted_in);
-    console.log(parentCourse);
-
-    setPost(post);
-    setParentCourse(parentCourse);
-
-    setIsLoading(false);
-
-    if (parentCourse?.instructor_id === state.userInfo?.id) {
-      setIsInstructor(true);
-    }
-  };
-
   useEffect(() => {
+    const loadData = async () => {
+      const post: Post = await getPostDetail(id);
+      console.log(post);
+  
+      const parentCourse: Course = await getCourseDetail(post.posted_in);
+      console.log(parentCourse);
+  
+      setPost(post);
+      setParentCourse(parentCourse);
+  
+      setIsLoading(false);
+  
+      if (parentCourse?.instructor_id === state.userInfo?.id) {
+        setIsInstructor(true);
+      }
+    };
+  
     loadData();
-  }, [id]);
+  }, [state, id]);
 
   useEffect(() => {
     if (

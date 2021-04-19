@@ -12,17 +12,18 @@ const ProfileCard: React.FC<Props> = () => {
   const [numNotifications, setNumNotifications] = useState(0);
   const [numCourses, setNumCourses] = useState(0);
 
-  const loadNumNotifs = async () => {
-    const res = await getNotifications();
-    setNumNotifications(res?.length);
-  };
-
-  const loadNumCourse = async () => {
-    const res = await getUserCourses(state.userInfo?.id || -1);
-    setNumCourses(res?.length);
-  };
-
   useEffect(() => {
+    const loadNumNotifs = async () => {
+      const res = await getNotifications();
+      setNumNotifications(res?.length);
+    };
+
+    const loadNumCourse = async () => {
+      const res = await getUserCourses(state.userInfo?.id || -1);
+      setNumCourses(res?.length);
+    };
+
+
     loadNumNotifs();
     loadNumCourse();
   }, [state]);

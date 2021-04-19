@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 
-import { useTable, Column, useSortBy } from "react-table";
-import {useExportData, convertDataToBlob} from "./export-table";
+import { useTable, useSortBy } from "react-table";
+import {useExportData} from "./export-table";
 
-import { Menu, Item, Separator, Submenu, useContextMenu, TriggerEvent } from 'react-contexify';
+import { Menu, Item, useContextMenu, TriggerEvent } from 'react-contexify';
 
 import 'react-contexify/dist/ReactContexify.css';
 import './table-content-menu.css';
@@ -38,10 +38,6 @@ const ReportTable: React.FC<Props> = ({columns, data}) => {
         key: 'value'
       }
     });
-  };
-
-  const handleItemClick = ({event, props}: any) => {
-    console.log(event, props);
   };
 
   return (

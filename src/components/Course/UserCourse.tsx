@@ -12,13 +12,13 @@ const UserCourse: React.FC<Props> = () => {
   const [courses, setCourses] = useState<Course[] | null>(null);
   const { state } = useContext(UserContext);
 
-  const loadCourses = async () => {
-    const res = await getUserCourses(state.userInfo?.id || -1);
-    console.log(res);
-    setCourses(res);
-  };
-
   useEffect(() => {
+    const loadCourses = async () => {
+      const res = await getUserCourses(state.userInfo?.id || -1);
+      console.log(res);
+      setCourses(res);
+    };
+    
     loadCourses();
   }, [state]);
 

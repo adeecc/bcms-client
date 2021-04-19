@@ -42,7 +42,7 @@ const GuardedRoute: React.FC<any> = ({ Component, roles, ...rest }) => {
         },
       });
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <Route
