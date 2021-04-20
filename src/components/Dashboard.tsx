@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import PostList from "./Post/PostList";
 
-import { clearAllNotifications } from "../api/notificationClient";
+// import { clearAllNotifications } from "../api/notificationClient";
 import { UserContext } from "../global/context/userContext";
 import { UserRoles } from "../global/context/user";
 import CourseList from "./Course/CourseList";
